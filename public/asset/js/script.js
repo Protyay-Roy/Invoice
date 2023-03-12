@@ -48,4 +48,37 @@ $(document).ready(function () {
         $('#subtotal').val(subtotal);
     });
 
+    $(document).on('click', '#edit_customer', function () {
+        var id = $(this).val();
+        $('#editModal').modal('show');
+        $('#customer_id').val($(this).val());
+
+        $.ajax({
+            url: 'update-customer/' + id,
+            type: 'get',
+            success: function (data) {
+                if (data.status == 200) {
+                    $('#name').val(data.ledgers.name);
+                    $('#email').val(data.ledgers.email);
+                    $('#address').val(data.ledgers.address);
+                    $('#phone').val(data.ledgers.phone);
+                    $('#company_name').val(data.ledgers.company_name);
+                    $('#info').val(data.ledgers.info);
+                }
+                // $('#name').val(data.ledgers.name);
+            }
+        });
+
+    });
+
+    $(document).on('click', '#delete_customer', function () {
+        var id = $(this).val();
+        var result = confirm('Do you want to delete this?');
+        if (result) {
+            window.location = 'delete-customer/'+id;
+        }
+
+    });
+
 });
+
