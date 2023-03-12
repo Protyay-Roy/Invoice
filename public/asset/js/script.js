@@ -64,6 +64,14 @@ $(document).ready(function () {
                     $('#phone').val(data.ledgers.phone);
                     $('#company_name').val(data.ledgers.company_name);
                     $('#info').val(data.ledgers.info);
+                    if(data.transections != null){
+                        $('#debit').val(data.transections.debit);
+                        $('#credit').val(data.transections.credit);
+                    }else{
+                        $('#debit').val(null);
+                        $('#credit').val(null);
+                    }
+                    // console.log(data.transections.id);
                 }
                 // $('#name').val(data.ledgers.name);
             }

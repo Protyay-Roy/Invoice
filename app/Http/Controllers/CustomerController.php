@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ledger;
+use App\Models\Transection;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -11,6 +12,9 @@ class CustomerController extends Controller
     {
         // dd($request->id);
 
+
+
+        // die;
         // $request->validate([
         //     'name' => 'required',
         //     // 'email' => 'required|email|unique:table,column,except,id',
@@ -21,14 +25,18 @@ class CustomerController extends Controller
         //     'info' => 'required',
         // ]);
 
-        if($request->update_id != null){
+        if ($request->update_id != null) {
             $ledgers = Ledger::find($request->update_id);
             $message = 'Customer update successfully!';
-            // dd($ledgers);
-        }else{
+            $transections = Transection::where('ledger_id', $ledgers->id)->first();
+        } else {
             $ledgers = new Ledger;
             $message = 'Customer added successfully!';
+            $transections = new Transection;
         }
+        // dd($transections->id);
+        // echo '<pre>';
+        // print_r($ledgers->id);
         // die;
         $ledgers->type = 1;
         $ledgers->name = ucwords($request->name);
@@ -39,15 +47,36 @@ class CustomerController extends Controller
         $ledgers->info = $request->info;
         $ledgers->save();
 
+        if ($transections->id != null) {
+            $transections->entry_date = now();
+            $transections->debit = $request->debit;
+            $transections->credit = $request->credit;
+            $transections->save();
+        } else {
+            if (!empty($request->debit || $request->credit)) {
+
+                $transections->ledger_id = $ledgers->id;
+                $transections->bank_id = null;
+                $transections->entry_date = now();
+                $transections->debit = $request->debit;
+                $transections->credit = $request->credit;
+                $transections->type = 'Opening balance';
+                $transections->note = 'N/A';
+                $transections->save();
+            }
+        }
+
         return back()->with('success_message', $message);
     }
 
     public function updateCustomer($id)
     {
         $ledgers = Ledger::find($id);
+        $transections = Transection::where('ledger_id', $id)->first();
         return response()->json([
             'status' => 200,
-            'ledgers' => $ledgers
+            'ledgers' => $ledgers,
+            'transections' => $transections
         ]);
     }
 
