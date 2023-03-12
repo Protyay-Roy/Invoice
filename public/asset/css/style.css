@@ -1,0 +1,124 @@
+*{
+	font-family: 'Poppins', sans-serif;
+	
+}
+section{
+	background: #dff4ff;
+	padding-bottom: 50px;
+}
+#top-header{
+	background: #ffffff;
+}
+#main-body{
+	width: 100%;
+	padding-top: 3rem !important;
+}
+#main-body .container{
+	background: #ffffff;
+}
+.body_content{
+	min-height: 500px;
+	border-radius: 10px;
+	padding-top: 3rem;
+}
+#top-header .navbar-expand-lg .navbar-nav .nav-item{
+	margin-right: 0.3125rem;
+	margin-left: 0.3125rem;
+	background-color: rgb(248, 226, 113);
+	border-radius: 0.3125rem;
+}
+#top-header .navbar-expand-lg .navbar-nav .nav-item:hover{
+	background-color: rgb(189, 180, 134);
+}
+#top-header .navbar-light .navbar-nav .nav-link{
+	color: #777777;
+	font-weight: 500;
+}
+#top-header .navbar-light .navbar-nav .nav-link:hover{
+	color: #ffffff !important;
+}
+#top-header .navbar-light .navbar-nav .nav-item.active{
+	background-color: rgb(216, 247, 131);
+}
+#top-header .navbar-light .navbar-nav .nav-item.active .nav-link{
+	color: #555555!important;
+}
+
+#body-table{
+	margin-top: 2rem;
+}
+table .table_head tr th{
+	color: #444444;
+	font-weight: 500 !important;
+	text-align: center;
+}
+table tbody tr td input.form-control{
+	/* height: 50px !important; */
+	padding: 0.75rem 0.75rem !important;
+}
+input{
+	outline: none !important;
+	border: 1px solid #b5b5b5 !important;
+}
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #4b4b4b !important;
+    outline: 0;
+    box-shadow: none !important;
+}
+button{
+	box-shadow: none !important;
+}
+span{
+	padding-top: 10px;
+	margin-right: 1rem;
+	font-size: 16px;
+	font-weight: 500;
+}
+div.dataTables_wrapper div.dt-row {
+    margin-top: 0.6rem;
+}
+#body-top .container .body-top-content{
+	margin-top:  3rem;
+	background: #ffffff;
+	border-radius: 0.7rem;
+	/* padding: 0.3rem 0; */
+}
+#body-top .container .body-top-content ul {
+	display: flex;
+	padding: 0.5rem 0.3rem;
+}
+#body-top .container .body-top-content ul li {
+	list-style-type: none;
+	text-align: center;
+	padding: 0.8rem 0.5rem;
+}
+#body-top .container .body-top-content ul li button{
+	line-height: 1rem;
+	font-size: 14px;
+}
+.modal-dialog {
+    max-width: 700px;
+    margin: 1.75rem auto;
+}
+.navbar {
+    padding-top: .7rem;
+    padding-bottom: .7rem;
+}
+
+#search_dropdown .dropdown{
+	border: 1px solid #b5b5b5;
+	border-radius: 0.3125rem;
+}
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
