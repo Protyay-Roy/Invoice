@@ -10,34 +10,31 @@ class CustomerController extends Controller
 {
     public function createCustomer(Request $request, $id = null)
     {
-        // dd($request->id);
-
-
-
-        // die;
-        // $request->validate([
-        //     'name' => 'required',
-        //     // 'email' => 'required|email|unique:table,column,except,id',
-        //     'email' => 'required|email|unique:ledgers,email',
-        //     'address' => 'required',
-        //     'phone' => 'required|numaric',
-        //     'phone' => 'required',
-        //     'info' => 'required',
-        // ]);
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:ledgers,email,'.$request->update_id,
+            'address' => 'required',
+            'phone' => 'required|numaric',
+            'company_name' => 'required',
+            'info' => 'required',
+        ]);
 
         if ($request->update_id != null) {
             $ledgers = Ledger::find($request->update_id);
             $message = 'Customer update successfully!';
-            $transections = Transection::where('ledger_id', $ledgers->id)->first();
+            $transections = Transection::where('ledger_id', $request->update_id)->first();
+            if ($transections == null) {
+                $transections_id = null;
+                $transections = new Transection;
+            } else {
+                $transections_id = $transections->id;
+            }
         } else {
             $ledgers = new Ledger;
             $message = 'Customer added successfully!';
             $transections = new Transection;
+            $transections_id = null;
         }
-        // dd($transections->id);
-        // echo '<pre>';
-        // print_r($ledgers->id);
-        // die;
         $ledgers->type = 1;
         $ledgers->name = ucwords($request->name);
         $ledgers->email = $request->email;
@@ -47,17 +44,16 @@ class CustomerController extends Controller
         $ledgers->info = $request->info;
         $ledgers->save();
 
-        if ($transections->id != null) {
-            $transections->entry_date = now();
+        if ($transections_id != null) {
+            $transections->entry_date = date("Y-m-d");
             $transections->debit = $request->debit;
             $transections->credit = $request->credit;
             $transections->save();
         } else {
             if (!empty($request->debit || $request->credit)) {
-
                 $transections->ledger_id = $ledgers->id;
                 $transections->bank_id = null;
-                $transections->entry_date = now();
+                $transections->entry_date = date("Y-m-d");
                 $transections->debit = $request->debit;
                 $transections->credit = $request->credit;
                 $transections->type = 'Opening balance';
@@ -82,6 +78,7 @@ class CustomerController extends Controller
 
     public function destroy($id)
     {
+        $transections = Transection::where('ledger_id', $id)->delete();
         $ledgers = Ledger::find($id)->delete();
         return back()->with('success_message', "Customer deleted succssfully");
     }
