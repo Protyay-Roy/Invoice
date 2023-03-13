@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-    Customer List
+    Supplier List
 @endsection
 @section('content')
     <div id="body-top">
@@ -9,16 +9,16 @@
                 <div class="col-6 offset-3">
                     <div class="body-top-content">
                         <ul>
-                            <li>All Customer</li>
-                            <li>Active Customer</li>
-                            <li>Inactive Customer</li>
+                            <li>All Supplier</li>
+                            <li>Active Supplier</li>
+                            <li>Inactive Supplier</li>
                             <li>
                                 {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
                                     Add customer
                                 </button> --}}
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                    Add customer
+                                    Add Supplier
                                 </button>
                             </li>
                         </ul>
@@ -35,12 +35,12 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Customer Details</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Add Supplier Details</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{ url('/create-customer') }}" method="post">
+                        <form action="{{ url('/create-supplier') }}" method="post">
                             @csrf
                             <div class="modal-body">
                                 <div class="mb-3">
@@ -104,14 +104,14 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit & Update Customer Details</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Edit & Update Supplier Details</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{ url('/create-customer') }}" method="post">
+                        <form action="{{ url('/create-supplier') }}" method="post">
                             @csrf
-                            <input type="hidden" name="update_id" id="customer_id" value="">
+                            <input type="hidden" name="update_id" id="supplier_id" value="">
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name:</label>
@@ -193,19 +193,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (App\Models\Ledger::where('type', 1)->get() as $customer)
+                        @foreach (App\Models\Ledger::where('type', 2)->get() as $supplier)
                             <tr>
-                                <td>{{ $customer->company_name }}</td>
-                                <td>{{ $customer->name }}</td>
-                                <td>{{ $customer->email }}</td>
-                                <td>{{ $customer->address }}</td>
-                                <td>{{ $customer->phone }}</td>
-                                <td>{{ $customer->info }}</td>
+                                <td>{{ $supplier->company_name }}</td>
+                                <td>{{ $supplier->name }}</td>
+                                <td>{{ $supplier->email }}</td>
+                                <td>{{ $supplier->address }}</td>
+                                <td>{{ $supplier->phone }}</td>
+                                <td>{{ $supplier->info }}</td>
                                 <td>
                                     <a href="#" class="btn btn-primary">view</a>
-                                    <button class="btn btn-warning" id="edit_customer"
-                                        value="{{ $customer->id }}">edit</button>
-                                    <button class="btn btn-danger" id="delete_customer" value="{{ $customer->id }}">delete</button>
+                                    <button class="btn btn-warning" id="edit_supplier"
+                                        value="{{ $supplier->id }}">edit</button>
+                                    <button class="btn btn-danger" id="delete_supplier" value="{{ $supplier->id }}">delete</button>
                                 </td>
                             </tr>
                         @endforeach

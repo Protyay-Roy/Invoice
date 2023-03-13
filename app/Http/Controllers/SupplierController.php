@@ -6,9 +6,9 @@ use App\Models\Ledger;
 use App\Models\Transection;
 use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class SupplierController extends Controller
 {
-    public function createCustomer(Request $request)
+    public function createSupplier(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -21,7 +21,7 @@ class CustomerController extends Controller
 
         if ($request->update_id != null) {
             $ledgers = Ledger::find($request->update_id);
-            $message = 'Customer update successfully!';
+            $message = 'Supplier update successfully!';
             $transections = Transection::where('ledger_id', $request->update_id)->first();
             if ($transections == null) {
                 $transections_id = null;
@@ -31,11 +31,11 @@ class CustomerController extends Controller
             }
         } else {
             $ledgers = new Ledger;
-            $message = 'Customer added successfully!';
+            $message = 'Supplier added successfully!';
             $transections = new Transection;
             $transections_id = null;
         }
-        $ledgers->type = 1;
+        $ledgers->type = 2;
         $ledgers->name = ucwords($request->name);
         $ledgers->email = $request->email;
         $ledgers->address = ucwords($request->address);
@@ -65,7 +65,7 @@ class CustomerController extends Controller
         return back()->with('success_message', $message);
     }
 
-    public function updateCustomer($id)
+    public function updateSupplier($id)
     {
         $ledgers = Ledger::find($id);
         $transections = Transection::where('ledger_id', $id)->first();
@@ -80,6 +80,6 @@ class CustomerController extends Controller
     {
         $transections = Transection::where('ledger_id', $id)->delete();
         $ledgers = Ledger::find($id)->delete();
-        return back()->with('success_message', "Customer deleted succssfully!");
+        return back()->with('success_message', "Supplier deleted succssfully!");
     }
 }

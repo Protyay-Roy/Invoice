@@ -48,6 +48,7 @@ $(document).ready(function () {
         $('#subtotal').val(subtotal);
     });
 
+    // CUSTOMER CLICK EVENT
     $(document).on('click', '#edit_customer', function () {
         var id = $(this).val();
         $('#editModal').modal('show');
@@ -84,6 +85,47 @@ $(document).ready(function () {
         var result = confirm('Do you want to delete this?');
         if (result) {
             window.location = 'delete-customer/'+id;
+        }
+
+    });
+
+    // SUPPLIER CLICK EVENT
+    $(document).on('click', '#edit_supplier', function () {
+        var id = $(this).val();
+        $('#editModal').modal('show');
+        $('#supplier_id').val($(this).val());
+
+        $.ajax({
+            url: 'update-supplier/' + id,
+            type: 'get',
+            success: function (data) {
+                if (data.status == 200) {
+                    $('#name').val(data.ledgers.name);
+                    $('#email').val(data.ledgers.email);
+                    $('#address').val(data.ledgers.address);
+                    $('#phone').val(data.ledgers.phone);
+                    $('#company_name').val(data.ledgers.company_name);
+                    $('#info').val(data.ledgers.info);
+                    if(data.transections != null){
+                        $('#debit').val(data.transections.debit);
+                        $('#credit').val(data.transections.credit);
+                    }else{
+                        $('#debit').val(null);
+                        $('#credit').val(null);
+                    }
+                    // console.log(data.transections.id);
+                }
+                // $('#name').val(data.ledgers.name);
+            }
+        });
+
+    });
+
+    $(document).on('click', '#delete_supplier', function () {
+        var id = $(this).val();
+        var result = confirm('Do you want to delete this?');
+        if (result) {
+            window.location = 'delete-supplier/'+id;
         }
 
     });

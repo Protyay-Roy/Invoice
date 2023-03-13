@@ -66,7 +66,7 @@
                             <a class="nav-link" href="{{ route('customer-list') }}">Customer <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Supplier <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ route('supplier-list') }}">Supplier <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Bank <span class="sr-only">(current)</span></a>
