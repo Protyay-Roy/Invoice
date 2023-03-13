@@ -32,3 +32,6 @@ Route::view('supplier', 'supplier')->name('supplier-list');
 Route::post('create-supplier', [SupplierController::class, 'createSupplier'])->name('create-supplier');
 Route::get('update-supplier/{id}', [SupplierController::class, 'updateSupplier']);
 Route::get('delete-supplier/{id}', [SupplierController::class, 'destroy']);
+
+
+// Route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create-invoice');

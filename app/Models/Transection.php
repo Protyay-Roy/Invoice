@@ -10,4 +10,8 @@ class Transection extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    public function getCustomer(){
+        return $this->belongsTo('App\Models\Ledger', 'ledger_id', 'id');
+    }
 }

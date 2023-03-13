@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transections', function (Blueprint $table) {
+        Schema::create('invoice_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ledger_id')->constrained();
+            $table->foreignId('transection_id')->constrained();
+            $table->string('item');
+            $table->string('size');
+            $table->string('unit');
+            $table->float('width');
+            $table->float('height');
+            $table->float('square_ft');
+            $table->float('rate');
+            $table->float('price');
             $table->date('entry_date');
-            $table->string('debit')->nullable();
-            $table->string('credit')->nullable();
-            $table->string('type');
-            $table->text('note');
-            $table->string('bank_name')->nullable();
         });
     }
 
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transections');
+        Schema::dropIfExists('invoice_items');
     }
 };

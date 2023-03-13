@@ -52,12 +52,12 @@ class CustomerController extends Controller
         } else {
             if (!empty($request->debit || $request->credit)) {
                 $transections->ledger_id = $ledgers->id;
-                $transections->bank_id = null;
                 $transections->entry_date = date("Y-m-d");
                 $transections->debit = $request->debit;
                 $transections->credit = $request->credit;
-                $transections->type = 'Opening balance';
+                $transections->type = 'OPENING BALANCE';
                 $transections->note = 'N/A';
+                $transections->bank_name = null;
                 $transections->save();
             }
         }

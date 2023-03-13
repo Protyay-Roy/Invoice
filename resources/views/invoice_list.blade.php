@@ -20,17 +20,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>test</td>
-                                <td>
-                                    <a href="" class="btn btn-primary">Edit</a>
-                                    <a href="" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
+                            @foreach (App\Models\Transection::where('type','INVOICE')->get() as $invoice)
+                                <tr>
+                                    <td>{{ $invoice->entry_date }}</td>
+                                    <td>{{ $invoice->type }}</td>
+                                    <td>{{ $invoice->bank_name }}</td>
+                                    <td>{{ $invoice->debit }}</td>
+                                    <td>{{ $invoice->credit }}</td>
+                                    <td>
+                                        <a href="" class="btn btn-primary">Edit</a>
+                                        <a href="" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
