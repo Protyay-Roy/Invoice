@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bank;
+use App\Models\Bank_transection;
 use Illuminate\Http\Request;
 
 class BankController extends Controller
@@ -18,9 +19,18 @@ class BankController extends Controller
         if ($request->update_id != null){
             $banks = Bank::find($request->update_id);
             $message = 'Bank update successfully!';
+            $bank_transections = Bank_transection::where('bank_id', $request->update_id)->first();
+            if ($bank_transections == null) {
+                $transections_id = null;
+                $bank_transections = new Bank_transection;
+            } else {
+                $transections_id = $bank_transections->id;
+            }
         }else{
             $banks = new Bank;
             $message = 'Bank added successfully!';
+            $bank_transections = new Bank_transection;
+            $transections_id = null;
         }
 
         $banks->name = $request->name;
@@ -29,16 +39,34 @@ class BankController extends Controller
         $banks->info = $request->info;
         $banks->save();
 
+        if ($transections_id != null) {
+            $bank_transections->entry_date = date("Y-m-d");
+            $bank_transections->debit = $request->debit;
+            $bank_transections->credit = $request->credit;
+            $bank_transections->save();
+        } else {
+            if (!empty($request->debit || $request->credit)) {
+                $bank_transections->bank_id = $banks->id;
+                $bank_transections->entry_date = date("Y-m-d");
+                $bank_transections->debit = $request->debit;
+                $bank_transections->credit = $request->credit;
+                $bank_transections->type = 'OPENING BALANCE';
+                $bank_transections->note = 'N/A';
+                $bank_transections->save();
+            }
+        }
+
         return back()->with('success_message', $message);
     }
 
 
     public function updateBank($id)
     {
-        $banks = Bank::find($id);
+        // $banks = ;
         return response()->json([
             'status' => 200,
-            'banks' => $banks
+            'banks' => Bank::find($id),
+            'bank_transections' => Bank_transection::where('bank_id', $id)->first()
         ]);
     }
 

@@ -19,6 +19,7 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap4.min.css">
 
     <link rel="stylesheet" href="{{ asset('asset') }}/css/style.css">
@@ -63,13 +64,16 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customer-list') }}">Customer <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ route('customer-list') }}">Customer <span
+                                    class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('supplier-list') }}">Supplier <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ route('supplier-list') }}">Supplier <span
+                                    class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('bank-list') }}">Bank <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ route('bank-list') }}">Bank <span
+                                    class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                 </div>

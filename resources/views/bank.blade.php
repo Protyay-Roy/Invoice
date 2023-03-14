@@ -70,7 +70,7 @@
                                     <label for="info" class="form-label">Information:</label>
                                     <input type="text" class="form-control" placeholder="Enter info" name="info">
                                 </div>
-                                {{-- <div class="mb-3">
+                                <div class="mb-3">
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="debit" class="form-label">Debit:</label>
@@ -83,7 +83,7 @@
                                                 name="credit">
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -128,7 +128,7 @@
                                     <label for="info" class="form-label">Information:</label>
                                     <input type="text" class="form-control" placeholder="Enter info" name="info" id="info">
                                 </div>
-                                {{-- <div class="mb-3">
+                                <div class="mb-3">
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="debit" class="form-label">Debit:</label>
@@ -141,7 +141,7 @@
                                                 placeholder="Enter credit" name="credit">
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

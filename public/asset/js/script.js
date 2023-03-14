@@ -1,7 +1,9 @@
 $(document).ready(function () {
 
 
-    $('#example').DataTable();
+    $('#example').DataTable({
+        scrollX: true,
+    });
 
     $('#search_dropdown select').selectpicker();
 
@@ -154,13 +156,13 @@ $(document).ready(function () {
                     $('#account_number').val(data.banks.account_number);
                     $('#branch').val(data.banks.branch);
                     $('#info').val(data.banks.info);
-                    // if(data.transections != null){
-                    //     $('#debit').val(data.transections.debit);
-                    //     $('#credit').val(data.transections.credit);
-                    // }else{
-                    //     $('#debit').val(null);
-                    //     $('#credit').val(null);
-                    // }
+                    if(data.bank_transections != null){
+                        $('#debit').val(data.bank_transections.debit);
+                        $('#credit').val(data.bank_transections.credit);
+                    }else{
+                        $('#debit').val(null);
+                        $('#credit').val(null);
+                    }
                     // console.log(data.transections.id);
                 }
             }

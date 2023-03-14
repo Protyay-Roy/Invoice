@@ -39,9 +39,11 @@
                     </div>
                 </div>
 
-
                 <hr class="mt-4">
-                <div id="body-table">
+                <div class="row">
+                    <div class="col-12">
+
+                <div id="body-table responsive">
                     <table class="table table-bordered table-striped">
                         <thead class="table_head">
                             <tr>
@@ -92,6 +94,8 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                    </div>
                 </div>
                 <div class="row mt-5">
                     <div class="col-8"></div>
