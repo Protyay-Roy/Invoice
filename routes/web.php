@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\SupplierController;
@@ -20,7 +21,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::match(['get', 'post'], 'create-invoice', [InvoiceController::class, 'createInvoice'])->name('create-invoice');
 Route::view('invoice', 'invoice_list')->name('invoice-list');
 // CUSTOMER ROUTE
 Route::view('customer', 'customer')->name('customer-list');
@@ -34,4 +34,19 @@ Route::get('update-supplier/{id}', [SupplierController::class, 'updateSupplier']
 Route::get('delete-supplier/{id}', [SupplierController::class, 'destroy']);
 
 
-// Route::post('create-invoice', [InvoiceController::class, 'createInvoice'])->name('create-invoice');
+// INVOICE ROUTE
+Route::match(['get', 'post'], 'create-invoice', [InvoiceController::class, 'createInvoice'])->name('create-invoice');
+Route::match(['get', 'post'], 'edit-invoice/{id}', [InvoiceController::class, 'editInvoice']);
+Route::get('delete-invoice/{id}', [InvoiceController::class, 'destroy']);
+
+// BANK ROUTE
+Route::view('bank', 'bank')->name('bank-list');
+Route::post('create-bank', [BankController::class, 'createBank'])->name('create-bank');
+Route::get('update-bank/{id}', [BankController::class, 'updateBank']);
+Route::get('delete-bank/{id}', [BankController::class, 'destroy']);
+
+// DAILY ENTRY ROUTE
+Route::view('create-daily-entry', 'create_daily_entry')->name('daily_entry');
+
+
+

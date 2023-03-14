@@ -58,7 +58,7 @@
                                 Daily Entry
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="index.html">Create Entry</a>
+                                <a class="dropdown-item" href="{{ route('daily_entry') }}">Create Entry</a>
                                 <a class="dropdown-item" href="invoice_list.html">Entry List</a>
                             </div>
                         </li>
@@ -69,7 +69,7 @@
                             <a class="nav-link" href="{{ route('supplier-list') }}">Supplier <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Bank <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ route('bank-list') }}">Bank <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                 </div>

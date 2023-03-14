@@ -26,6 +26,12 @@ $(document).ready(function () {
     // REMOVE ROW
     $(document).on('click', '#remove_attribute', function () {
         $(this).closest('tr').remove();
+        var subtotal = $('#subtotal').val();
+        var $row = $(this).closest('tr');
+        var price = $row.find('.price').val();
+        subtotal -= price;
+        $('#subtotal').val(subtotal);
+
     });
 
     $(document).on('keyup', '.width, .height, .rate', function () {
@@ -65,10 +71,10 @@ $(document).ready(function () {
                     $('#phone').val(data.ledgers.phone);
                     $('#company_name').val(data.ledgers.company_name);
                     $('#info').val(data.ledgers.info);
-                    if(data.transections != null){
+                    if (data.transections != null) {
                         $('#debit').val(data.transections.debit);
                         $('#credit').val(data.transections.credit);
-                    }else{
+                    } else {
                         $('#debit').val(null);
                         $('#credit').val(null);
                     }
@@ -84,7 +90,7 @@ $(document).ready(function () {
         var id = $(this).val();
         var result = confirm('Do you want to delete this?');
         if (result) {
-            window.location = 'delete-customer/'+id;
+            window.location = 'delete-customer/' + id;
         }
 
     });
@@ -106,10 +112,10 @@ $(document).ready(function () {
                     $('#phone').val(data.ledgers.phone);
                     $('#company_name').val(data.ledgers.company_name);
                     $('#info').val(data.ledgers.info);
-                    if(data.transections != null){
+                    if (data.transections != null) {
                         $('#debit').val(data.transections.debit);
                         $('#credit').val(data.transections.credit);
-                    }else{
+                    } else {
                         $('#debit').val(null);
                         $('#credit').val(null);
                     }
@@ -125,10 +131,60 @@ $(document).ready(function () {
         var id = $(this).val();
         var result = confirm('Do you want to delete this?');
         if (result) {
-            window.location = 'delete-supplier/'+id;
+            window.location = 'delete-supplier/' + id;
         }
 
     });
 
+    // Bank CLICK EVENT
+    $(document).on('click', '#edit_bank', function () {
+        var id = $(this).val();
+        $('#editModal').modal('show');
+        $('#bank_id').val($(this).val());
+
+        $.ajax({
+            url: 'update-bank/' + id,
+            type: 'get',
+            success: function (data) {
+                if (data.status == 200) {
+                    $('#name').val(data.banks.name);
+                    $('#account_number').val(data.banks.account_number);
+                    $('#branch').val(data.banks.branch);
+                    $('#info').val(data.banks.info);
+                    // if(data.transections != null){
+                    //     $('#debit').val(data.transections.debit);
+                    //     $('#credit').val(data.transections.credit);
+                    // }else{
+                    //     $('#debit').val(null);
+                    //     $('#credit').val(null);
+                    // }
+                    // console.log(data.transections.id);
+                }
+            }
+        });
+
+    });
+
+    $(document).on('click', '#delete_bank', function () {
+        var id = $(this).val();
+        var result = confirm('Do you want to delete this?');
+        if (result) {
+            window.location = 'delete-bank/' + id;
+        }
+
+    });
+
+    $(document).on('click', '#delete_invoice', function () {
+        var id = $(this).val();
+        var result = confirm('Do you want to delete this?');
+        if (result) {
+            window.location = 'delete-invoice/' + id;
+        }
+
+    });
+
+    // $(document).on('click', '#edt', function () {
+    //         window.location = 'edit-invoice';
+    // });
 });
 

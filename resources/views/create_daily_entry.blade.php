@@ -15,7 +15,7 @@
             @endif
             <form action="{{ route('create-invoice') }}" method="post">
                 @csrf
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-2 offset-2">
                         <input type="date" class="form-control" name="entry_date">
                     </div>
@@ -37,7 +37,7 @@
                             <a class="btn btn-outline-success" href="{{ route('customer-list') }}">Add Customer</a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
 
                 <hr class="mt-4">
@@ -93,7 +93,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="row mt-5">
+                {{-- <div class="row mt-5">
                     <div class="col-8"></div>
                     <div class="col-3 pb-5">
                         <div class="sub_total d-flex">
@@ -126,7 +126,7 @@
                         </div>
                         <button class="float-right mb-5 btn btn-success">Save</button>
                     </div>
-                </div>
+                </div> --}}
             </form>
         </div>
     </div>

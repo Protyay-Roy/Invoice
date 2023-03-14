@@ -28,8 +28,12 @@
                                     <td>{{ $invoice->debit }}</td>
                                     <td>{{ $invoice->credit }}</td>
                                     <td>
-                                        <a href="" class="btn btn-primary">Edit</a>
-                                        <a href="" class="btn btn-danger">Delete</a>
+                                        <a href="{{ url('edit-invoice/'.$invoice->id) }}" class="btn btn-primary">Edit</a>
+                                        {{-- <form>
+                                            <input type="hidden" name="invoice_id" value="{{ $invoice->id }}">
+                                            <button class="btn btn-success" id="edt">edit</button>
+                                        </form> --}}
+                                        <button value="{{ $invoice->id }}" id="delete_invoice" class="btn btn-danger">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
