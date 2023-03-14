@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DailyEntryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,7 @@ Route::get('delete-bank/{id}', [BankController::class, 'destroy']);
 
 // DAILY ENTRY ROUTE
 Route::view('create-daily-entry', 'create_daily_entry')->name('daily_entry');
+Route::get('profile/{type}', [DailyEntryController::class, 'getProfile']);
 
 
 

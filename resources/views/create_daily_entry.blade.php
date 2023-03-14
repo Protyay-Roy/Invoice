@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-    Create Invoice
+    Create Daily Entry
 @endsection
 @section('content')
     <div id="main-body">
@@ -15,77 +15,52 @@
             @endif
             <form action="{{ route('create-invoice') }}" method="post">
                 @csrf
-                {{-- <div class="row">
-                    <div class="col-2 offset-2">
-                        <input type="date" class="form-control" name="entry_date">
-                    </div>
-                    <div class="col-4" id="search_dropdown">
-
-                        <select data-live-search="true" class="w-100" name="ledger_id">
-                            <option data-tokens="" disabled selected>Select customer</option>
-                            @foreach (App\Models\Ledger::where('type', 1)->get() as $customer)
-                                <option data-tokens="{{ $customer->id }}" value="{{ $customer->id }}">
-                                    {{ $customer->name }}</option>
-                            @endforeach
-                        </select>
-
-
-                    </div>
-                    <div class="col-2">
-                        <div>
-                            <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
-                            <a class="btn btn-outline-success" href="{{ route('customer-list') }}">Add Customer</a>
-                        </div>
-                    </div>
-                </div> --}}
-
-
-                <hr class="mt-4">
                 <div id="body-table">
                     <table class="table table-bordered table-striped">
                         <thead class="table_head">
                             <tr>
-                                <th scope="col">Item</th>
-                                <th scope="col">Size</th>
-                                <th scope="col">Unit</th>
-                                <th scope="col">Width</th>
-                                <th scope="col">Height</th>
-                                <th scope="col">Square ft</th>
-                                <th scope="col">Rate</th>
-                                <th scope="col">Price</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Profile</th>
+                                <th scope="col">Debit</th>
+                                <th scope="col">Credit</th>
+                                <th scope="col">Note</th>
+                                <th scope="col">Bank</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody id="attr_field">
+                        <tbody id="table_body">
                             <tr id="TableRow">
                                 <td>
-                                    <input type="text" class="form-control" name="item[]" placeholder="Item">
+                                    <input type="date" class="form-control" name="date[]">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="size[]" placeholder="Size">
+                                    <select name="type[]" class="form-control entry_type">
+                                        <option selected disabled>Select payment type</option>
+                                        <option value="customer">Customer Payment</option>
+                                        <option value="supplier">Supplier Payment</option>
+                                        <option value="bank">Bank Payment</option>
+                                    </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="unit[]" placeholder="Unit">
+                                    <select name="profile[]" class="form-control profile">
+                                        <option selected disabled>Select profile</option>
+                                    </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control width" name="width[]" placeholder="Width">
+                                    <input type="text" class="form-control" name="debit[]" placeholder="Debit">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control height" name="height[]" placeholder="Height">
+                                    <input type="text" class="form-control" name="credit[]" placeholder="Credit">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control square_ft" name="square_ft[]"
-                                        placeholder="Square ft" readonly>
+                                    <input type="text" class="form-control" name="note[]" placeholder="Note">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control rate" name="rate[]" placeholder="Rate">
+                                    <input type="text" class="form-control" name="bank[]" placeholder="Bank">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control price" name="price[]" placeholder="Price"
-                                        readonly>
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary mt-1" id="add_attribute">
+                                    <button class="btn btn-primary mt-1" id="add_entry">
                                         <i class="fa-solid fa-plus"></i>
                                     </button>
                                 </td>
@@ -93,40 +68,8 @@
                         </tbody>
                     </table>
                 </div>
-                {{-- <div class="row mt-5">
-                    <div class="col-8"></div>
-                    <div class="col-3 pb-5">
-                        <div class="sub_total d-flex">
-                            <span>SubTotal:</span>
-                            <input class="form-control" type="text" id="subtotal" name="subtotal"
-                                placeholder="SubTotal">
-                        </div>
-                        <div class="sub_total d-flex mt-4">
-                            <span style="margin-right: 38px;">Credit:</span>
-                            <input class="form-control" type="text" id="credit" name="credit" placeholder="Credit">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4 offset-4">
-                        <div class="mb-2">
-                            <label for="note" class="form-label">Note:</label>
-                            <input type="text" class="form-control" placeholder="Enter note" name="note">
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="mb-3">
-                            <label for="bank_name" class="form-label">Bank:</label>
-                            <select name="bank_name" id="bank_name" class="form-control">
-                                <option selected disabled>Select Bank</option>
-                                @foreach (App\Models\Bank::get() as $bank)
-                                    <option value="{{ $bank->name }}"> {{ $bank->name }} </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <button class="float-right mb-5 btn btn-success">Save</button>
-                    </div>
-                </div> --}}
+                <button class="btn btn-success float-right mb-5">Save</button>
+                <div class="clr"></div>
             </form>
         </div>
     </div>

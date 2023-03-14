@@ -56,7 +56,7 @@
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody id="attr_field">
+                        <tbody id="table_body">
                             <tr id="TableRow">
                                 <td>
                                     <input type="text" class="form-control" name="item[]" placeholder="Item">
@@ -85,7 +85,7 @@
                                         readonly>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary mt-1" id="add_attribute">
+                                    <button class="btn btn-primary mt-1" id="add_invoice">
                                         <i class="fa-solid fa-plus"></i>
                                     </button>
                                 </td>

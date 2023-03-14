@@ -5,8 +5,8 @@ $(document).ready(function () {
 
     $('#search_dropdown select').selectpicker();
 
-    // ADD ROW
-    $(document).on("click", "#add_attribute", function (e) {
+    // ADD INVOICE ROW
+    $(document).on("click", "#add_invoice", function (e) {
         e.preventDefault();
         var add_attr = '';
         add_attr += '<tr>';
@@ -18,13 +18,13 @@ $(document).ready(function () {
         add_attr += '<td><input type="text" class="form-control square_ft" name="square_ft[]" placeholder="Square ft" readonly></td>';
         add_attr += '<td><input type="text" class="form-control rate" name="rate[]" placeholder="Rate"></td>';
         add_attr += '<td><input type="text" class="form-control price" name="price[]" placeholder="Price" readonly></td>';
-        add_attr += '<td><button class="btn btn-danger mt-1" id="remove_attribute"><i class="fa-solid fa-trash"></i></button></td>';
+        add_attr += '<td><button class="btn btn-danger mt-1" id="remove_invoice_row"><i class="fa-solid fa-trash"></i></button></td>';
         add_attr += '</tr>';
-        $("#attr_field").append(add_attr)
+        $("#table_body").append(add_attr)
     });
 
-    // REMOVE ROW
-    $(document).on('click', '#remove_attribute', function () {
+    // REMOVE INVOICE ROW
+    $(document).on('click', '#remove_invoice_row', function () {
         $(this).closest('tr').remove();
         var subtotal = $('#subtotal').val();
         var $row = $(this).closest('tr');
@@ -34,6 +34,7 @@ $(document).ready(function () {
 
     });
 
+    // CALCULATE INVOICE ITEMS BY CLICK EVENT
     $(document).on('keyup', '.width, .height, .rate', function () {
         var $row = $(this).closest('tr');
         var width = $row.find('.width').val();
@@ -86,6 +87,7 @@ $(document).ready(function () {
 
     });
 
+    // DELETE CUSTOMER CLICK EVENT
     $(document).on('click', '#delete_customer', function () {
         var id = $(this).val();
         var result = confirm('Do you want to delete this?');
@@ -127,6 +129,7 @@ $(document).ready(function () {
 
     });
 
+    // DELETE SUPPLIER CLICK EVENT
     $(document).on('click', '#delete_supplier', function () {
         var id = $(this).val();
         var result = confirm('Do you want to delete this?');
@@ -136,7 +139,7 @@ $(document).ready(function () {
 
     });
 
-    // Bank CLICK EVENT
+    // BANK CLICK EVENT
     $(document).on('click', '#edit_bank', function () {
         var id = $(this).val();
         $('#editModal').modal('show');
@@ -165,6 +168,7 @@ $(document).ready(function () {
 
     });
 
+    // DELETE BANK CLICK EVENT
     $(document).on('click', '#delete_bank', function () {
         var id = $(this).val();
         var result = confirm('Do you want to delete this?');
@@ -174,6 +178,7 @@ $(document).ready(function () {
 
     });
 
+    // DELETE INVOICE CLICK EVENT
     $(document).on('click', '#delete_invoice', function () {
         var id = $(this).val();
         var result = confirm('Do you want to delete this?');
@@ -183,8 +188,53 @@ $(document).ready(function () {
 
     });
 
-    // $(document).on('click', '#edt', function () {
-    //         window.location = 'edit-invoice';
-    // });
+    // ADD DAILY ENTRY ROW
+    $(document).on("click", "#add_entry", function (e) {
+        e.preventDefault();
+        var add_attr = '';
+        add_attr += '<tr>';
+        add_attr += '<td><input type="date" class="form-control" name="date[]"></td>';
+        add_attr += '<td><select name="type[]" class="form-control entry_type"><option selected disabled>Select payment type</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
+        add_attr += '<td><select name="profile[]" class="form-control profile"><option selected disabled>Select profile</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
+        add_attr += '<td><input type="text" class="form-control" name="debit[]" placeholder="Debit"></td>';
+        add_attr += '<td><input type="text" class="form-control" name="credit[]" placeholder="Credit"></td>';
+        add_attr += '<td><input type="text" class="form-control" name="note[]" placeholder="Note"></td>';
+        add_attr += '<td><input type="text" class="form-control" name="bank[]" placeholder="Bank"></td>';
+        add_attr += '<td><button class="btn btn-danger mt-1" id="remove_entry_row"><i class="fa-solid fa-trash"></i></button></td>';
+        add_attr += '</tr>';
+        $("#table_body").append(add_attr)
+    });
+
+    // REMOVE DAILY ENTRY ROW
+    $(document).on('click', '#remove_entry_row', function () {
+        $(this).closest('tr').remove();
+    });
+
+    $(document).on('change', '.entry_type', function () {
+        // var type = $(this).val();
+        // var $row = $(this).closest('tr');
+
+        var type = $(this).val();
+        var $row = $(this).closest('tr');
+        var $profileSelect = $row.find('.profile');
+
+        $profileSelect.html('<option selected disabled>Select profile</option>');
+
+        $.ajax({
+            url: 'profile/' + type,
+            type: 'get',
+            success: function (data) {
+                // if(data.status == 200){
+                    $.each(data, function(index, profile){
+                        $profileSelect.append('<option value="' + profile.id + '">' + profile.name + '</option>');
+                    });
+                // }
+            },
+            error: function () {
+                alert('Error');
+            }
+        })
+    })
+
 });
 
