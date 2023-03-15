@@ -26,8 +26,6 @@ section {
     min-height: 500px;
     border-radius: 10px;
     padding-top: 3rem;
-    /* width: 100%;
-    overflow-wrap: normal; */
 }
 
 #top-header .navbar-expand-lg .navbar-nav .nav-item {
@@ -183,13 +181,27 @@ div.dataTables_wrapper div.dt-row {
 }
 
 
-/* @media screen and (max-width: 700px) {
-    #responsive{
-        width: 100% !important;
-        overflow: hidden !important;
+@media (max-width: 460px) {
+    .body-top-content ul{
+        display: block !important;
     }
-    #responsive .table tr{
-        overflow-x: scroll !important;
-        overflow: hidden;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+/* @media (min-width: 576px) {
+    .body-top-content ul li {
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+    .body-top-content ul li:last-child {
+        margin-right: 0;
+    }
+
+    .body-top-content button {
+        float: right;
     }
 } */
+
+
+

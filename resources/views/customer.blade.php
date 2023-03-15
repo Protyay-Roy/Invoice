@@ -6,17 +6,13 @@
     <div id="body-top">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 offset-lg-3">
+                <div class="col-md-6 offset-lg-3 col-sm-12">
                     <div class="body-top-content">
                         <ul>
                             <li>All Customer</li>
                             <li>Active Customer</li>
                             <li>Inactive Customer</li>
                             <li>
-                                {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                    Add customer
-                                </button> --}}
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                     Add customer
                                 </button>
