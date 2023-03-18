@@ -18,11 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
-Route::view('invoice', 'invoice_list')->name('invoice-list');
+Route::view('/', 'invoice_list')->name('invoice-list');
+Route::view('daily_entry-list', 'entry_list')->name('daily_entry-list');
 // CUSTOMER ROUTE
 Route::view('customer', 'customer')->name('customer-list');
 Route::post('create-customer', [CustomerController::class, 'createCustomer'])->name('create-customer');
@@ -47,8 +48,11 @@ Route::get('update-bank/{id}', [BankController::class, 'updateBank']);
 Route::get('delete-bank/{id}', [BankController::class, 'destroy']);
 
 // DAILY ENTRY ROUTE
-Route::view('create-daily-entry', 'create_daily_entry')->name('daily_entry');
+
+// Route::view('daily_entry-list', 'create_daily_entry')->name('daily_entry');
 Route::get('profile/{type}', [DailyEntryController::class, 'getProfile']);
+Route::get('get_bank', [DailyEntryController::class, 'getBank']);
+Route::match(['get', 'post'], 'add-edit-daily_entry', [DailyEntryController::class, 'addEditEntry'])->name('add-edit-daily_entry');
 
 
 

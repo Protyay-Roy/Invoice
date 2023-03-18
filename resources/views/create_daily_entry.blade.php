@@ -13,7 +13,7 @@
                     </button>
                 </div>
             @endif
-            <form action="{{ route('create-invoice') }}" method="post">
+            <form action="{{ route('add-edit-daily_entry') }}" method="post">
                 @csrf
                 <div id="body-table">
                     <table class="table table-bordered table-striped">
@@ -57,7 +57,13 @@
                                     <input type="text" class="form-control" name="note[]" placeholder="Note">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="bank[]" placeholder="Bank">
+                                    {{-- <input type="text" class="form-control" name="bank_name[]" placeholder=""> --}}
+                                    <select name="bank_name[]" id="bank_name" class="form-control">
+                                        <option selected disabled>Select your bank</option>
+                                        @foreach (App\Models\Bank::get() as $bank)
+                                        <option value="{{ $bank->name }}">{{ $bank->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </td>
                                 <td>
                                     <button class="btn btn-primary mt-1" id="add_entry">

@@ -21,16 +21,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (App\Models\Transection::where('type','INVOICE')->get() as $invoice)
+                                @foreach (App\Models\Transection::where('type','PAYMENT')->get() as $entry)
                                     <tr>
-                                        <td>{{ $invoice->entry_date }}</td>
-                                        <td>{{ $invoice->getCustomer->name }}</td>
-                                        <td>{{ $invoice->bank_name }}</td>
-                                        <td>{{ $invoice->debit }}</td>
-                                        <td>{{ $invoice->credit }}</td>
+                                        <td>{{ $entry->entry_date }}</td>
+                                        <td>{{ $entry->getCustomer->name }}</td>
+                                        <td>{{ $entry->bank_name }}</td>
+                                        <td>{{ $entry->debit }}</td>
+                                        <td>{{ $entry->credit }}</td>
                                         <td>
-                                            <a href="{{ url('edit-invoice/'.$invoice->id) }}" class="btn btn-primary">Edit</a>
-                                            <button value="{{ $invoice->id }}" id="delete_invoice" class="btn btn-danger">Delete</button>
+                                            <a href="{{ url('edit-invoice/'.$entry->id) }}" class="btn btn-primary">Edit</a>
+                                            <button value="{{ $entry->id }}" id="delete_invoice" class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
                                 @endforeach

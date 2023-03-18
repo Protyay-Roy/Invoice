@@ -59,8 +59,8 @@
                                 Daily Entry
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('daily_entry') }}">Create Entry</a>
-                                <a class="dropdown-item" href="invoice_list.html">Entry List</a>
+                                <a class="dropdown-item" href="{{ route('add-edit-daily_entry') }}">Create Entry</a>
+                                <a class="dropdown-item" href="{{ route('daily_entry-list') }}">Entry List</a>
                             </div>
                         </li>
                         <li class="nav-item">

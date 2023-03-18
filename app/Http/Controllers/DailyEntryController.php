@@ -3,25 +3,74 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bank;
+use App\Models\Bank_transection;
 use App\Models\Ledger;
+use App\Models\Transection;
 use Illuminate\Http\Request;
 
 class DailyEntryController extends Controller
 {
     public function getProfile($type)
     {
-        if($type == 'customer'){
+        if ($type == 'customer') {
             $profile = Ledger::where('type', 1)->get();
-        } else if($type == 'supplier'){
+        } else if ($type == 'supplier') {
             $profile = Ledger::where('type', 2)->get();
-        }else if($type == 'bank'){
+        } else if ($type == 'bank') {
             $profile = Bank::get();
         }
 
         return $profile;
-        // return response()->json([
-        //     'status' => 200,
-        //     'profile' => $profile
-        // ]);
+    }
+
+    public function addEditEntry(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'date' => 'required',
+                'type' => 'required',
+                'profile' => 'required'
+            ]);
+
+            foreach ($request->date as $key => $date) {
+                $note = !empty($request->note[$key]) ? $request->note[$key] : 'N/A';
+                if ($request->type[$key] == 'customer' || $request->type[$key] == 'supplier') {
+
+                    if (!empty($request->debit[$key] || $request->credit[$key])) {
+                        $transections = new Transection;
+                        $transections->ledger_id = $request->profile[$key];
+                        $transections->entry_date = $date;
+                        $transections->debit = $request->debit[$key];
+                        $transections->credit = $request->credit[$key];
+                        $transections->type = 'PAYMENT';
+                        $transections->note = $note;
+                        $transections->bank_name = !empty($request->bank_name[$key]) ? $request->bank_name[$key] : null;
+                        $transections->save();
+                    }
+                } else if ($request->type[$key] == 'bank') {
+                    if (!empty($request->debit || $request->credit)) {
+                        $bank_transections = new Bank_transection;
+                        $bank_transections->bank_id = $request->profile[$key];
+                        $bank_transections->entry_date = $date;
+                        $bank_transections->debit = $request->debit[$key];
+                        $bank_transections->credit = $request->credit[$key];
+                        $bank_transections->type = 'PAYMENT';
+                        $bank_transections->note = $note;
+                        $bank_transections->save();
+                    }
+                }
+            }
+
+            return back();
+        }
+        return view('create_daily_entry');
+    }
+
+    public function getBank()
+    {
+        $banks = Bank::get();
+        return response()->json([
+            'bank' => $banks
+        ]);
     }
 }

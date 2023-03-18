@@ -43,7 +43,7 @@ $(document).ready(function () {
         var height = $row.find('.height').val();
         var rate = $row.find('.rate').val();
 
-        var square_ft = width * height;
+        var square_ft = (width * height)/144;
 
         $row.find('.square_ft').val(square_ft);
         var price = square_ft * rate;
@@ -191,21 +191,22 @@ $(document).ready(function () {
     });
 
     // ADD DAILY ENTRY ROW
-    $(document).on("click", "#add_entry", function (e) {
-        e.preventDefault();
-        var add_attr = '';
-        add_attr += '<tr>';
-        add_attr += '<td><input type="date" class="form-control" name="date[]"></td>';
-        add_attr += '<td><select name="type[]" class="form-control entry_type"><option selected disabled>Select payment type</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
-        add_attr += '<td><select name="profile[]" class="form-control profile"><option selected disabled>Select profile</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
-        add_attr += '<td><input type="text" class="form-control" name="debit[]" placeholder="Debit"></td>';
-        add_attr += '<td><input type="text" class="form-control" name="credit[]" placeholder="Credit"></td>';
-        add_attr += '<td><input type="text" class="form-control" name="note[]" placeholder="Note"></td>';
-        add_attr += '<td><input type="text" class="form-control" name="bank[]" placeholder="Bank"></td>';
-        add_attr += '<td><button class="btn btn-danger mt-1" id="remove_entry_row"><i class="fa-solid fa-trash"></i></button></td>';
-        add_attr += '</tr>';
-        $("#table_body").append(add_attr)
-    });
+    // $(document).on("click", "#add_entry", function (e) {
+    //     e.preventDefault();
+    //     var add_attr = '';
+    //     add_attr += '<tr>';
+    //     add_attr += '<td><input type="date" class="form-control" name="date[]"></td>';
+    //     add_attr += '<td><select name="type[]" class="form-control entry_type"><option selected disabled>Select payment type</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
+    //     add_attr += '<td><select name="profile[]" class="form-control profile"><option selected disabled>Select profile</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
+    //     add_attr += '<td><input type="text" class="form-control" name="debit[]" placeholder="Debit"></td>';
+    //     add_attr += '<td><input type="text" class="form-control" name="credit[]" placeholder="Credit"></td>';
+    //     add_attr += '<td><input type="text" class="form-control" name="note[]" placeholder="Note"></td>';
+    //     // add_attr += '<td><input type="text" class="form-control" name="bank_name[]" placeholder="Bank"></td>';
+    //     add_attr += '<td><select name="bank_name[]" id="bank_name" class="form-control"><option selected disabled>Select your bank</option>@foreach (App\Models\Bank::get() as $bank)<option value="{{ $bank->name }}">{{ $bank->name }}</option>@endforeach</select></td>';
+    //     add_attr += '<td><button class="btn btn-danger mt-1" id="remove_entry_row"><i class="fa-solid fa-trash"></i></button></td>';
+    //     add_attr += '</tr>';
+    //     $("#table_body").append(add_attr)
+    // });
 
     // REMOVE DAILY ENTRY ROW
     $(document).on('click', '#remove_entry_row', function () {
@@ -213,9 +214,6 @@ $(document).ready(function () {
     });
 
     $(document).on('change', '.entry_type', function () {
-        // var type = $(this).val();
-        // var $row = $(this).closest('tr');
-
         var type = $(this).val();
         var $row = $(this).closest('tr');
         var $profileSelect = $row.find('.profile');
@@ -237,6 +235,48 @@ $(document).ready(function () {
             }
         })
     })
+
+
+
+    $(document).on("click", "#add_entry", function (e) {
+        // Prevent the default behavior of the button click
+        e.preventDefault();
+
+        // Build a string of HTML to add to the table
+        var add_attr = '';
+        add_attr += '<tr>';
+        add_attr += '<td><input type="date" class="form-control" name="date[]"></td>';
+        add_attr += '<td><select name="type[]" class="form-control entry_type"><option selected disabled>Select payment type</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
+        add_attr += '<td><select name="profile[]" class="form-control profile"><option selected disabled>Select profile</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
+        add_attr += '<td><input type="text" class="form-control" name="debit[]" placeholder="Debit"></td>';
+        add_attr += '<td><input type="text" class="form-control" name="credit[]" placeholder="Credit"></td>';
+        add_attr += '<td><input type="text" class="form-control" name="note[]" placeholder="Note"></td>';
+        add_attr += '<td><select name="bank_name[]" id="bank_name" class="form-control"><option selected disabled>Select your bank</option>';
+
+        // Use an AJAX request to get the bank model from the server
+        $.ajax({
+            url: '/get_bank',
+            type: 'GET',
+            success: function (data) {
+                // Loop through the bank models and add an option element for each one
+                $.each(data.bank, function (index, bank) {
+                    add_attr += '<option value="' + bank.name + '">' + bank.name + '</option>';
+                });
+
+                // Add the closing tag for the select element and the remove button
+                add_attr += '</select></td>';
+                add_attr += '<td><button class="btn btn-danger mt-1" id="remove_entry_row"><i class="fa-solid fa-trash"></i></button></td>';
+
+                // Append the new row to the table body
+                $("#table_body").append(add_attr);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
+
 
 });
 
