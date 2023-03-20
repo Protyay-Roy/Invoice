@@ -202,7 +202,7 @@
                                 <td>{{ $supplier->phone }}</td>
                                 <td>{{ $supplier->info }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-primary">view</a>
+                                    {{-- <a href="#" class="btn btn-primary">view</a> --}}
                                     <button class="btn btn-warning" id="edit_supplier"
                                         value="{{ $supplier->id }}">edit</button>
                                     <button class="btn btn-danger" id="delete_supplier" value="{{ $supplier->id }}">delete</button>

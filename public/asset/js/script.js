@@ -57,7 +57,7 @@ $(document).ready(function () {
         $('#subtotal').val(subtotal);
     });
 
-    // CUSTOMER CLICK EVENT
+    // EDIT CUSTOMER CLICK EVENT
     $(document).on('click', '#edit_customer', function () {
         var id = $(this).val();
         $('#editModal').modal('show');
@@ -96,6 +96,36 @@ $(document).ready(function () {
         if (result) {
             window.location = 'delete-customer/' + id;
         }
+
+    });
+
+    // VIEW CUSTOMER CLICK EVENT
+    $(document).on('click', '#view_customer', function () {
+        var id = $(this).val();
+        $('#viewModal').modal('show');
+        $('#customer_id').val($(this).val());
+
+        $.ajax({
+            url: 'view-customer/' + id,
+            type: 'get',
+            success: function (data) {
+                if (data.status == 200) {
+                    $('#view_name').html(data.ledgers.name);
+                    $('#view_email').html(data.ledgers.email);
+                    $('#view_address').html(data.ledgers.address);
+                    $('#view_phone').html(data.ledgers.phone);
+                    $('#view_company_name').html(data.ledgers.company_name);
+                    $('#view_info').html(data.ledgers.info);
+                    if (data.transections != null) {
+                        $('#view_debit').html(data.transections.debit);
+                        $('#view_credit').html(data.transections.credit);
+                    } else {
+                        $('#view_debit').html(null);
+                        $('#view_credit').html(null);
+                    }
+                }
+            }
+        });
 
     });
 

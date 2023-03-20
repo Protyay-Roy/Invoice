@@ -39,7 +39,6 @@
 
 
             <!--customer add Modal -->
-
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -173,6 +172,52 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- customer view Modal -->
+            <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Customer Information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-success float-right mt-2 mb-4 mr-3">Download pdf</button>
+                            <table class="table mb-5">
+                                <tr>
+                                    <th>Name:</th>
+                                    <td id="view_name"></td>
+                                    <th>Company name:</th>
+                                    <td id="view_company_name">></td>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td id="view_email">></td>
+                                    <th>Phone no.:</th>
+                                    <td id="view_phone">></td>
+                                </tr>
+                                <tr>
+                                    <th>Address:</th>
+                                    <td id="view_address">></td>
+                                    <th>Note:</th>
+                                    <td id="view_info">></td>
+                                </tr>
+                                <tr>
+                                    <th>Debit:</th>
+                                    <td id="view_debit">></td>
+                                    <th>Credit:</th>
+                                    <td id="view_credit">></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div id="main-body">
@@ -208,7 +253,9 @@
                                 <td>{{ $customer->phone }}</td>
                                 <td>{{ $customer->info }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-primary">view</a>
+                                    {{-- <a href="#" class="btn btn-primary">view</a> --}}
+                                    {{-- <button class="btn btn-info" id="view_customer"
+                                        value="{{ $customer->id }}">View</button> --}}
                                     <button class="btn btn-warning" id="edit_customer"
                                         value="{{ $customer->id }}">edit</button>
                                     <button class="btn btn-danger" id="delete_customer"
