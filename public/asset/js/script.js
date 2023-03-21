@@ -266,6 +266,16 @@ $(document).ready(function () {
         })
     })
 
+    // DELETE ENTRY CLICK EVENT
+    $(document).on('click', '#delete_entry', function () {
+        var id = $(this).val();
+        var result = confirm('Do you want to delete this?');
+        if (result) {
+            window.location = 'delete-entry/' + id;
+        }
+
+    });
+
 
 
     $(document).on("click", "#add_entry", function (e) {

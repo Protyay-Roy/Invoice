@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class DailyEntryController extends Controller
 {
-    public function getProfile($type)
+    public function getProfile($route = null, $type)
     {
         if ($type == 'customer') {
             $profile = Ledger::where('type', 1)->get();
@@ -72,5 +72,30 @@ class DailyEntryController extends Controller
         return response()->json([
             'bank' => $banks
         ]);
+    }
+
+    public function editEntry(Request $request, $ledger_id)
+    {
+        $transections = Transection::with('getCustomer')->where(['ledger_id' => $ledger_id,'type' => 'PAYMENT'])->get();
+
+        // dd($transections);
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'date' => 'required',
+                'type' => 'required',
+                'profile' => 'required'
+            ]);
+
+
+            return redirect('invoice')->with('success_message', "Daily entry updated succssfully!");
+        }
+
+        return view('edit_daily_entry', compact('transections'));
+    }
+
+    public function destroy(Transection $transection)
+    {
+        $transection->delete();
+        return back()->with('success_message', "Invoice deleted succssfully!");
     }
 }

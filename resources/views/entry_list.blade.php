@@ -29,8 +29,8 @@
                                         <td>{{ $entry->debit }}</td>
                                         <td>{{ $entry->credit }}</td>
                                         <td>
-                                            <a href="{{ url('edit-invoice/'.$entry->id) }}" class="btn btn-primary">Edit</a>
-                                            <button value="{{ $entry->id }}" id="delete_invoice" class="btn btn-danger">Delete</button>
+                                            <a href="{{ route('edit-entry', $entry->ledger_id) }}" class="btn btn-primary">Edit</a>
+                                            <button value="{{ $entry->id }}" id="delete_entry" class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
                                 @endforeach
