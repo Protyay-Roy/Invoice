@@ -14,14 +14,11 @@
                     </button>
                 </div>
 
-                <div>
-                    {{-- <button class="btn btn-success float-right mt-2 mb-4 mr-3">Download pdf</button> --}}
-
-                    <p class="pl-1 pt-2">Date: <span class="view_date"></span></p>
-
+                <div id="invoice_view">
+                    <p class="pl-1 pt-3">Date: <span class="view_date"></span></p>
                     <hr>
                     <div>
-                        <p>Invoice to:</p>
+                        <h6>Invoice to:</h6>
                         <ul>
                             <li>Name: <span class="view_name">hii</span></li>
                             <li>Company Name: <span class="view_com_name"></span></li>
@@ -32,32 +29,32 @@
                             <li>Info: <span class="view_info"></span></li>
                         </ul>
                     </div>
-                    {{-- <table class="table mb-5">
-                        <tr>
-                            <th>Name:</th>
-                            <td id="view_name"></td>
-                            <th>Company name:</th>
-                            <td id="view_company_name"></td>
-                        </tr>
-                        <tr>
-                            <th>Email:</th>
-                            <td id="view_email"></td>
-                            <th>Phone no.:</th>
-                            <td id="view_phone"></td>
-                        </tr>
-                        <tr>
-                            <th>Address:</th>
-                            <td id="view_address"></td>
-                            <th>Note:</th>
-                            <td id="view_info"></td>
-                        </tr>
-                        <tr>
-                            <th>Debit:</th>
-                            <td id="view_debit"></td>
-                            <th>Credit:</th>
-                            <td id="view_credit"></td>
-                        </tr>
-                    </table> --}}
+                    <table class="table table-bordered mb-5">
+                        <tHead>
+                            <tr>
+                                <th scope="col">Entry date</th>
+                                <th scope="col">Item</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Unit</th>
+                                <th scope="col">Width</th>
+                                <th scope="col">Height</th>
+                                <th scope="col">Square ft</th>
+                                <th scope="col">Rate</th>
+                                <th scope="col">Amount</th>
+                            </tr>
+                        </tHead>
+                        <tBody class="view_tBody">
+
+                        </tBody>
+                    </table>
+
+                    <p class="mb-5 mr-1 float-right">Total: <span class="view_total"></span></p>
+                    <div class="clr"></div>
+                    <p>Note: <span>Somthing....</span></p>
+
+                    <button class="btn btn-success float-right mt-2 mb-4 mr-3">Download pdf</button>
+                    <div class="clr"></div>
+
                 </div>
             </div>
         </div>

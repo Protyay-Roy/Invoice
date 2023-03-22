@@ -113,7 +113,7 @@ class InvoiceController extends Controller
 
     public function viewInvoice($id)
     {
-        $transections = Transection::with('getCustomer')->find($id);
+        $transections = Transection::with('getCustomer', 'getInvoiceItems')->find($id);
         // dd($transections);
         // $transections = Transection::where('ledger_id', $id)->first();
         return response()->json([

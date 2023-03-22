@@ -302,7 +302,6 @@ $(document).ready(function () {
     // VIEW INVOICE CLICK EVENT
     $(document).on('click', '#view_invoice', function () {
         var id = $(this).val();
-        $('#viewModal').modal('show');
         $('#customer_id').val($(this).val());
 
         $.ajax({
@@ -310,21 +309,32 @@ $(document).ready(function () {
             type: 'get',
             success: function (data) {
                 if (data.status == 200) {
-                    $('.view_date').text(data.transections.entry_date)
+                    $('#viewModal').modal('show');
+                    // console.log(data.transections);
+                    var d = new Date();
+                    var strDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+
+                    var type = data.transections.get_customer.type == 1 ? 'Customer' : 'Supplier';
+
+                    $('.view_date').text(strDate)
                     $('.view_name').text(data.transections.get_customer.name)
-                    $('.view_email').html(data.transections.get_customer.email);
-                    $('.view_address').html(data.transections.get_customer.address);
-                    $('.view_phone').html(data.transections.get_customer.phone);
-                    $('.view_com_name').html(data.transections.get_customer.company_name);
-                    $('.view_info').html(data.transections.get_customer.info);
-                    // $('#view_info').html(data.ledgers.info);
-                    // if (data.transections != null) {
-                    //     $('#view_debit').html(data.transections.debit);
-                    //     $('#view_credit').html(data.transections.credit);
-                    // } else {
-                    //     $('#view_debit').html(null);
-                    //     $('#view_credit').html(null);
-                    // }
+                    $('.view_type').text(type)
+                    $('.view_email').text(data.transections.get_customer.email);
+                    $('.view_address').text(data.transections.get_customer.address);
+                    $('.view_phone').text(data.transections.get_customer.phone);
+                    $('.view_com_name').text(data.transections.get_customer.company_name);
+                    $('.view_info').text(data.transections.get_customer.info);
+                    if (data.transections.get_invoice_items != null) {
+                            $.each(data.transections.get_invoice_items, function(index, invoice){
+                                $('.view_tBody').html(
+                                    '<tr><td>'+invoice.entry_date+'</td><td>'+invoice.item+'</td><td>'+invoice.size+'</td><td>'+invoice.unit+'</td><td>'+invoice.width+'</td><td>'+invoice.height+'</td><td>'+invoice.square_ft+'</td><td>'+invoice.rate+'</td><td>'+invoice.price+'</td></tr>'
+                                    )
+                            })
+                    } else {
+                        $('.view_tBody').html('')
+                    }
+
+                    $('.view_total').text(data.transections.debit+' TK');
                 }
             }
         });

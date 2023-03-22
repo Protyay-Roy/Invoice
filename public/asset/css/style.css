@@ -187,21 +187,26 @@ div.dataTables_wrapper div.dt-row {
     }
 }
 
-/* Small devices (landscape phones, 576px and up) */
-/* @media (min-width: 576px) {
-    .body-top-content ul li {
-        display: inline-block;
-        margin-right: 20px;
-    }
+#invoice_view p{
+    font-weight: 600;
+    font-size: 14px;
+}
+#invoice_view p span{
+    font-weight: 400;
+    font-size: 14px;
+}
 
-    .body-top-content ul li:last-child {
-        margin-right: 0;
-    }
-
-    .body-top-content button {
-        float: right;
-    }
-} */
-
-
+#invoice_view ul li{
+    list-style-type: none;
+    font-weight: 500;
+    font-size: 14px;
+}
+#invoice_view ul li span{
+    font-weight: 400;
+    font-size: 14px;
+}
+#invoice_view table tHead th{
+    font-weight: 600;
+    font-size: 15px;
+}
 
