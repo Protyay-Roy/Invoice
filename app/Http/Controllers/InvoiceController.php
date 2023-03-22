@@ -111,6 +111,17 @@ class InvoiceController extends Controller
         return view('edit_invoice', compact('transections'));
     }
 
+    public function viewInvoice($id)
+    {
+        $transections = Transection::with('getCustomer')->find($id);
+        // dd($transections);
+        // $transections = Transection::where('ledger_id', $id)->first();
+        return response()->json([
+            'status' => 200,
+            // 'ledgers' => $ledgers,
+            'transections' => $transections
+        ]);
+    }
 
 
     public function destroy($id)

@@ -16,6 +16,18 @@
             <form action="{{ route('add-edit-daily_entry') }}" method="post">
                 @csrf
                 <div id="body-table">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <table class="table table-bordered table-striped">
                         <thead class="table_head">
                             <tr>
@@ -61,7 +73,7 @@
                                     <select name="bank_name[]" id="bank_name" class="form-control">
                                         <option selected disabled>Select your bank</option>
                                         @foreach (App\Models\Bank::get() as $bank)
-                                        <option value="{{ $bank->name }}">{{ $bank->name }}</option>
+                                            <option value="{{ $bank->name }}">{{ $bank->name }}</option>
                                         @endforeach
                                     </select>
                                 </td>

@@ -10,7 +10,19 @@ use Illuminate\Http\Request;
 
 class DailyEntryController extends Controller
 {
-    public function getProfile($route = null, $type)
+    public function getProfile($type)
+    {
+        if ($type == 'customer') {
+            $profile = Ledger::where('type', 1)->get();
+        } else if ($type == 'supplier') {
+            $profile = Ledger::where('type', 2)->get();
+        } else if ($type == 'bank') {
+            $profile = Bank::get();
+        }
+
+        return $profile;
+    }
+    public function getEditProfile($route, $type)
     {
         if ($type == 'customer') {
             $profile = Ledger::where('type', 1)->get();
@@ -74,9 +86,9 @@ class DailyEntryController extends Controller
         ]);
     }
 
-    public function editEntry(Request $request, $ledger_id)
+    public function editEntry(Request $request, $id)
     {
-        $transections = Transection::with('getCustomer')->where(['ledger_id' => $ledger_id,'type' => 'PAYMENT'])->get();
+        $transection = Transection::with('getCustomer')->find($id);
 
         // dd($transections);
         if ($request->isMethod('post')) {
@@ -85,17 +97,40 @@ class DailyEntryController extends Controller
                 'type' => 'required',
                 'profile' => 'required'
             ]);
+            $note = !empty($request->note) ? $request->note : 'N/A';
+            if ($request->type == 'customer' || $request->type == 'supplier') {
 
-
-            return redirect('invoice')->with('success_message', "Daily entry updated succssfully!");
+                if (!empty($request->debit || $request->credit)) {
+                    $transection->ledger_id = $request->profile;
+                    $transection->entry_date = $request->date;
+                    $transection->debit = $request->debit;
+                    $transection->credit = $request->credit;
+                    $transection->type = 'PAYMENT';
+                    $transection->note = $note;
+                    $transection->bank_name = !empty($request->bank_name) ? $request->bank_name : null;
+                    $transection->save();
+                }
+            } else if ($request->type == 'bank') {
+                if (!empty($request->debit || $request->credit)) {
+                    $bank_transections = new Bank_transection;
+                    $bank_transections->bank_id = $request->profile;
+                    $bank_transections->entry_date = $request->date;
+                    $bank_transections->debit = $request->debit;
+                    $bank_transections->credit = $request->credit;
+                    $bank_transections->type = 'PAYMENT';
+                    $bank_transections->note = $note;
+                    $bank_transections->save();
+                }
+            }
+            return redirect('daily_entry-list')->with('success_message', "Daily entry updated succssfully!");
         }
 
-        return view('edit_daily_entry', compact('transections'));
+        return view('edit_daily_entry', compact('transection'));
     }
 
     public function destroy(Transection $transection)
     {
         $transection->delete();
-        return back()->with('success_message', "Invoice deleted succssfully!");
+        return back()->with('success_message', "Daily entry deleted succssfully!");
     }
 }

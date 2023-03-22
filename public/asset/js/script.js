@@ -43,7 +43,7 @@ $(document).ready(function () {
         var height = $row.find('.height').val();
         var rate = $row.find('.rate').val();
 
-        var square_ft = (width * height)/144;
+        var square_ft = (width * height) / 144;
 
         $row.find('.square_ft').val(square_ft);
         var price = square_ft * rate;
@@ -100,34 +100,34 @@ $(document).ready(function () {
     });
 
     // VIEW CUSTOMER CLICK EVENT
-    $(document).on('click', '#view_customer', function () {
-        var id = $(this).val();
-        $('#viewModal').modal('show');
-        $('#customer_id').val($(this).val());
+    // $(document).on('click', '#view_customer', function () {
+    //     var id = $(this).val();
+    //     $('#viewModal').modal('show');
+    //     $('#customer_id').val($(this).val());
 
-        $.ajax({
-            url: 'view-customer/' + id,
-            type: 'get',
-            success: function (data) {
-                if (data.status == 200) {
-                    $('#view_name').html(data.ledgers.name);
-                    $('#view_email').html(data.ledgers.email);
-                    $('#view_address').html(data.ledgers.address);
-                    $('#view_phone').html(data.ledgers.phone);
-                    $('#view_company_name').html(data.ledgers.company_name);
-                    $('#view_info').html(data.ledgers.info);
-                    if (data.transections != null) {
-                        $('#view_debit').html(data.transections.debit);
-                        $('#view_credit').html(data.transections.credit);
-                    } else {
-                        $('#view_debit').html(null);
-                        $('#view_credit').html(null);
-                    }
-                }
-            }
-        });
+    //     $.ajax({
+    //         url: 'view-customer/' + id,
+    //         type: 'get',
+    //         success: function (data) {
+    //             if (data.status == 200) {
+    //                 $('#view_name').html(data.ledgers.name);
+    //                 $('#view_email').html(data.ledgers.email);
+    //                 $('#view_address').html(data.ledgers.address);
+    //                 $('#view_phone').html(data.ledgers.phone);
+    //                 $('#view_company_name').html(data.ledgers.company_name);
+    //                 $('#view_info').html(data.ledgers.info);
+    //                 if (data.transections != null) {
+    //                     $('#view_debit').html(data.transections.debit);
+    //                     $('#view_credit').html(data.transections.credit);
+    //                 } else {
+    //                     $('#view_debit').html(null);
+    //                     $('#view_credit').html(null);
+    //                 }
+    //             }
+    //         }
+    //     });
 
-    });
+    // });
 
     // SUPPLIER CLICK EVENT
     $(document).on('click', '#edit_supplier', function () {
@@ -186,10 +186,10 @@ $(document).ready(function () {
                     $('#account_number').val(data.banks.account_number);
                     $('#branch').val(data.banks.branch);
                     $('#info').val(data.banks.info);
-                    if(data.bank_transections != null){
+                    if (data.bank_transections != null) {
                         $('#debit').val(data.bank_transections.debit);
                         $('#credit').val(data.bank_transections.credit);
-                    }else{
+                    } else {
                         $('#debit').val(null);
                         $('#credit').val(null);
                     }
@@ -220,29 +220,7 @@ $(document).ready(function () {
 
     });
 
-    // ADD DAILY ENTRY ROW
-    // $(document).on("click", "#add_entry", function (e) {
-    //     e.preventDefault();
-    //     var add_attr = '';
-    //     add_attr += '<tr>';
-    //     add_attr += '<td><input type="date" class="form-control" name="date[]"></td>';
-    //     add_attr += '<td><select name="type[]" class="form-control entry_type"><option selected disabled>Select payment type</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
-    //     add_attr += '<td><select name="profile[]" class="form-control profile"><option selected disabled>Select profile</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
-    //     add_attr += '<td><input type="text" class="form-control" name="debit[]" placeholder="Debit"></td>';
-    //     add_attr += '<td><input type="text" class="form-control" name="credit[]" placeholder="Credit"></td>';
-    //     add_attr += '<td><input type="text" class="form-control" name="note[]" placeholder="Note"></td>';
-    //     // add_attr += '<td><input type="text" class="form-control" name="bank_name[]" placeholder="Bank"></td>';
-    //     add_attr += '<td><select name="bank_name[]" id="bank_name" class="form-control"><option selected disabled>Select your bank</option>@foreach (App\Models\Bank::get() as $bank)<option value="{{ $bank->name }}">{{ $bank->name }}</option>@endforeach</select></td>';
-    //     add_attr += '<td><button class="btn btn-danger mt-1" id="remove_entry_row"><i class="fa-solid fa-trash"></i></button></td>';
-    //     add_attr += '</tr>';
-    //     $("#table_body").append(add_attr)
-    // });
-
-    // REMOVE DAILY ENTRY ROW
-    $(document).on('click', '#remove_entry_row', function () {
-        $(this).closest('tr').remove();
-    });
-
+    // CHANGE ENTRY TYPE BY AJAX
     $(document).on('change', '.entry_type', function () {
         var type = $(this).val();
         var $row = $(this).closest('tr');
@@ -255,9 +233,9 @@ $(document).ready(function () {
             type: 'get',
             success: function (data) {
                 // if(data.status == 200){
-                    $.each(data, function(index, profile){
-                        $profileSelect.append('<option value="' + profile.id + '">' + profile.name + '</option>');
-                    });
+                $.each(data, function (index, profile) {
+                    $profileSelect.append('<option value="' + profile.id + '">' + profile.name + '</option>');
+                });
                 // }
             },
             error: function () {
@@ -277,7 +255,7 @@ $(document).ready(function () {
     });
 
 
-
+    // ADD DAILY ENTRY ROW
     $(document).on("click", "#add_entry", function (e) {
         // Prevent the default behavior of the button click
         e.preventDefault();
@@ -316,7 +294,41 @@ $(document).ready(function () {
         });
     });
 
+    // DELETE DAILY ENTRY ROW
+    $(document).on('click', '#remove_entry_row', function () {
+        $(this).closest('tr').remove();
+    });
 
+    // VIEW INVOICE CLICK EVENT
+    $(document).on('click', '#view_invoice', function () {
+        var id = $(this).val();
+        $('#viewModal').modal('show');
+        $('#customer_id').val($(this).val());
 
+        $.ajax({
+            url: 'view-invoice/' + id,
+            type: 'get',
+            success: function (data) {
+                if (data.status == 200) {
+                    $('.view_date').text(data.transections.entry_date)
+                    $('.view_name').text(data.transections.get_customer.name)
+                    $('.view_email').html(data.transections.get_customer.email);
+                    $('.view_address').html(data.transections.get_customer.address);
+                    $('.view_phone').html(data.transections.get_customer.phone);
+                    $('.view_com_name').html(data.transections.get_customer.company_name);
+                    $('.view_info').html(data.transections.get_customer.info);
+                    // $('#view_info').html(data.ledgers.info);
+                    // if (data.transections != null) {
+                    //     $('#view_debit').html(data.transections.debit);
+                    //     $('#view_credit').html(data.transections.credit);
+                    // } else {
+                    //     $('#view_debit').html(null);
+                    //     $('#view_credit').html(null);
+                    // }
+                }
+            }
+        });
+
+    });
 });
 

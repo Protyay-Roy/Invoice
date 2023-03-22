@@ -28,6 +28,7 @@ Route::post('create-customer', [CustomerController::class, 'createCustomer'])->n
 Route::get('update-customer/{id}', [CustomerController::class, 'updateCustomer']);
 // Route::get('view-customer/{id}', [CustomerController::class, 'viewCustomer']);
 Route::get('delete-customer/{id}', [CustomerController::class, 'destroy']);
+
 // SUPPLIER ROUTE
 Route::view('supplier', 'supplier')->name('supplier-list');
 Route::post('create-supplier', [SupplierController::class, 'createSupplier'])->name('create-supplier');
@@ -40,6 +41,7 @@ Route::view('/', 'invoice_list')->name('invoice-list');
 Route::match(['get', 'post'], 'create-invoice', [InvoiceController::class, 'createInvoice'])->name('create-invoice');
 Route::match(['get', 'post'], 'edit-invoice/{id}', [InvoiceController::class, 'editInvoice']);
 Route::get('delete-invoice/{id}', [InvoiceController::class, 'destroy']);
+Route::get('view-invoice/{id}', [InvoiceController::class, 'viewInvoice']);
 
 // BANK ROUTE
 Route::view('bank', 'bank')->name('bank-list');
@@ -51,10 +53,11 @@ Route::get('delete-bank/{id}', [BankController::class, 'destroy']);
 
 // Route::view('daily_entry-list', 'create_daily_entry')->name('daily_entry');
 Route::view('daily_entry-list', 'entry_list')->name('daily_entry-list');
-Route::get('{route?}/profile/{type}', [DailyEntryController::class, 'getProfile']);
+Route::get('profile/{type}', [DailyEntryController::class, 'getProfile']);
+Route::get('{route}/profile/{type}', [DailyEntryController::class, 'getEditProfile']);
 Route::get('get_bank', [DailyEntryController::class, 'getBank']);
 Route::match(['get', 'post'], 'add-edit-daily_entry', [DailyEntryController::class, 'addEditEntry'])->name('add-edit-daily_entry');
-Route::match(['get', 'post'], 'edit-daily_entry/{ledger_id}', [DailyEntryController::class, 'editEntry'])->name('edit-entry');
+Route::match(['get', 'post'], 'edit-daily_entry/{id}', [DailyEntryController::class, 'editEntry'])->name('edit-entry');
 Route::get('delete-entry/{transection}', [InvoiceController::class, 'destroy']);
 
 

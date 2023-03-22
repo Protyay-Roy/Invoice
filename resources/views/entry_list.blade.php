@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-    Invoice List
+    Daily Entry List
 @endsection
 @section('content')
     <div id="main-body">
@@ -29,7 +29,7 @@
                                         <td>{{ $entry->debit }}</td>
                                         <td>{{ $entry->credit }}</td>
                                         <td>
-                                            <a href="{{ route('edit-entry', $entry->ledger_id) }}" class="btn btn-primary">Edit</a>
+                                            <a href="{{ route('edit-entry', $entry->id) }}" class="btn btn-primary">Edit</a>
                                             <button value="{{ $entry->id }}" id="delete_entry" class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
