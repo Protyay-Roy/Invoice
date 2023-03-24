@@ -161,7 +161,7 @@
 
 
             <!-- customer view Modal -->
-            <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            {{-- <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -203,7 +203,49 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
+            {{-- <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content px-4">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">Customer Information</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div id="invoice_view" class="mt-1">
+                            <div>
+                                <ul>
+                                    <li>Name: <span class="view_name"></span></li>
+                                    <li>Company Name: <span class="view_com_name"></span></li>
+                                    <li>Type: <span class="view_type"></span></li>
+                                    <li>Email: <span class="view_email"></span></li>
+                                    <li>Phone no.: <span class="view_phone"></span></li>
+                                    <li>Address: <span class="view_address"></span></li>
+                                    <li>Info: <span class="view_info"></span></li>
+                                </ul>
+                            </div>
+                            <table class="table table-bordered mb-5">
+                                <tHead>
+                                    <tr>
+                                        <th scope="col">Entry date</th>
+                                        <th scope="col">Debit</th>
+                                        <th scope="col">Credit</th>
+                                        <th scope="col">Note</th>
+                                        <th scope="col">Bank Name</th>
+                                    </tr>
+                                </tHead>
+                                <tBody class="view_tBody">
+
+                                </tBody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
         </div>
     </div>
     <div id="main-body">
@@ -253,8 +295,8 @@
                                 <td>{{ $customer->info }}</td>
                                 <td>
                                     {{-- <a href="#" class="btn btn-primary">view</a> --}}
-                                    {{-- <button class="btn btn-info" id="view_customer"
-                                        value="{{ $customer->id }}">View</button> --}}
+                                    <button class="btn btn-info" id="view_customer"
+                                        value="{{ $customer->id }}">View</button>
                                     <button class="btn btn-warning" id="edit_customer"
                                         value="{{ $customer->id }}">edit</button>
                                     <button class="btn btn-danger" id="delete_customer"

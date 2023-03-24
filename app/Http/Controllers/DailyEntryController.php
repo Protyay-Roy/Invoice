@@ -73,7 +73,7 @@ class DailyEntryController extends Controller
                 }
             }
 
-            return back();
+            return redirect('daily_entry-list')->with('success_message', 'Daily entry added successfully!');
         }
         return view('create_daily_entry');
     }

@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('customer', 'customer')->name('customer-list');
 Route::post('create-customer', [CustomerController::class, 'createCustomer'])->name('create-customer');
 Route::get('update-customer/{id}', [CustomerController::class, 'updateCustomer']);
-// Route::get('view-customer/{id}', [CustomerController::class, 'viewCustomer']);
+Route::get('view-customer/{id}', [CustomerController::class, 'viewCustomer']);
 Route::get('delete-customer/{id}', [CustomerController::class, 'destroy']);
 
 // SUPPLIER ROUTE

@@ -105,34 +105,40 @@ $(document).ready(function () {
     });
 
     // VIEW CUSTOMER CLICK EVENT
-    // $(document).on('click', '#view_customer', function () {
-    //     var id = $(this).val();
-    //     $('#viewModal').modal('show');
-    //     $('#customer_id').val($(this).val());
+    $(document).on('click', '#view_customer', function () {
+        var id = $(this).val();
+        $('#customer_id').val($(this).val());
+        window.location = 'view-customer/' + id
 
-    //     $.ajax({
-    //         url: 'view-customer/' + id,
-    //         type: 'get',
-    //         success: function (data) {
-    //             if (data.status == 200) {
-    //                 $('#view_name').html(data.ledgers.name);
-    //                 $('#view_email').html(data.ledgers.email);
-    //                 $('#view_address').html(data.ledgers.address);
-    //                 $('#view_phone').html(data.ledgers.phone);
-    //                 $('#view_company_name').html(data.ledgers.company_name);
-    //                 $('#view_info').html(data.ledgers.info);
-    //                 if (data.transections != null) {
-    //                     $('#view_debit').html(data.transections.debit);
-    //                     $('#view_credit').html(data.transections.credit);
-    //                 } else {
-    //                     $('#view_debit').html(null);
-    //                     $('#view_credit').html(null);
-    //                 }
-    //             }
-    //         }
-    //     });
+        // $.ajax({
+        //     url: 'view-customer/' + id,
+        //     type: 'get',
+        //     success: function (data) {
+        //         if (data.status == 200) {
+        //             $('.view_tBody').html('');
+        //             $('#viewModal').modal('show');
 
-    // });
+        //             var type = data.ledgers.type == 1 ? 'Customer' : 'Supplier';
+        //             $('.view_name').html(data.ledgers.name);
+        //             $('.view_email').html(data.ledgers.email);
+        //             $('.view_address').html(data.ledgers.address);
+        //             $('.view_type').html(type);
+        //             $('.view_phone').html(data.ledgers.phone);
+        //             $('.view_com_name').html(data.ledgers.company_name);
+        //             $('.view_info').html(data.ledgers.info);
+        //             if (data.transections != null) {
+        //                 // $('#view_debit').html(data.transections.debit);
+        //                 // $('#view_credit').html(data.transections.credit);
+        //                 $('.view_tBody').append('<tr><td>' + data.transections.entry_date + '</td><td>' + data.transections.debit + '</td><td>' + data.transections.credit + '</td><td>' + data.transections.note + '</td><td>' + data.transections.bank_name + '</td></tr>')
+        //             } else {
+        //                 $('.view_tBody').html(null);
+        //                 // $('#view_credit').html(null);
+        //             }
+        //         }
+        //     }
+        // });
+
+    });
 
 
     // SUPPLIER CLICK EVENT
@@ -315,8 +321,9 @@ $(document).ready(function () {
             type: 'get',
             success: function (data) {
                 if (data.status == 200) {
+                    $('.view_tBody').html('');
                     $('#viewModal').modal('show');
-                    $.each(data.transections.get_invoice_items, function(index, invoice){
+                    $.each(data.transections.get_invoice_items, function (index, invoice) {
 
                         console.log(invoice.item);
                     });
@@ -335,16 +342,16 @@ $(document).ready(function () {
                     $('.view_com_name').text(data.transections.get_customer.company_name);
                     $('.view_info').text(data.transections.get_customer.info);
                     if (data.transections.get_invoice_items != null) {
-                            $.each(data.transections.get_invoice_items, function(index, invoice){
-                                $('.view_tBody').append(
-                                    '<tr><td>'+invoice.entry_date+'</td><td>'+invoice.item+'</td><td>'+invoice.size+'</td><td>'+invoice.width+'</td><td>'+invoice.height+'</td><td>'+invoice.square_ft+'</td><td>'+invoice.qty+'</td><td>'+invoice.total_square_ft+'</td><td>'+invoice.rate+'</td><td>'+invoice.price+'</td></tr>'
-                                    )
-                            })
+                        $.each(data.transections.get_invoice_items, function (index, invoice) {
+                            $('.view_tBody').append(
+                                '<tr><td>' + invoice.entry_date + '</td><td>' + invoice.item + '</td><td>' + invoice.size + '</td><td>' + invoice.width + '</td><td>' + invoice.height + '</td><td>' + invoice.square_ft + '</td><td>' + invoice.qty + '</td><td>' + invoice.total_square_ft + '</td><td>' + invoice.rate + '</td><td>' + invoice.price + '</td></tr>'
+                            )
+                        })
                     } else {
                         $('.view_tBody').html('')
                     }
 
-                    $('.view_total').text(data.transections.debit+' TK');
+                    $('.view_total').text(data.transections.debit + ' TK');
                 }
             }
         });
@@ -354,7 +361,7 @@ $(document).ready(function () {
     // DELETE DAILY ENTRY ROW
     $(document).on('click', '#pdf_link', function () {
         // console.log($(this).val());
-        window.location = 'download-pdf/'+$(this).val();
+        window.location = 'download-pdf/' + $(this).val();
     });
 });
 

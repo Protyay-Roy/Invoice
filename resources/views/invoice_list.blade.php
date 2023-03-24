@@ -20,7 +20,7 @@
                     <div>
                         <h6>Invoice to:</h6>
                         <ul>
-                            <li>Name: <span class="view_name">hii</span></li>
+                            <li>Name: <span class="view_name"></span></li>
                             <li>Company Name: <span class="view_com_name"></span></li>
                             <li>Type: <span class="view_type"></span></li>
                             <li>Email: <span class="view_email"></span></li>
@@ -60,6 +60,8 @@
             </div>
         </div>
     </div>
+
+
     <div id="main-body">
         <div class="container body_content">
             <div class="row">

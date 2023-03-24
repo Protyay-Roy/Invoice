@@ -76,16 +76,17 @@ class CustomerController extends Controller
         ]);
     }
 
-    // public function viewCustomer($id)
-    // {
-    //     $ledgers = Ledger::find($id);
-    //     $transections = Transection::where('ledger_id', $id)->first();
-    //     return response()->json([
-    //         'status' => 200,
-    //         'ledgers' => $ledgers,
-    //         'transections' => $transections
-    //     ]);
-    // }
+    public function viewCustomer($id)
+    {
+        $ledgers = Ledger::find($id);
+        $transections = Transection::where(['ledger_id' => $id, 'type' => 'OPENING BALANCE'])->first();
+        // return response()->json([
+        //     'status' => 200,
+        //     'ledgers' => $ledgers,
+        //     'transections' => $transections
+        // ]);
+        return view('view_customer', compact('ledgers','transections'));
+    }
 
     public function destroy($id)
     {
