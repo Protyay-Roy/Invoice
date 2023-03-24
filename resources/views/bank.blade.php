@@ -22,17 +22,17 @@
 
 
                     @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li class="text-dark">{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="text-dark">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                 </div>
             </div>
             <!-- Button trigger modal -->
@@ -59,12 +59,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="account_number" class="form-label">Account number:</label>
-                                    <input type="text" class="form-control" placeholder="Enter account number" name="account_number">
+                                    <input type="text" class="form-control" placeholder="Enter account number"
+                                        name="account_number">
                                 </div>
                                 <div class="mb-3">
                                     <label for="branch" class="form-label">Branch:</label>
-                                    <input type="text" class="form-control" placeholder="Enter branch"
-                                        name="branch">
+                                    <input type="text" class="form-control" placeholder="Enter branch" name="branch">
                                 </div>
                                 <div class="mb-3">
                                     <label for="info" class="form-label">Information:</label>
@@ -113,20 +113,23 @@
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Bank Name:</label>
-                                    <input type="text" class="form-control" placeholder="Enter bank name" name="name" id="name">
+                                    <input type="text" class="form-control" placeholder="Enter bank name"
+                                        name="name" id="name">
                                 </div>
                                 <div class="mb-3">
                                     <label for="account_number" class="form-label">Account number:</label>
-                                    <input type="text" class="form-control" placeholder="Enter account number" name="account_number" id="account_number">
+                                    <input type="text" class="form-control" placeholder="Enter account number"
+                                        name="account_number" id="account_number">
                                 </div>
                                 <div class="mb-3">
                                     <label for="branch" class="form-label">Branch:</label>
-                                    <input type="text" class="form-control" placeholder="Enter branch"
-                                        name="branch" id="branch">
+                                    <input type="text" class="form-control" placeholder="Enter branch" name="branch"
+                                        id="branch">
                                 </div>
                                 <div class="mb-3">
                                     <label for="info" class="form-label">Information:</label>
-                                    <input type="text" class="form-control" placeholder="Enter info" name="info" id="info">
+                                    <input type="text" class="form-control" placeholder="Enter info" name="info"
+                                        id="info">
                                 </div>
                                 <div class="mb-3">
                                     <div class="row">
@@ -165,13 +168,25 @@
                 </div>
             @endif
 
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li class="text-dark">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <button type="button" class="btn btn-dark mb-3" data-toggle="modal" data-target="#exampleModal">
                 Add Bank
             </button>
             <div class="clr"></div>
             <div>
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead class="table_head">
+                    <thead>
                         <tr>
                             <th scope="col">Bank Name</th>
                             <th scope="col">Account Number</th>

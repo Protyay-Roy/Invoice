@@ -49,40 +49,36 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email:</label>
-                                    <input type="email" class="form-control" placeholder="Enter email"
-                                        name="email">
+                                    <input type="email" class="form-control" placeholder="Enter email" name="email">
                                 </div>
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Address:</label>
-                                    <input type="text" class="form-control" placeholder="Enter address"
-                                        name="address">
+                                    <input type="text" class="form-control" placeholder="Enter address" name="address">
                                 </div>
                                 <div class="mb-3">
                                     <label for="phone" class="form-label">Phone:</label>
-                                    <input type="number" class="form-control" placeholder="Enter phone"
-                                        name="phone">
+                                    <input type="number" class="form-control" placeholder="Enter phone" name="phone">
                                 </div>
                                 <div class="mb-3">
                                     <label for="company_name" class="form-label">Company Name:</label>
-                                    <input type="text" class="form-control"
-                                        placeholder="Enter company name" name="company_name">
+                                    <input type="text" class="form-control" placeholder="Enter company name"
+                                        name="company_name">
                                 </div>
                                 <div class="mb-3">
                                     <label for="info" class="form-label">Information:</label>
-                                    <input type="text" class="form-control" placeholder="Enter info"
-                                        name="info">
+                                    <input type="text" class="form-control" placeholder="Enter info" name="info">
                                 </div>
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="debit" class="form-label">Debit:</label>
-                                            <input type="text" class="form-control"
-                                                placeholder="Enter debit" name="debit">
+                                            <input type="text" class="form-control" placeholder="Enter debit"
+                                                name="debit">
                                         </div>
                                         <div class="col-6">
                                             <label for="credit" class="form-label">Credit:</label>
-                                            <input type="text" class="form-control"
-                                                placeholder="Enter credit" name="credit">
+                                            <input type="text" class="form-control" placeholder="Enter credit"
+                                                name="credit">
                                         </div>
                                     </div>
                                 </div>
@@ -179,9 +175,21 @@
                     </button>
                 </div>
             @endif
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div>
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead class="table_head">
+                    <thead>
                         <tr>
                             <th scope="col">Company</th>
                             <th scope="col">Name</th>
@@ -205,7 +213,8 @@
                                     {{-- <a href="#" class="btn btn-primary">view</a> --}}
                                     <button class="btn btn-warning" id="edit_supplier"
                                         value="{{ $supplier->id }}">edit</button>
-                                    <button class="btn btn-danger" id="delete_supplier" value="{{ $supplier->id }}">delete</button>
+                                    <button class="btn btn-danger" id="delete_supplier"
+                                        value="{{ $supplier->id }}">delete</button>
                                 </td>
                             </tr>
                         @endforeach

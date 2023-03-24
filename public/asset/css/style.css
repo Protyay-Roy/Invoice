@@ -60,11 +60,11 @@ section {
     margin-top: 2rem;
 }
 
-table .table_head tr th {
+/* table .table_head tr th {
     color: #444444;
     font-weight: 500 !important;
     text-align: center;
-}
+} */
 
 table tbody tr td input.form-control {
     /* height: 50px !important; */
@@ -209,4 +209,14 @@ div.dataTables_wrapper div.dt-row {
     font-weight: 600;
     font-size: 15px;
 }
-
+.table th, .table td {
+    padding: 5px !important;
+}
+.table th, .table td .btn{
+    padding: 0 8px !important;
+}
+/* table th{
+    font-weight: 600 !important;
+    color: #333333 !important;
+    font-size: 18px !important;
+} */

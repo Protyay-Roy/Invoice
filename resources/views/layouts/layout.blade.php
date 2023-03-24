@@ -24,6 +24,8 @@
 
     <link rel="stylesheet" href="{{ asset('asset') }}/css/style.css">
 
+
+
 </head>
 
 <body>
@@ -102,6 +104,10 @@
     <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap4.min.js"></script>
 
     <script src="{{ asset('asset') }}/js/script.js"></script>
+
+
+</script>
+
 </body>
 
 </html>

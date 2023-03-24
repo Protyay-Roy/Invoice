@@ -18,10 +18,11 @@ return new class extends Migration
             $table->foreignId('transection_id')->constrained();
             $table->string('item');
             $table->string('size');
-            $table->string('unit');
             $table->float('width');
             $table->float('height');
             $table->float('square_ft');
+            $table->integer('qty');
+            $table->float('total_square_ft');
             $table->float('rate');
             $table->float('price');
             $table->date('entry_date');

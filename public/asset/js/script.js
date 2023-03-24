@@ -14,10 +14,11 @@ $(document).ready(function () {
         add_attr += '<tr>';
         add_attr += '<td><input type="text" class="form-control" name="item[]" placeholder="Item"></td>';
         add_attr += '<td><input type="text" class="form-control" name="size[]" placeholder="Size"></td>';
-        add_attr += '<td><input type="text" class="form-control" name="unit[]" placeholder="Unit"></td>';
         add_attr += '<td><input type="text" class="form-control width" name="width[]" placeholder="Width"></td>';
         add_attr += '<td><input type="text" class="form-control height" name="height[]" placeholder="Height"></td>';
         add_attr += '<td><input type="text" class="form-control square_ft" name="square_ft[]" placeholder="Square ft" readonly></td>';
+        add_attr += '<td><input type="text" class="form-control qty" name="qty[]" placeholder="Quantity"></td>';
+        add_attr += '<td><input type="text" class="form-control total_square_ft" name="total_square_ft[]" placeholder="Total Square ft" readonly></td>';
         add_attr += '<td><input type="text" class="form-control rate" name="rate[]" placeholder="Rate"></td>';
         add_attr += '<td><input type="text" class="form-control price" name="price[]" placeholder="Price" readonly></td>';
         add_attr += '<td><button class="btn btn-danger mt-1" id="remove_invoice_row"><i class="fa-solid fa-trash"></i></button></td>';
@@ -37,16 +38,20 @@ $(document).ready(function () {
     });
 
     // CALCULATE INVOICE ITEMS BY CLICK EVENT
-    $(document).on('keyup', '.width, .height, .rate', function () {
+    $(document).on('keyup', '.width, .height, .rate, .qty', function () {
         var $row = $(this).closest('tr');
         var width = $row.find('.width').val();
         var height = $row.find('.height').val();
         var rate = $row.find('.rate').val();
+        var qty = $row.find('.qty').val();
 
         var square_ft = (width * height) / 144;
 
         $row.find('.square_ft').val(square_ft);
-        var price = square_ft * rate;
+        var total_square_ft = square_ft * qty;
+
+        $row.find('.total_square_ft').val(total_square_ft);
+        var price = total_square_ft * rate;
         $row.find('.price').val(price);
 
         var subtotal = 0;
@@ -128,6 +133,7 @@ $(document).ready(function () {
     //     });
 
     // });
+
 
     // SUPPLIER CLICK EVENT
     $(document).on('click', '#edit_supplier', function () {
@@ -310,7 +316,11 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 200) {
                     $('#viewModal').modal('show');
-                    // console.log(data.transections);
+                    $.each(data.transections.get_invoice_items, function(index, invoice){
+
+                        console.log(invoice.item);
+                    });
+                    $('#pdf_link').val(data.transections.id);
                     var d = new Date();
                     var strDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
 
@@ -326,8 +336,8 @@ $(document).ready(function () {
                     $('.view_info').text(data.transections.get_customer.info);
                     if (data.transections.get_invoice_items != null) {
                             $.each(data.transections.get_invoice_items, function(index, invoice){
-                                $('.view_tBody').html(
-                                    '<tr><td>'+invoice.entry_date+'</td><td>'+invoice.item+'</td><td>'+invoice.size+'</td><td>'+invoice.unit+'</td><td>'+invoice.width+'</td><td>'+invoice.height+'</td><td>'+invoice.square_ft+'</td><td>'+invoice.rate+'</td><td>'+invoice.price+'</td></tr>'
+                                $('.view_tBody').append(
+                                    '<tr><td>'+invoice.entry_date+'</td><td>'+invoice.item+'</td><td>'+invoice.size+'</td><td>'+invoice.width+'</td><td>'+invoice.height+'</td><td>'+invoice.square_ft+'</td><td>'+invoice.qty+'</td><td>'+invoice.total_square_ft+'</td><td>'+invoice.rate+'</td><td>'+invoice.price+'</td></tr>'
                                     )
                             })
                     } else {
@@ -340,5 +350,14 @@ $(document).ready(function () {
         });
 
     });
+
+    // DELETE DAILY ENTRY ROW
+    $(document).on('click', '#pdf_link', function () {
+        // console.log($(this).val());
+        window.location = 'download-pdf/'+$(this).val();
+    });
 });
+
+
+
 

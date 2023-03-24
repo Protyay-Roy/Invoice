@@ -60,5 +60,7 @@ Route::match(['get', 'post'], 'add-edit-daily_entry', [DailyEntryController::cla
 Route::match(['get', 'post'], 'edit-daily_entry/{id}', [DailyEntryController::class, 'editEntry'])->name('edit-entry');
 Route::get('delete-entry/{transection}', [InvoiceController::class, 'destroy']);
 
+Route::get('download-pdf/{id}', [InvoiceController::class, 'downloadPDF']);
+
 
 

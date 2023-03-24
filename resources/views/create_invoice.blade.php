@@ -5,9 +5,13 @@
 @section('content')
     <div id="main-body">
         <div class="container body_content">
-            @if (Session::has('success_message'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Success:</strong> {{ Session('success_message') }}
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li class="text-dark">{{ $error }}</li>
+                        @endforeach
+                    </ul>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -31,70 +35,72 @@
 
 
                     </div>
-                    <div class="col-2">
-                        <div>
-                            <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
-                            <a class="btn btn-outline-success" href="{{ route('customer-list') }}">Add Customer</a>
-                        </div>
-                    </div>
                 </div>
 
                 <hr class="mt-4">
                 <div class="row">
                     <div class="col-12">
-
-                <div id="body-table responsive">
-                    <table class="table table-bordered table-striped">
-                        <thead class="table_head">
-                            <tr>
-                                <th scope="col">Item</th>
-                                <th scope="col">Size</th>
-                                <th scope="col">Unit</th>
-                                <th scope="col">Width</th>
-                                <th scope="col">Height</th>
-                                <th scope="col">Square ft</th>
-                                <th scope="col">Rate</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table_body">
-                            <tr id="TableRow">
-                                <td>
-                                    <input type="text" class="form-control" name="item[]" placeholder="Item">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="size[]" placeholder="Size">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="unit[]" placeholder="Unit">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control width" name="width[]" placeholder="Width">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control height" name="height[]" placeholder="Height">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control square_ft" name="square_ft[]"
-                                        placeholder="Square ft" readonly>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control rate" name="rate[]" placeholder="Rate">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control price" name="price[]" placeholder="Price"
-                                        readonly>
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary mt-1" id="add_invoice">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        <div id="body-table responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table_head">
+                                    <tr>
+                                        <th scope="col">Item</th>
+                                        <th scope="col">Size</th>
+                                        <th scope="col">Width</th>
+                                        <th scope="col">Height</th>
+                                        <th scope="col">Square ft</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Total Square ft</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table_body">
+                                    <tr id="TableRow">
+                                        <td>
+                                            <input type="text" class="form-control" name="item[]" placeholder="Item">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="size[]" placeholder="Size">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control width" name="width[]"
+                                                placeholder="Width">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control height" name="height[]"
+                                                placeholder="Height">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control square_ft" name="square_ft[]"
+                                                placeholder="Square ft" readonly>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control qty" name="qty[]"
+                                                placeholder="Quantity">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control total_square_ft"
+                                                name="total_square_ft[]" placeholder="Total Square ft" readonly>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control rate" name="rate[]"
+                                                placeholder="Rate">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control price" name="price[]"
+                                                placeholder="Price" readonly>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary mt-1" id="add_invoice">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-5">
@@ -106,16 +112,17 @@
                                 placeholder="SubTotal">
                         </div>
                         <div class="sub_total d-flex mt-4">
-                            <span style="margin-right: 38px;">Credit:</span>
-                            <input class="form-control" type="text" id="credit" name="credit" placeholder="Credit">
+                            <span style="margin-right: 38px;">Paid:</span>
+                            <input class="form-control" type="text" id="credit" name="credit"
+                                placeholder="Paid">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-4 offset-4">
                         <div class="mb-2">
-                            <label for="note" class="form-label">Note:</label>
-                            <input type="text" class="form-control" placeholder="Enter note" name="note">
+                            <label for="note" class="form-label">Cheque:</label>
+                            <input type="text" class="form-control" placeholder="Enter Cheque" name="cheque">
                         </div>
                     </div>
                     <div class="col-4">
@@ -134,4 +141,5 @@
             </form>
         </div>
     </div>
+
 @endsection

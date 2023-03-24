@@ -49,7 +49,6 @@
                             <tr>
                                 <th scope="col">Item</th>
                                 <th scope="col">Size</th>
-                                <th scope="col">Unit</th>
                                 <th scope="col">Width</th>
                                 <th scope="col">Height</th>
                                 <th scope="col">Square ft</th>
@@ -63,39 +62,6 @@
                             </tr>
                         </thead>
                         <tbody id="attr_field">
-                            {{-- <tr id="TableRow">
-                                <td>
-                                    <input type="text" class="form-control" name="item[]" placeholder="Item">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="size[]" placeholder="Size">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="unit[]" placeholder="Unit">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control width" name="width[]" placeholder="Width">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control height" name="height[]" placeholder="Height">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control square_ft" name="square_ft[]"
-                                        placeholder="Square ft" readonly>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control rate" name="rate[]" placeholder="Rate">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control price" name="price[]" placeholder="Price"
-                                        readonly>
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary mt-1" id="add_attribute">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                </td>
-                            </tr> --}}
                             @foreach ($transections->getInvoiceItems as $item)
                                 <tr id="TableRow">
                                     <td>
@@ -105,10 +71,6 @@
                                     <td>
                                         <input type="text" class="form-control" name="size[]"
                                             value="{{ $item->size }}">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="unit[]"
-                                            value="{{ $item->unit }}">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control width" name="width[]"
@@ -123,6 +85,14 @@
                                             value="{{ $item->square_ft }}" readonly>
                                     </td>
                                     <td>
+                                        <input type="text" class="form-control piece" name="piece[]"
+                                            placeholder="Piece">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control total_square_ft" name="total_square_ft[]"
+                                            placeholder="Total Square ft" readonly>
+                                    </td>
+                                    <td>
                                         <input type="text" class="form-control rate" name="rate[]"
                                             value="{{ $item->rate }}">
                                     </td>
@@ -131,10 +101,6 @@
                                             value="{{ $item->price }}" readonly>
                                     </td>
                                     <td>
-                                        {{-- <button class="btn btn-primary mt-1" id="add_attribute">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button> --}}
-
                                         <button class="btn btn-danger mt-1" id="remove_attribute"><i
                                                 class="fa-solid fa-trash"></i></button>
                                     </td>

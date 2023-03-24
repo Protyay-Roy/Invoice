@@ -35,10 +35,11 @@
                                 <th scope="col">Entry date</th>
                                 <th scope="col">Item</th>
                                 <th scope="col">Size</th>
-                                <th scope="col">Unit</th>
                                 <th scope="col">Width</th>
                                 <th scope="col">Height</th>
                                 <th scope="col">Square ft</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total Square ft</th>
                                 <th scope="col">Rate</th>
                                 <th scope="col">Amount</th>
                             </tr>
@@ -52,7 +53,7 @@
                     <div class="clr"></div>
                     <p>Note: <span>Somthing....</span></p>
 
-                    <button class="btn btn-success float-right mt-2 mb-4 mr-3">Download pdf</button>
+                    <button id="pdf_link" class="btn btn-success float-right mt-2 mb-4 mr-3">Download pdf</button>
                     <div class="clr"></div>
 
                 </div>
@@ -63,6 +64,14 @@
         <div class="container body_content">
             <div class="row">
                 <div class="col-12">
+                    @if (Session::has('success_message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Success:</strong> {{ Session('success_message') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <h2>Transition details</h2>
                     <div>
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
