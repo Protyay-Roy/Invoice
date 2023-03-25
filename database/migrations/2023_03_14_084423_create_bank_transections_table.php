@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('bank_transections', function (Blueprint $table) {
             $table->id();
             $table->foreignId('bank_id')->constrained();
-            $table->date('entry_date');
+            $table->text('entry_date');
             $table->float('debit')->nullable();
             $table->float('credit')->nullable();
             $table->string('type');

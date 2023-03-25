@@ -40,14 +40,14 @@ class BankController extends Controller
         $banks->save();
 
         if ($transections_id != null) {
-            $bank_transections->entry_date = date("Y-m-d");
+            $bank_transections->entry_date = date("d-m-Y");
             $bank_transections->debit = $request->debit;
             $bank_transections->credit = $request->credit;
             $bank_transections->save();
         } else {
             if (!empty($request->debit || $request->credit)) {
                 $bank_transections->bank_id = $banks->id;
-                $bank_transections->entry_date = date("Y-m-d");
+                $bank_transections->entry_date = date("d-m-Y");
                 $bank_transections->debit = $request->debit;
                 $bank_transections->credit = $request->credit;
                 $bank_transections->type = 'OPENING BALANCE';
@@ -70,8 +70,16 @@ class BankController extends Controller
         ]);
     }
 
+    public function viewBank($id)
+    {
+        $bank = Bank::find($id);
+        $bank_transection = Bank_transection::where(['bank_id' => $id, 'type' => 'OPENING BALANCE'])->first();
+        return view('view_bank', compact('bank','bank_transection'));
+    }
+
     public function destroy($id)
     {
+        Bank_transection::where('bank_id', $id)->delete();
         $banks = Bank::find($id)->delete();
         return back()->with('success_message', "Bank deleted succssfully!");
     }

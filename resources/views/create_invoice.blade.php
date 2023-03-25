@@ -20,8 +20,13 @@
             <form action="{{ route('create-invoice') }}" method="post">
                 @csrf
                 <div class="row">
-                    <div class="col-2 offset-2">
-                        <input type="date" class="form-control" name="entry_date">
+                    {{-- <input type="text" id="datepicker" name="entry_date"> --}}
+
+                    <div class="col-3 offset-2 d-flex">
+                        <label for="datepicker" class="pt-2 mr-2">Date:</label>
+
+                        <input type="text" id="datepicker" name="entry_date" class="form-control"
+                            value="{{ date('d-m-Y') }}">
                     </div>
                     <div class="col-4" id="search_dropdown">
 
@@ -113,19 +118,20 @@
                         </div>
                         <div class="sub_total d-flex mt-4">
                             <span style="margin-right: 38px;">Paid:</span>
-                            <input class="form-control" type="text" id="credit" name="credit"
-                                placeholder="Paid">
+                            <input class="form-control" type="text" id="credit" name="credit" placeholder="Paid">
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4 offset-4">
+                    <div class="col-4 offset-2">
                         <div class="mb-2">
                             <label for="note" class="form-label">Cheque:</label>
                             <input type="text" class="form-control" placeholder="Enter Cheque" name="cheque">
                         </div>
                     </div>
-                    <div class="col-4">
+                </div>
+                <div class="row">
+                    <div class="col-4 offset-6">
                         <div class="mb-3">
                             <label for="bank_name" class="form-label">Bank:</label>
                             <select name="bank_name" id="bank_name" class="form-control">
@@ -135,9 +141,11 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button class="float-right mb-5 btn btn-success">Save</button>
                     </div>
                 </div>
+
+                <button class="float-right mb-5 mr-1 btn btn-success">Save</button>
+                <div class="clr"></div>
             </form>
         </div>
     </div>

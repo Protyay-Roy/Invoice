@@ -14,24 +14,16 @@
                         <div class="col-md-6">
                             <table id="customer_info">
                                 <tr>
-                                    <th>Company Name:</th>
-                                    <td>{{ $ledgers->company_name }}</td>
+                                    <th>Bank Name:</th>
+                                    <td>{{ $bank->name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Name:</th>
-                                    <td>{{ $ledgers->name }}</td>
+                                    <th>Account No:</th>
+                                    <td>{{ $bank->account_number }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Address:</th>
-                                    <td>{{ $ledgers->address }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Email:</th>
-                                    <td>{{ $ledgers->email }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Phone no.:</th>
-                                    <td>{{ $ledgers->phone }}</td>
+                                    <th>Brance:</th>
+                                    <td>{{ $bank->branch }}</td>
                                 </tr>
                             </table>
                             <table id="customer_transection_info">
@@ -44,9 +36,9 @@
                                 </thead>
                                 <tbody class="bg-light">
                                     <tr>
-                                        <td> {{ $transections->debit }} </td>
-                                        <td>{{ $transections->credit }}</td>
-                                        <td>{{ $transections->debit - $transections->credit }}</td>
+                                        <td> {{ $bank_transection->debit }} </td>
+                                        <td>{{ $bank_transection->credit }}</td>
+                                        <td>{{ $bank_transection->debit - $bank_transection->credit }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -82,7 +74,7 @@
             <!-- Button trigger modal -->
         </div>
     </div>
-    <div id="main-body">
+    <div id="main-body" class="pb-5">
         <div class="container body_content" style="margin-top: -25px; min-height:130px">
             <div class="col-md-12">
                 <table class="table table-bordered mb-5">
@@ -92,16 +84,14 @@
                             <th scope="col">Debit</th>
                             <th scope="col">Credit</th>
                             <th scope="col">Note</th>
-                            <th scope="col">Bank Name</th>
                         </tr>
                     </tHead>
                     <tBody>
                         <tr>
-                            <td>{{ $transections->entry_date }}</td>
-                            <td>{{ $transections->debit }}</td>
-                            <td>{{ $transections->credit }}</td>
-                            <td>{{ $transections->note == 'N/A' ? 'Empty' : $transections->note }}</td>
-                            <td>{{ $transections->bank_name == null ? 'Empty' : $transections->bank_name }}</td>
+                            <td>{{ $bank_transection->entry_date }}</td>
+                            <td>{{ $bank_transection->debit }}</td>
+                            <td>{{ $bank_transection->credit }}</td>
+                            <td>{{ $bank_transection->note == 'N/A' ? 'Empty' : $bank_transection->note }}</td>
                         </tr>
                     </tBody>
                 </table>

@@ -48,7 +48,7 @@
                         <tbody id="table_body">
                             <tr id="TableRow">
                                 <td>
-                                    <input type="date" class="form-control" name="date"
+                                    <input type="text" class="form-control" name="date" id="datepicker"
                                         value="{{ $transection->entry_date }}">
                                     @error('date')
                                         <small class="text-danger">{{ $message }}</small>

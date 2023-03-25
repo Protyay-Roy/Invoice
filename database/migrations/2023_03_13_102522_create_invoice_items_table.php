@@ -25,7 +25,7 @@ return new class extends Migration
             $table->float('total_square_ft');
             $table->float('rate');
             $table->float('price');
-            $table->date('entry_date');
+            $table->text('entry_date');
         });
     }
 

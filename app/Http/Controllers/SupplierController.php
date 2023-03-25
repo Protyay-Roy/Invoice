@@ -45,14 +45,14 @@ class SupplierController extends Controller
         $ledgers->save();
 
         if ($transections_id != null) {
-            $transections->entry_date = date("Y-m-d");
+            $transections->entry_date = date("d-m-Y");
             $transections->debit = $request->debit;
             $transections->credit = $request->credit;
             $transections->save();
         } else {
             if (!empty($request->debit || $request->credit)) {
                 $transections->ledger_id = $ledgers->id;
-                $transections->entry_date = date("Y-m-d");
+                $transections->entry_date = date("d-m-Y");
                 $transections->debit = $request->debit;
                 $transections->credit = $request->credit;
                 $transections->type = 'OPENING BALANCE';
@@ -74,6 +74,13 @@ class SupplierController extends Controller
             'ledgers' => $ledgers,
             'transections' => $transections
         ]);
+    }
+
+    public function viewSupplier($id)
+    {
+        $ledgers = Ledger::find($id);
+        $transections = Transection::where(['ledger_id' => $id, 'type' => 'OPENING BALANCE'])->first();
+        return view('view_supplier', compact('ledgers','transections'));
     }
 
     public function destroy($id)

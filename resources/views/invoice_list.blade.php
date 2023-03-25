@@ -74,17 +74,17 @@
                             </button>
                         </div>
                     @endif
-                    <h2>Transition details</h2>
+                    <h4 class="text-center">Transition details</h4>
                     <div>
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>DATE</th>
-                                    <th>name</th>
-                                    <th>BANK/CASH</th>
-                                    <th>DEBIT</th>
-                                    <th>CREDIT</th>
-                                    <th>ACTION</th>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Bank/Cash</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>

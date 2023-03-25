@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Dashboard')</title>
 
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap4.min.css">
 
+    <link rel="stylesheet" href="{{ asset('asset') }}/css/jquery-ui.min.css">
     <link rel="stylesheet" href="{{ asset('asset') }}/css/style.css">
 
 
@@ -61,7 +61,7 @@
                                 Daily Entry
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('add-edit-daily_entry') }}">Create Entry</a>
+                                <a class="dropdown-item" href="{{ route('add-edit-daily_entry') }}"> Create Entry</a>
                                 <a class="dropdown-item" href="{{ route('daily_entry-list') }}">Entry List</a>
                             </div>
                         </li>
@@ -103,10 +103,10 @@
     <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap4.min.js"></script>
 
+    <script src="{{ asset('asset') }}/js/jquery-ui.min.js"></script>
+
     <script src="{{ asset('asset') }}/js/script.js"></script>
 
-
-</script>
 
 </body>
 

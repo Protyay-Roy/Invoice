@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('transections', function (Blueprint $table) {
             $table->id();
             $table->foreignId('ledger_id')->constrained();
-            $table->date('entry_date');
-            $table->string('debit')->nullable();
-            $table->string('credit')->nullable();
+            $table->text('entry_date');
+            $table->float('debit')->nullable();
+            $table->float('credit')->nullable();
             $table->string('type');
             $table->text('note');
             $table->string('bank_name')->nullable();

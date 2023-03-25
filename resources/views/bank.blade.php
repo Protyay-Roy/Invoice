@@ -203,7 +203,8 @@
                                 <td>{{ $bank->branch }}</td>
                                 <td>{{ $bank->info }}</td>
                                 <td>
-                                    {{-- <a href="#" class="btn btn-primary">view</a> --}}
+                                    <button class="btn btn-info" id="view_bank"
+                                        value="{{ $bank->id }}">View</button>
                                     <button class="btn btn-warning" id="edit_bank"
                                         value="{{ $bank->id }}">edit</button>
                                     <button class="btn btn-danger" id="delete_bank"

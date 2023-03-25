@@ -45,14 +45,14 @@ class CustomerController extends Controller
         $ledgers->save();
 
         if ($transections_id != null) {
-            $transections->entry_date = date("Y-m-d");
+            $transections->entry_date = date("d-m-Y");
             $transections->debit = $request->debit;
             $transections->credit = $request->credit;
             $transections->save();
         } else {
             if (!empty($request->debit || $request->credit)) {
                 $transections->ledger_id = $ledgers->id;
-                $transections->entry_date = date("Y-m-d");
+                $transections->entry_date = date("d-m-Y");
                 $transections->debit = $request->debit;
                 $transections->credit = $request->credit;
                 $transections->type = 'OPENING BALANCE';
@@ -80,11 +80,6 @@ class CustomerController extends Controller
     {
         $ledgers = Ledger::find($id);
         $transections = Transection::where(['ledger_id' => $id, 'type' => 'OPENING BALANCE'])->first();
-        // return response()->json([
-        //     'status' => 200,
-        //     'ledgers' => $ledgers,
-        //     'transections' => $transections
-        // ]);
         return view('view_customer', compact('ledgers','transections'));
     }
 

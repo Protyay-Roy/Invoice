@@ -6,17 +6,13 @@
     <div id="body-top">
         <div class="container">
             <div class="row">
-                <div class="col-6 offset-3">
+                <div class="col-md-7 col-sm-12 mx-auto">
                     <div class="body-top-content">
                         <ul>
-                            <li>All Supplier</li>
-                            <li>Active Supplier</li>
-                            <li>Inactive Supplier</li>
+                            <li> <a href="#">All Supplier</a> </li>
+                            <li> <a href="#">Active Supplier</a>  </li>
+                            <li> <a href="#">Inactive Supplier</a> </li>
                             <li>
-                                {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                    Add customer
-                                </button> --}}
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                     Add Supplier
                                 </button>
@@ -210,7 +206,8 @@
                                 <td>{{ $supplier->phone }}</td>
                                 <td>{{ $supplier->info }}</td>
                                 <td>
-                                    {{-- <a href="#" class="btn btn-primary">view</a> --}}
+                                    <button class="btn btn-info" id="view_supplier"
+                                        value="{{ $supplier->id }}">View</button>
                                     <button class="btn btn-warning" id="edit_supplier"
                                         value="{{ $supplier->id }}">edit</button>
                                     <button class="btn btn-danger" id="delete_supplier"

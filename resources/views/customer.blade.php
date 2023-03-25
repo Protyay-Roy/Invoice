@@ -6,12 +6,12 @@
     <div id="body-top">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 offset-lg-3 col-sm-12">
+                <div class="col-md-7 col-sm-12 mx-auto">
                     <div class="body-top-content">
                         <ul>
-                            <li>All Customer</li>
-                            <li>Active Customer</li>
-                            <li>Inactive Customer</li>
+                            <li> <a href="#">All Customer</a> </li>
+                            <li> <a href="#">Active Customer</a>  </li>
+                            <li> <a href="#">Inactive Customer</a> </li>
                             <li>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                     Add customer
@@ -159,93 +159,6 @@
                 </div>
             </div>
 
-
-            <!-- customer view Modal -->
-            {{-- <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Customer Information</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <div>
-                            <button class="btn btn-success float-right mt-2 mb-4 mr-3">Download pdf</button>
-                            <table class="table mb-5">
-                                <tr>
-                                    <th>Name:</th>
-                                    <td id="view_name"></td>
-                                    <th>Company name:</th>
-                                    <td id="view_company_name">></td>
-                                </tr>
-                                <tr>
-                                    <th>Email:</th>
-                                    <td id="view_email">></td>
-                                    <th>Phone no.:</th>
-                                    <td id="view_phone">></td>
-                                </tr>
-                                <tr>
-                                    <th>Address:</th>
-                                    <td id="view_address">></td>
-                                    <th>Note:</th>
-                                    <td id="view_info">></td>
-                                </tr>
-                                <tr>
-                                    <th>Debit:</th>
-                                    <td id="view_debit">></td>
-                                    <th>Credit:</th>
-                                    <td id="view_credit">></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-
-            {{-- <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content px-4">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">Customer Information</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <div id="invoice_view" class="mt-1">
-                            <div>
-                                <ul>
-                                    <li>Name: <span class="view_name"></span></li>
-                                    <li>Company Name: <span class="view_com_name"></span></li>
-                                    <li>Type: <span class="view_type"></span></li>
-                                    <li>Email: <span class="view_email"></span></li>
-                                    <li>Phone no.: <span class="view_phone"></span></li>
-                                    <li>Address: <span class="view_address"></span></li>
-                                    <li>Info: <span class="view_info"></span></li>
-                                </ul>
-                            </div>
-                            <table class="table table-bordered mb-5">
-                                <tHead>
-                                    <tr>
-                                        <th scope="col">Entry date</th>
-                                        <th scope="col">Debit</th>
-                                        <th scope="col">Credit</th>
-                                        <th scope="col">Note</th>
-                                        <th scope="col">Bank Name</th>
-                                    </tr>
-                                </tHead>
-                                <tBody class="view_tBody">
-
-                                </tBody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
     <div id="main-body">
@@ -294,7 +207,6 @@
                                 <td>{{ $customer->phone }}</td>
                                 <td>{{ $customer->info }}</td>
                                 <td>
-                                    {{-- <a href="#" class="btn btn-primary">view</a> --}}
                                     <button class="btn btn-info" id="view_customer"
                                         value="{{ $customer->id }}">View</button>
                                     <button class="btn btn-warning" id="edit_customer"

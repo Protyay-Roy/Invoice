@@ -33,6 +33,7 @@ Route::get('delete-customer/{id}', [CustomerController::class, 'destroy']);
 Route::view('supplier', 'supplier')->name('supplier-list');
 Route::post('create-supplier', [SupplierController::class, 'createSupplier'])->name('create-supplier');
 Route::get('update-supplier/{id}', [SupplierController::class, 'updateSupplier']);
+Route::get('view-supplier/{id}', [SupplierController::class, 'viewSupplier']);
 Route::get('delete-supplier/{id}', [SupplierController::class, 'destroy']);
 
 
@@ -47,6 +48,7 @@ Route::get('view-invoice/{id}', [InvoiceController::class, 'viewInvoice']);
 Route::view('bank', 'bank')->name('bank-list');
 Route::post('create-bank', [BankController::class, 'createBank'])->name('create-bank');
 Route::get('update-bank/{id}', [BankController::class, 'updateBank']);
+Route::get('view-bank/{id}', [BankController::class, 'viewBank']);
 Route::get('delete-bank/{id}', [BankController::class, 'destroy']);
 
 // DAILY ENTRY ROUTE
