@@ -19,7 +19,7 @@ section {
 
 #main-body .container {
     background: #ffffff;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
 }
 
 .body_content {
@@ -215,6 +215,45 @@ ul li{
 .table th, .table td .btn{
     padding: 0 8px !important;
 }
-#customer_view ul li{
+#body-top .container #customer_view {
+    margin-top: 3rem;
+    background: #ffffff;
+    border-radius: 0.7rem;
+    padding: 0.8rem 0 1rem;
+}
+/* #customer_view ul li{
+    padding: 0.3125rem;
+}
+#customer_view ul li span{
+    margin-left: 2rem;
+} */
+#customer_info{
+    width: 100%;
+}
+#customer_info tr td{
+    padding-left: 5rem !important;
+    font-size: 14px;
+}
+#customer_info tr{
     border-top: 1px solid #c9c9c9;
+}
+#customer_info tr th{
+    font-weight: 600;
+    font-size: 15px;
+    padding: 0.3125rem !important;
+}
+#customer_transection_info{
+    margin-top: 1.3rem;
+    width: 100%;
+}
+#customer_transection_info tr th{
+    padding: 0.3125rem 0rem;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+#customer_transection_info tr td{
+    text-align: center;
+    padding: 0.5rem 0rem;
+    font-size: 14px;
 }

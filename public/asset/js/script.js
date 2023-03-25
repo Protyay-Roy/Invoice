@@ -109,35 +109,6 @@ $(document).ready(function () {
         var id = $(this).val();
         $('#customer_id').val($(this).val());
         window.location = 'view-customer/' + id
-
-        // $.ajax({
-        //     url: 'view-customer/' + id,
-        //     type: 'get',
-        //     success: function (data) {
-        //         if (data.status == 200) {
-        //             $('.view_tBody').html('');
-        //             $('#viewModal').modal('show');
-
-        //             var type = data.ledgers.type == 1 ? 'Customer' : 'Supplier';
-        //             $('.view_name').html(data.ledgers.name);
-        //             $('.view_email').html(data.ledgers.email);
-        //             $('.view_address').html(data.ledgers.address);
-        //             $('.view_type').html(type);
-        //             $('.view_phone').html(data.ledgers.phone);
-        //             $('.view_com_name').html(data.ledgers.company_name);
-        //             $('.view_info').html(data.ledgers.info);
-        //             if (data.transections != null) {
-        //                 // $('#view_debit').html(data.transections.debit);
-        //                 // $('#view_credit').html(data.transections.credit);
-        //                 $('.view_tBody').append('<tr><td>' + data.transections.entry_date + '</td><td>' + data.transections.debit + '</td><td>' + data.transections.credit + '</td><td>' + data.transections.note + '</td><td>' + data.transections.bank_name + '</td></tr>')
-        //             } else {
-        //                 $('.view_tBody').html(null);
-        //                 // $('#view_credit').html(null);
-        //             }
-        //         }
-        //     }
-        // });
-
     });
 
 
