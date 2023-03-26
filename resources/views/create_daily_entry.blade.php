@@ -44,7 +44,7 @@
                         <tbody id="table_body">
                             <tr id="TableRow">
                                 <td>
-                                    <input type="text" value="{{ date("d-m-Y") }}" id="datepicker" class="form-control" name="date[]">
+                                    <input type="text" value="{{ date("d-m-Y") }}" id="datepicker" class="form-control datepicker" name="date[]">
                                 </td>
                                 <td>
                                     <select name="type[]" class="form-control entry_type">

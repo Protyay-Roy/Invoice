@@ -72,9 +72,20 @@ class BankController extends Controller
 
     public function viewBank($id)
     {
+        // $bank = Bank::find($id);
+        // $bank_transection = Bank_transection::where(['bank_id' => $id, 'type' => 'OPENING BALANCE'])->first();
+        // return view('view_bank', compact('bank','bank_transection'));
         $bank = Bank::find($id);
-        $bank_transection = Bank_transection::where(['bank_id' => $id, 'type' => 'OPENING BALANCE'])->first();
-        return view('view_bank', compact('bank','bank_transection'));
+        $bank_transections = Bank_transection::where('bank_id', $id)->get();
+        $debit = 0;
+        $credit = 0;
+        $balance = 0;
+        foreach($bank_transections as $transection){
+            $debit += $transection->debit;
+            $credit += $transection->credit;
+            $balance = $debit-$credit;
+        }
+        return view('view_bank', compact('bank','bank_transections','debit','credit','balance'));
     }
 
     public function destroy($id)

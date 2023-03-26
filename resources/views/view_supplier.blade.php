@@ -44,9 +44,9 @@
                                 </thead>
                                 <tbody class="bg-light">
                                     <tr>
-                                        <td> {{ $transections->debit }} </td>
-                                        <td>{{ $transections->credit }}</td>
-                                        <td>{{ $transections->debit - $transections->credit }}</td>
+                                        <td> {{ $debit }} </td>
+                                        <td>{{ $credit }}</td>
+                                        <td>{{ $balance }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -83,7 +83,7 @@
         </div>
     </div>
     <div id="main-body">
-        <div class="container body_content" style="margin-top: -25px; min-height:130px">
+        <div class="container body_content" style="margin-top: -25px; min-height:130px;padding-bottom: 10px">
             <div class="col-md-12">
                 <table class="table table-bordered mb-5">
                     <tHead>
@@ -96,13 +96,15 @@
                         </tr>
                     </tHead>
                     <tBody>
-                        <tr>
-                            <td>{{ $transections->entry_date }}</td>
-                            <td>{{ $transections->debit }}</td>
-                            <td>{{ $transections->credit }}</td>
-                            <td>{{ $transections->note == 'N/A' ? 'Empty' : $transections->note }}</td>
-                            <td>{{ $transections->bank_name == null ? 'Empty' : $transections->bank_name }}</td>
-                        </tr>
+                        @foreach ($transections as $transection)
+                            <tr>
+                                <td>{{ $transection->entry_date }}</td>
+                                <td>{{ $transection->debit }}</td>
+                                <td>{{ $transection->credit }}</td>
+                                <td>{{ $transection->note == 'N/A' ? 'Empty' : $transection->note }}</td>
+                                <td>{{ $transection->bank_name == null ? 'Empty' : $transection->bank_name }}</td>
+                            </tr>
+                        @endforeach
                     </tBody>
                 </table>
 

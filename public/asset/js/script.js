@@ -272,7 +272,7 @@ $(document).ready(function () {
         // Build a string of HTML to add to the table
         var add_attr = '';
         add_attr += '<tr>';
-        add_attr += '<td><input type="text" value="{{ date("d-m-Y") }}" id="datepicker" class="form-control" name="date[]"></td>';
+        add_attr += '<td><input type="text" value="" id="datepicker" class="form-control datepicker" name="date[]"></td>';
         add_attr += '<td><select name="type[]" class="form-control entry_type"><option selected disabled>Select payment type</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
         add_attr += '<td><select name="profile[]" class="form-control profile"><option selected disabled>Select profile</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
         add_attr += '<td><input type="text" class="form-control" name="debit[]" placeholder="Debit"></td>';
@@ -349,7 +349,7 @@ $(document).ready(function () {
     });
 
     // DATE
-    $('#datepicker').datepicker({
+    $('.datepicker').datepicker({
         dateFormat: "dd-mm-yy",
         changeMonth: true,
         changeYear: true

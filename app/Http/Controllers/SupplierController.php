@@ -79,8 +79,16 @@ class SupplierController extends Controller
     public function viewSupplier($id)
     {
         $ledgers = Ledger::find($id);
-        $transections = Transection::where(['ledger_id' => $id, 'type' => 'OPENING BALANCE'])->first();
-        return view('view_supplier', compact('ledgers','transections'));
+        $transections = Transection::where('ledger_id', $id)->get();
+        $debit = 0;
+        $credit = 0;
+        $balance = 0;
+        foreach($transections as $transection){
+            $debit += $transection->debit;
+            $credit += $transection->credit;
+            $balance = $debit-$credit;
+        }
+        return view('view_supplier', compact('ledgers','transections','debit','credit','balance'));
     }
 
     public function destroy($id)
