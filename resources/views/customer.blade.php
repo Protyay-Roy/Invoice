@@ -21,9 +21,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Button trigger modal -->
-
-
             <!--customer add Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -80,15 +77,12 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                {{-- <button type="button" class="btn btn-success">Save</button> --}}
                                 <input type="submit" value="Save" class="btn btn-success" style="box-shadow: none">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
-
             <!--customer update/edit Modal -->
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -151,14 +145,12 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                {{-- <button type="button" class="btn btn-success">Save</button> --}}
                                 <input type="submit" value="Update" class="btn btn-success" style="box-shadow: none">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <div id="main-body">
@@ -171,7 +163,6 @@
                     </button>
                 </div>
             @endif
-
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <ul>

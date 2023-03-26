@@ -1,12 +1,10 @@
 $(document).ready(function () {
-
     // DATATABLE
     $('#example').DataTable({
         scrollX: true,
     });
     // SEARCH INPUT
     $('#search_dropdown select').selectpicker();
-
     // ADD INVOICE ROW
     $(document).on("click", "#add_invoice", function (e) {
         e.preventDefault();
@@ -25,13 +23,10 @@ $(document).ready(function () {
         add_attr += '</tr>';
         $("#table_body").append(add_attr)
     });
-
-
     // VIEW INVOICE CLICK EVENT
     $(document).on('click', '#view_invoice', function () {
         var id = $(this).val();
         $('#customer_id').val($(this).val());
-
         $.ajax({
             url: 'view-invoice/' + id,
             type: 'get',
@@ -67,13 +62,11 @@ $(document).ready(function () {
                         $('.view_tBody').html('')
                     }
 
-                    $('.view_total').text(data.transections.debit + ' TK');
+                    $('.view_total').text(data.transections.debit);
                 }
             }
         });
-
     });
-
     // CALCULATE INVOICE ITEMS BY CLICK EVENT
     $(document).on('keyup', '.width, .height, .rate, .qty', function () {
         var $row = $(this).closest('tr');
@@ -98,7 +91,6 @@ $(document).ready(function () {
 
         $('#subtotal').val(subtotal.toFixed(2));
     });
-
     // REMOVE INVOICE ROW
     $(document).on('click', '#remove_invoice_row', function () {
         var $row = $(this).closest('tr');
@@ -110,8 +102,6 @@ $(document).ready(function () {
         subtotal -= parseFloat(price);
         $('#subtotal').val(subtotal.toFixed(2));
     });
-
-
     // DELETE INVOICE CLICK EVENT
     $(document).on('click', '#delete_invoice', function () {
         var id = $(this).val();
@@ -121,14 +111,12 @@ $(document).ready(function () {
         }
 
     });
-
     // VIEW CUSTOMER CLICK EVENT
     $(document).on('click', '#view_customer', function () {
         var id = $(this).val();
         $('#customer_id').val($(this).val());
         window.location = 'view-customer/' + id
     });
-
     // EDIT CUSTOMER CLICK EVENT
     $(document).on('click', '#edit_customer', function () {
         var id = $(this).val();
@@ -153,14 +141,11 @@ $(document).ready(function () {
                         $('#debit').val(null);
                         $('#credit').val(null);
                     }
-                    // console.log(data.transections.id);
                 }
-                // $('#name').val(data.ledgers.name);
             }
         });
 
     });
-
     // DELETE CUSTOMER CLICK EVENT
     $(document).on('click', '#delete_customer', function () {
         var id = $(this).val();
@@ -170,14 +155,12 @@ $(document).ready(function () {
         }
 
     });
-
     // VIEW SUPPLIER CLICK EVENT
     $(document).on('click', '#view_supplier', function () {
         var id = $(this).val();
         $('#customer_id').val($(this).val());
         window.location = 'view-supplier/' + id
     });
-
     // EDIT SUPPLIER CLICK EVENT
     $(document).on('click', '#edit_supplier', function () {
         var id = $(this).val();
@@ -207,7 +190,6 @@ $(document).ready(function () {
         });
 
     });
-
     // DELETE SUPPLIER CLICK EVENT
     $(document).on('click', '#delete_supplier', function () {
         var id = $(this).val();
@@ -217,14 +199,12 @@ $(document).ready(function () {
         }
 
     });
-
     // VIEW BANK CLICK EVENT
     $(document).on('click', '#view_bank', function () {
         var id = $(this).val();
         $('#customer_id').val($(this).val());
         window.location = 'view-bank/' + id
     });
-
     // EDIT BANK CLICK EVENT
     $(document).on('click', '#edit_bank', function () {
         var id = $(this).val();
@@ -247,13 +227,11 @@ $(document).ready(function () {
                         $('#debit').val(null);
                         $('#credit').val(null);
                     }
-                    // console.log(data.transections.id);
                 }
             }
         });
 
     });
-
     // DELETE BANK CLICK EVENT
     $(document).on('click', '#delete_bank', function () {
         var id = $(this).val();
@@ -263,16 +241,19 @@ $(document).ready(function () {
         }
 
     });
-
     // ADD DAILY ENTRY ROW
     $(document).on("click", "#add_entry", function (e) {
-        // Prevent the default behavior of the button click
         e.preventDefault();
-
-        // Build a string of HTML to add to the table
+        function getCurrentDate() {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            return dd + '-' + mm + '-' + yyyy;
+        }
         var add_attr = '';
         add_attr += '<tr>';
-        add_attr += '<td><input type="text" value="" id="datepicker" class="form-control datepicker" name="date[]"></td>';
+        add_attr += '<td><input type="text" class="form-control datepicker" name="date[]" value="' + getCurrentDate() + '"></td>';
         add_attr += '<td><select name="type[]" class="form-control entry_type"><option selected disabled>Select payment type</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
         add_attr += '<td><select name="profile[]" class="form-control profile"><option selected disabled>Select profile</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
         add_attr += '<td><input type="text" class="form-control" name="debit[]" placeholder="Debit"></td>';
@@ -280,22 +261,25 @@ $(document).ready(function () {
         add_attr += '<td><input type="text" class="form-control" name="note[]" placeholder="Note"></td>';
         add_attr += '<td><select name="bank_name[]" id="bank_name" class="form-control"><option selected disabled>Select your bank</option>';
 
-        // Use an AJAX request to get the bank model from the server
         $.ajax({
             url: '/get_bank',
             type: 'GET',
             success: function (data) {
-                // Loop through the bank models and add an option element for each one
                 $.each(data.bank, function (index, bank) {
                     add_attr += '<option value="' + bank.name + '">' + bank.name + '</option>';
                 });
-
-                // Add the closing tag for the select element and the remove button
                 add_attr += '</select></td>';
                 add_attr += '<td><button class="btn btn-danger mt-1" id="remove_entry_row"><i class="fa-solid fa-trash"></i></button></td>';
 
-                // Append the new row to the table body
                 $("#table_body").append(add_attr);
+
+                // Initialize datepicker and set default date to current date
+                $('.datepicker').datepicker({
+                    dateFormat: "dd-mm-yy",
+                    changeMonth: true,
+                    changeYear: true,
+                    // defaultDate: new Date('d-m-Y') // Set default date to current date
+                });
             },
             error: function (data) {
                 console.log(data);
@@ -315,18 +299,15 @@ $(document).ready(function () {
             url: 'profile/' + type,
             type: 'get',
             success: function (data) {
-                // if(data.status == 200){
                 $.each(data, function (index, profile) {
                     $profileSelect.append('<option value="' + profile.id + '">' + profile.name + '</option>');
                 });
-                // }
             },
             error: function () {
                 alert('Error');
             }
         })
     })
-
     // DELETE ENTRY CLICK EVENT
     $(document).on('click', '#delete_entry', function () {
         var id = $(this).val();
@@ -334,20 +315,15 @@ $(document).ready(function () {
         if (result) {
             window.location = 'delete-entry/' + id;
         }
-
     });
-
     // DELETE ENTRY ROW
     $(document).on('click', '#remove_entry_row', function () {
         $(this).closest('tr').remove();
     });
-
     // DELETE DAILY ENTRY ROW
     $(document).on('click', '#pdf_link', function () {
-        // console.log($(this).val());
         window.location = 'download-pdf/' + $(this).val();
     });
-
     // DATE
     $('.datepicker').datepicker({
         dateFormat: "dd-mm-yy",

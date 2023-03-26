@@ -1,6 +1,5 @@
 * {
     font-family: 'Poppins', sans-serif;
-
 }
 i{
     font-size: 13px;
@@ -21,7 +20,6 @@ section {
 
 #main-body .container {
     background: #ffffff;
-    /* overflow-x: scroll; */
 }
 
 .body_content {
@@ -62,14 +60,7 @@ section {
     margin-top: 2rem;
 }
 
-/* table .table_head tr th {
-    color: #444444;
-    font-weight: 500 !important;
-    text-align: center;
-} */
-
 table tbody tr td input.form-control {
-    /* height: 50px !important; */
     padding: 0.75rem 0.75rem !important;
 }
 
@@ -105,7 +96,6 @@ div.dataTables_wrapper div.dt-row {
     margin-top: 3rem;
     background: #ffffff;
     border-radius: 0.7rem;
-    /* padding: 0.3rem 0; */
 }
 
 #body-top .container .body-top-content ul {
@@ -115,7 +105,6 @@ div.dataTables_wrapper div.dt-row {
 }
 
 #body-top .container .body-top-content ul li {
-    /* display: flex; */
     list-style-type: none;
     text-align: center;
     margin-right: 10px;
@@ -137,13 +126,6 @@ div.dataTables_wrapper div.dt-row {
     line-height: 1rem;
     font-size: 14px;
 }
-
-/* @media(max-width:458){
-    #body-top .container .body-top-content ul {
-        display: inline;
-        padding: 0.5rem 0.3rem;
-    }
-} */
 .modal-dialog {
     max-width: 800px;
     margin: 1.75rem auto;
@@ -171,12 +153,6 @@ div.dataTables_wrapper div.dt-row {
     }
 }
 
-/* @media screen and (max-width: 550px) {
-    #example_wrapper table#example {
-        overflow-x: auto;
-    }
-} */
-
 .navbar-collapse.show .navbar-nav {
     align-items: center;
 }
@@ -194,14 +170,11 @@ div.dataTables_wrapper div.dt-row {
 .dataTables_scrollBody {
     padding-bottom: 1rem !important;
 }
-
-
 @media (max-width: 460px) {
     .body-top-content ul{
         display: block !important;
     }
 }
-
 #invoice_view p{
     font-weight: 600;
     font-size: 14px;
@@ -273,7 +246,6 @@ ul li{
 }
 #select_type {
     height: calc(1.2rem + 0.5rem + 2px);
-    /* padding: 0.375rem 0.75rem; */
 }
 #header_heading{
     margin-bottom: 1.5rem;
@@ -294,11 +266,7 @@ ul li{
 table thead tr th{
     font-weight: 600;
     font-size: 14px;
-    /* padding: 5px 8px !important; */
 }
-/* .dataTables_scrollBody table thead tr th{
-    padding: 0 !important;
-} */
 .table td{
     padding: 3px 3px 3px 10px !important;
 }
@@ -306,10 +274,17 @@ table thead tr th{
     padding: 2px 7px !important;
     font-size: 14px ;
 }
-.table td .btn{
+table td .btn{
     padding: 2px 7px !important;
-    font-size: 14px ;
+    font-size: 14px  !important;
 }
 .close span{
     color: rgb(202, 7, 7);
+}
+.invoice_view_info th{
+    font-weight: 500;
+    font-size: 15px;
+}
+.invoice_view_info td span,.view_date{
+    margin-left: 15px;
 }

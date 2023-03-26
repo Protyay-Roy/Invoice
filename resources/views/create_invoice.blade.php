@@ -20,16 +20,13 @@
             <form action="{{ route('create-invoice') }}" method="post">
                 @csrf
                 <div class="row">
-                    {{-- <input type="text" id="datepicker" name="entry_date"> --}}
-
                     <div class="col-3 offset-2 d-flex">
                         <label for="datepicker" class="pt-2 mr-2">Date:</label>
 
-                        <input type="text" id="datepicker" name="entry_date" class="form-control"
+                        <input type="text" id="datepicker" name="entry_date"  class="form-control datepicker"
                             value="{{ date('d-m-Y') }}">
                     </div>
                     <div class="col-4" id="search_dropdown">
-
                         <select data-live-search="true" class="w-100" name="ledger_id">
                             <option data-tokens="" disabled selected>Select customer</option>
                             @foreach (App\Models\Ledger::where('type', 1)->get() as $customer)
@@ -37,11 +34,8 @@
                                     {{ $customer->name }}</option>
                             @endforeach
                         </select>
-
-
                     </div>
                 </div>
-
                 <hr class="mt-4">
                 <div class="row">
                     <div class="col-12">
@@ -123,7 +117,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4 offset-2">
+                    <div class="col-4 offset-6">
                         <div class="mb-2">
                             <label for="note" class="form-label">Cheque:</label>
                             <input type="text" class="form-control" placeholder="Enter Cheque" name="cheque">
@@ -143,7 +137,6 @@
                         </div>
                     </div>
                 </div>
-
                 <button class="float-right mb-5 mr-1 btn btn-success">Save</button>
                 <div class="clr"></div>
             </form>

@@ -12,7 +12,7 @@ class SupplierController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:ledgers,email,'.$request->update_id,
+            'email' => 'required|email|unique:ledgers,email,' . $request->update_id,
             'address' => 'required',
             'phone' => 'required|numeric',
             'company_name' => 'required',
@@ -83,12 +83,13 @@ class SupplierController extends Controller
         $debit = 0;
         $credit = 0;
         $balance = 0;
-        foreach($transections as $transection){
+        $total_balance = 0;
+        foreach ($transections as $transection) {
             $debit += $transection->debit;
             $credit += $transection->credit;
-            $balance = $debit-$credit;
+            $balance = $debit - $credit;
         }
-        return view('view_supplier', compact('ledgers','transections','debit','credit','balance'));
+        return view('view_supplier', compact('ledgers', 'transections', 'debit', 'credit', 'balance', 'total_balance'));
     }
 
     public function destroy($id)

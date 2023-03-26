@@ -138,11 +138,8 @@ class InvoiceController extends Controller
     public function viewInvoice($id)
     {
         $transections = Transection::with('getCustomer', 'getInvoiceItems')->find($id);
-        // dd($transections);
-        // $transections = Transection::where('ledger_id', $id)->first();
         return response()->json([
             'status' => 200,
-            // 'ledgers' => $ledgers,
             'transections' => $transections
         ]);
     }
@@ -156,11 +153,12 @@ class InvoiceController extends Controller
     }
     public function downloadPDF($id)
     {
-        // $transections = Transection::with('getCustomer', 'getInvoiceItems')->find($id);
-        $transections = Transection::with('getCustomer', 'getInvoiceItems')->where('id', $id)->get();
+        $transections = Transection::with('getCustomer', 'getInvoiceItems')->where('id', $id)->first();
         $pdf = Pdf::loadView('download_pdf', [
             'transections' => $transections
         ]);
         return $pdf->download('download_pdf.pdf');
+        // return view('download_pdf',compact('transections'));
     }
+
 }

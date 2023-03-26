@@ -7,20 +7,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-6 offset-3">
-                    {{-- <div class="body-top-content">
-                        <ul>
-                            <li>All Customer</li>
-                            <li>Active Customer</li>
-                            <li>Inactive Customer</li>
-                            <li>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                    Add customer
-                                </button>
-                            </li>
-                        </ul>
-                    </div> --}}
-
-
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <ul>
@@ -35,11 +21,7 @@
                     @endif
                 </div>
             </div>
-            <!-- Button trigger modal -->
-
-
             <!--bank add Modal -->
-
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -87,15 +69,12 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                {{-- <button type="button" class="btn btn-success">Save</button> --}}
                                 <input type="submit" value="Save" class="btn btn-success" style="box-shadow: none">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
-
             <!--bank update/edit Modal -->
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -148,7 +127,6 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                {{-- <button type="button" class="btn btn-success">Save</button> --}}
                                 <input type="submit" value="Update" class="btn btn-success" style="box-shadow: none">
                             </div>
                         </form>

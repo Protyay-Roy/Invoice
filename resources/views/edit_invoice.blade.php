@@ -18,26 +18,20 @@
                 <div class="row">
                     <div class="col-3 offset-2 d-flex">
                         <label for="datepicker" class="pt-2 mr-2">Date:</label>
-
                         <input type="text" id="datepicker" name="entry_date" class="form-control"
                             value="{{ $transections->entry_date }}">
                     </div>
                     <div class="col-4" id="search_dropdown">
-
                         <select data-live-search="true" class="w-100" name="ledger_id">
-                            {{-- <option data-tokens="" disabled selected>Select customer</option> --}}
                             @foreach (App\Models\Ledger::where('type', 1)->get() as $customer)
                                 <option data-tokens="{{ $customer->id }}" value="{{ $customer->id }}"
                                     {{ !empty($transections->getCustomer->name) && $customer->name == $transections->getCustomer->name ? 'selected' : '' }}>
                                     {{ $customer->name }}</option>
                             @endforeach
                         </select>
-                        {{-- {{$transections->getCustomer->name}} --}}
 
                     </div>
                 </div>
-
-
                 <hr class="mt-4">
                 <div id="body-table">
                     <table class="table table-bordered table-striped">
@@ -107,45 +101,6 @@
                         </tbody>
                     </table>
                 </div>
-                {{-- <div class="row mt-5">
-                    <div class="col-8"></div>
-                    <div class="col-3 pb-5">
-                        <div class="sub_total d-flex">
-                            <span>SubTotal:</span>
-                            <input class="form-control" type="text" id="subtotal" name="subtotal" placeholder="SubTotal"
-                                value="{{ $transections->debit }}">
-                        </div>
-                        <div class="sub_total d-flex mt-4">
-                            <span style="margin-right: 38px;">Credit:</span>
-                            <input class="form-control" type="text" id="credit" name="credit" placeholder="Credit"
-                                value="{{ $transections->credit }}">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4 offset-4">
-                        <div class="mb-2">
-                            <label for="note" class="form-label">Note:</label>
-                            <input type="text" class="form-control" placeholder="Enter note" name="note"
-                                value="{{ $transections->note }}">
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="mb-3">
-                            <label for="bank" class="form-label">Bank:</label>
-                            <select name="bank_name" id="bank" class="form-control">
-                                <option selected disabled>Select Bank</option>
-                                @foreach (App\Models\Bank::get() as $bank)
-                                    <option value="{{ $bank->name }}"
-                                        {{ !empty($transections->bank_name) && $transections->bank_name == $bank->name ? 'selected' : '' }}>
-                                        {{ $bank->name }} </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <button class="float-right mb-5 btn btn-success">Save</button>
-                    </div>
-                </div> --}}
-
                 <div class="row mt-5">
                     <div class="col-8"></div>
                     <div class="col-3 pb-5">
@@ -161,7 +116,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4 offset-2">
+                    <div class="col-4 offset-6">
                         <div class="mb-2">
                             <label for="note" class="form-label">Cheque:</label>
                             <input type="text" class="form-control" placeholder="Enter Cheque" name="cheque" value="{{ $transections->note }}">
@@ -183,7 +138,6 @@
                         </div>
                     </div>
                 </div>
-
                 <button class="float-right mb-5 mr-1 btn btn-success">Save</button>
                 <div class="clr"></div>
             </form>

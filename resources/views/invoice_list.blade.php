@@ -13,24 +13,44 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
                 <div id="invoice_view">
                     <p class="pl-1 pt-3">Date: <span class="view_date"></span></p>
                     <hr>
                     <div>
-                        <h6>Invoice to:</h6>
-                        <ul>
-                            <li>Name: <span class="view_name"></span></li>
-                            <li>Company Name: <span class="view_com_name"></span></li>
-                            <li>Type: <span class="view_type"></span></li>
-                            <li>Email: <span class="view_email"></span></li>
-                            <li>Phone no.: <span class="view_phone"></span></li>
-                            <li>Address: <span class="view_address"></span></li>
-                            <li>Info: <span class="view_info"></span></li>
-                        </ul>
+                        <h5>Invoice to:</h5>
+                        <table class="ml-2 invoice_view_info">
+                            <tr>
+                                <th>Company Name:</th>
+                                <td> <span class="view_com_name"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Name:</th>
+                                <td> <span class="view_name"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Type:</th>
+                                <td> <span class="view_type"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td> <span class="view_email"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Phone no.:</th>
+                                <td> <span class="view_phone"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Address:</th>
+                                <td> <span class="view_address"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Information:</th>
+                                <td> <span class="view_info"></span></td>
+                            </tr>
+                        </table>
                     </div>
-                    <table class="table table-bordered mb-5">
-                        <tHead>
+                    <table class="table table-striped table-bordered" style="width:100%">
+                        <thead>
                             <tr>
                                 <th scope="col">Entry date</th>
                                 <th scope="col">Item</th>
@@ -43,25 +63,18 @@
                                 <th scope="col">Rate</th>
                                 <th scope="col">Amount</th>
                             </tr>
-                        </tHead>
-                        <tBody class="view_tBody">
-
-                        </tBody>
+                        </thead>
+                        <tbody class="view_tBody"></tbody>
                     </table>
-
                     <p class="mb-5 mr-1 float-right">Total: <span class="view_total"></span></p>
                     <div class="clr"></div>
                     <p>Note: <span>Somthing....</span></p>
-
                     <button id="pdf_link" class="btn btn-success float-right mt-2 mb-4 mr-3">Download pdf</button>
                     <div class="clr"></div>
-
                 </div>
             </div>
         </div>
     </div>
-
-
     <div id="main-body">
         <div class="container body_content">
             <div class="row">
@@ -109,7 +122,6 @@
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

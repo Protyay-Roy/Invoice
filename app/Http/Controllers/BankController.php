@@ -16,7 +16,7 @@ class BankController extends Controller
             'branch' => 'required',
             'info' => 'required',
         ]);
-        if ($request->update_id != null){
+        if ($request->update_id != null) {
             $banks = Bank::find($request->update_id);
             $message = 'Bank update successfully!';
             $bank_transections = Bank_transection::where('bank_id', $request->update_id)->first();
@@ -26,7 +26,7 @@ class BankController extends Controller
             } else {
                 $transections_id = $bank_transections->id;
             }
-        }else{
+        } else {
             $banks = new Bank;
             $message = 'Bank added successfully!';
             $bank_transections = new Bank_transection;
@@ -72,20 +72,18 @@ class BankController extends Controller
 
     public function viewBank($id)
     {
-        // $bank = Bank::find($id);
-        // $bank_transection = Bank_transection::where(['bank_id' => $id, 'type' => 'OPENING BALANCE'])->first();
-        // return view('view_bank', compact('bank','bank_transection'));
         $bank = Bank::find($id);
         $bank_transections = Bank_transection::where('bank_id', $id)->get();
         $debit = 0;
         $credit = 0;
         $balance = 0;
-        foreach($bank_transections as $transection){
+        $total_balance = 0;
+        foreach ($bank_transections as $transection) {
             $debit += $transection->debit;
             $credit += $transection->credit;
-            $balance = $debit-$credit;
+            $balance = $debit - $credit;
         }
-        return view('view_bank', compact('bank','bank_transections','debit','credit','balance'));
+        return view('view_bank', compact('bank', 'bank_transections', 'debit', 'credit', 'balance', 'total_balance'));
     }
 
     public function destroy($id)

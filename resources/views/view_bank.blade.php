@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-    View Customer
+    View Bank
 @endsection
 @section('content')
     <div id="body-top">
@@ -56,15 +56,15 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">from</span>
                                     </div>
-                                    <input type="date" class="form-control" placeholder="Username" aria-label="Username"
-                                        aria-describedby="basic-addon1">
+                                    <input type="text" value="{{ date('d-m-y') }}"  class="form-control datepicker"
+                                        placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">to</span>
                                     </div>
-                                    <input type="date" class="form-control" placeholder="Username" aria-label="Username"
-                                        aria-describedby="basic-addon1">
+                                    <input type="text" value="{{ date('d-m-y') }}"  class="form-control datepicker"
+                                        placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                             </div>
                         </div>
@@ -83,23 +83,33 @@
                             <th scope="col">Entry date</th>
                             <th scope="col">Debit</th>
                             <th scope="col">Credit</th>
+                            <th scope="col">Balance</th>
                             <th scope="col">Note</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </tHead>
                     <tBody>
-                        @foreach ($bank_transections as $bank_transection)
+                        @foreach ($bank_transections as $transection)
+                            @php
+                                if (!empty($transection->debit) || $transection->debit != 0) {
+                                    $total_balance += $transection->debit;
+                                }
+                                if (!empty($transection->credit) || $transection->credit != 0) {
+                                    $total_balance -= $transection->credit;
+                                }
+                            @endphp
                             <tr>
-                                <td>{{ $bank_transection->entry_date }}</td>
-                                <td>{{ $bank_transection->debit }}</td>
-                                <td>{{ $bank_transection->credit }}</td>
-                                <td>{{ $bank_transection->note == 'N/A' ? 'Empty' : $bank_transection->note }}</td>
+                                <td>{{ $transection->entry_date }}</td>
+                                <td>{{ $transection->debit }}</td>
+                                <td>{{ $transection->credit }}</td>
+                                <td>{{ $total_balance }}</td>
+                                <td>{{ $transection->note == 'N/A' ? 'Empty' : $bank_transection->note }}</td>
+                                <td></td>
                             </tr>
                         @endforeach
                     </tBody>
                 </table>
-
             </div>
-
         </div>
     </div>
 @endsection

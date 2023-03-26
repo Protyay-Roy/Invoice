@@ -44,7 +44,8 @@
                         <tbody id="table_body">
                             <tr id="TableRow">
                                 <td>
-                                    <input type="text" value="{{ date("d-m-Y") }}" id="datepicker" class="form-control datepicker" name="date[]">
+                                    <input type="text" value="{{ date('d-m-Y') }}" id="datepicker"
+                                        class="form-control datepicker" name="date[]">
                                 </td>
                                 <td>
                                     <select name="type[]" class="form-control entry_type">
@@ -69,7 +70,6 @@
                                     <input type="text" class="form-control" name="note[]" placeholder="Note">
                                 </td>
                                 <td>
-                                    {{-- <input type="text" class="form-control" name="bank_name[]" placeholder=""> --}}
                                     <select name="bank_name[]" id="bank_name" class="form-control">
                                         <option selected disabled>Select your bank</option>
                                         @foreach (App\Models\Bank::get() as $bank)
@@ -91,4 +91,5 @@
             </form>
         </div>
     </div>
+
 @endsection
