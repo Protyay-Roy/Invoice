@@ -198,9 +198,9 @@
                                 <td>{{ $supplier->phone }}</td>
                                 <td>{{ $supplier->info }}</td>
                                 <td>
-                                    <button class="btn btn-info" id="view_supplier"
+                                    <button class="btn btn-success" id="view_supplier"
                                         value="{{ $supplier->id }}">View</button>
-                                    <button class="btn btn-warning" id="edit_supplier"
+                                    <button class="btn btn-info" id="edit_supplier"
                                         value="{{ $supplier->id }}">edit</button>
                                     <button class="btn btn-danger" id="delete_supplier"
                                         value="{{ $supplier->id }}">delete</button>

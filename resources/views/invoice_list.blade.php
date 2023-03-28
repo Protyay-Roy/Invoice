@@ -68,8 +68,8 @@
                     </table>
                     <p class="mb-5 mr-1 float-right">Total: <span class="view_total"></span></p>
                     <div class="clr"></div>
-                    <p>Note: <span>Somthing....</span></p>
-                    <button id="pdf_link" class="btn btn-success float-right mt-2 mb-4 mr-3">Download pdf</button>
+                    {{-- <p>Note: <span>Somthing....</span></p> --}}
+                    <button id="pdf_link" class="btn btn-dark float-right mt-2 mb-4 mr-3">Download pdf</button>
                     <div class="clr"></div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                                             <button class="btn btn-success" id="view_invoice"
                                                 value="{{ $invoice->id }}">View</button>
                                             <a href="{{ url('edit-invoice/' . $invoice->id) }}"
-                                                class="btn btn-primary">Edit</a>
+                                                class="btn btn-info">Edit</a>
                                             <button value="{{ $invoice->id }}" id="delete_invoice"
                                                 class="btn btn-danger">Delete</button>
                                         </td>

@@ -13,6 +13,14 @@
                     </button>
                 </div>
             @endif
+            @if (Session::has('error_message'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error:</strong> {{ Session('error_message') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <form action="{{ route('add-edit-daily_entry') }}" method="post">
                 @csrf
                 <div id="body-table">
@@ -45,10 +53,10 @@
                             <tr id="TableRow">
                                 <td>
                                     <input type="text" value="{{ date('d-m-Y') }}" id="datepicker"
-                                        class="form-control datepicker" name="date[]">
+                                        class="form-control datepicker" name="date[]" required>
                                 </td>
                                 <td>
-                                    <select name="type[]" class="form-control entry_type">
+                                    <select name="type[]" class="form-control entry_type" required>
                                         <option selected disabled>Select payment type</option>
                                         <option value="customer">Customer Payment</option>
                                         <option value="supplier">Supplier Payment</option>

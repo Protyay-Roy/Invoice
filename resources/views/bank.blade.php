@@ -37,16 +37,16 @@
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Bank Name:</label>
-                                    <input type="text" class="form-control" placeholder="Enter bank name" name="name">
+                                    <input type="text" class="form-control" placeholder="Enter bank name" name="name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="account_number" class="form-label">Account number:</label>
                                     <input type="text" class="form-control" placeholder="Enter account number"
-                                        name="account_number">
+                                        name="account_number" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="branch" class="form-label">Branch:</label>
-                                    <input type="text" class="form-control" placeholder="Enter branch" name="branch">
+                                    <input type="text" class="form-control" placeholder="Enter branch" name="branch" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="info" class="form-label">Information:</label>
@@ -158,7 +158,7 @@
                     </button>
                 </div>
             @endif
-            <button type="button" class="btn btn-dark mb-3" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
                 Add Bank
             </button>
             <div class="clr"></div>
@@ -181,9 +181,9 @@
                                 <td>{{ $bank->branch }}</td>
                                 <td>{{ $bank->info }}</td>
                                 <td>
-                                    <button class="btn btn-info" id="view_bank"
+                                    <button class="btn btn-success" id="view_bank"
                                         value="{{ $bank->id }}">View</button>
-                                    <button class="btn btn-warning" id="edit_bank"
+                                    <button class="btn btn-info" id="edit_bank"
                                         value="{{ $bank->id }}">edit</button>
                                     <button class="btn btn-danger" id="delete_bank"
                                         value="{{ $bank->id }}">delete</button>

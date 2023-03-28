@@ -43,14 +43,14 @@
                         <tbody id="table_body">
                             <tr id="TableRow">
                                 <td>
-                                    <input type="text" class="form-control" name="date" id="datepicker"
-                                        value="{{ $transection->entry_date }}">
+                                    <input type="text" class="form-control" name="date[]" id="datepicker"
+                                        value="{{ $transection->entry_date }}" required>
                                     @error('date')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </td>
                                 <td>
-                                    <select name="type" class="form-control entry_type">
+                                    <select name="type[]" class="form-control entry_type" required>
                                         <option selected disabled>Select payment type</option>
                                         <option value="customer">Customer Payment</option>
                                         <option value="supplier">Supplier Payment</option>
@@ -61,24 +61,24 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <select name="profile" class="form-control profile">
+                                    <select name="profile[]" class="form-control profile">
                                         <option selected disabled> Select Profile</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="debit" placeholder="Debit"
+                                    <input type="text" class="form-control" name="debit[]" placeholder="Debit"
                                         value="{{ $transection->debit }}">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="credit" placeholder="Credit"
+                                    <input type="text" class="form-control" name="credit[]" placeholder="Credit"
                                         value="{{ $transection->credit }}">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="note" placeholder="Note"
+                                    <input type="text" class="form-control" name="note[]" placeholder="Note"
                                         value="{{ $transection->note == 'N/A' ? '' : $transection->note }}">
                                 </td>
                                 <td>
-                                    <select name="bank_name" id="bank_name" class="form-control">
+                                    <select name="bank_name[]" id="bank_name" class="form-control">
                                         <option selected disabled>Select your bank</option>
                                         @foreach (App\Models\Bank::get() as $bank)
                                             <option

@@ -64,5 +64,5 @@ Route::get('delete-entry/{transection}', [InvoiceController::class, 'destroy']);
 
 Route::get('download-pdf/{id}', [InvoiceController::class, 'downloadPDF']);
 
-
+// Route::match(['get', 'post'], 'view-search', [CustomerController::class, 'search']);
 

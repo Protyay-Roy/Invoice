@@ -274,7 +274,7 @@ table thead tr th{
     padding: 2px 7px !important;
     font-size: 14px ;
 }
-table td .btn{
+table td .btn,.search_button_group button{
     padding: 2px 7px !important;
     font-size: 14px  !important;
 }
@@ -288,3 +288,6 @@ table td .btn{
 .invoice_view_info td span,.view_date{
     margin-left: 15px;
 }
+/* .search_button_group{
+
+} */

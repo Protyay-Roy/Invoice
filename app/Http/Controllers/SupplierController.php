@@ -50,7 +50,7 @@ class SupplierController extends Controller
             $transections->credit = $request->credit;
             $transections->save();
         } else {
-            if (!empty($request->debit || $request->credit)) {
+            if (!empty($request->debit) || !empty($request->credit)) {
                 $transections->ledger_id = $ledgers->id;
                 $transections->entry_date = date("d-m-Y");
                 $transections->debit = $request->debit;
@@ -80,10 +80,25 @@ class SupplierController extends Controller
     {
         $ledgers = Ledger::find($id);
         $transections = Transection::where('ledger_id', $id)->get();
+        $total_balance = 0;
+        if (request()->ajax()) {
+            $transections = Transection::where('ledger_id', $id)
+                ->when(request()->type == 'invoice', function ($query) {
+                    return $query->where('type', 'INVOICE');
+                })
+                ->when(request()->type == 'payment', function ($query) {
+                    return $query->where('type', 'PAYMENT');
+                })
+                ->when(!empty(request()->from) && !empty(request()->to), function ($query) {
+                    return $query->whereBetween('entry_date', [request()->from, request()->to]);
+                })
+                ->get();
+
+            return view('view_transection', compact('transections', 'total_balance'));
+        }
         $debit = 0;
         $credit = 0;
         $balance = 0;
-        $total_balance = 0;
         foreach ($transections as $transection) {
             $debit += $transection->debit;
             $credit += $transection->credit;
@@ -91,6 +106,42 @@ class SupplierController extends Controller
         }
         return view('view_supplier', compact('ledgers', 'transections', 'debit', 'credit', 'balance', 'total_balance'));
     }
+
+    // public function viewSupplier($id)
+    // {
+    //     $ledgers = Ledger::find($id);
+    //     $transections = Transection::where('ledger_id', $id)->get();
+    //     $total_balance = 0;
+    //     if (request()->ajax()) {
+    //         $transections = Transection::where('ledger_id', request()->id);
+
+    //         switch (request()->type) {
+    //             case 'invoice':
+    //                 $transections->where('type', 'INVOICE');
+    //                 break;
+    //             case 'payment':
+    //                 $transections->where('type', 'PAYMENT');
+    //                 break;
+    //             default:
+    //                 if (!empty(request()->from) && !empty(request()->to)) {
+    //                     $transections->whereBetween('entry_date', [request()->from, request()->to]);
+    //                 }
+    //         }
+
+    //         $transections = $transections->get();
+
+    //         return view('view_transection', compact('transections', 'total_balance'));
+    //     }
+    //     $debit = 0;
+    //     $credit = 0;
+    //     $balance = 0;
+    //     foreach ($transections as $transection) {
+    //         $debit += $transection->debit;
+    //         $credit += $transection->credit;
+    //         $balance = $debit - $credit;
+    //     }
+    //     return view('view_supplier', compact('ledgers', 'transections', 'debit', 'credit', 'balance', 'total_balance'));
+    // }
 
     public function destroy($id)
     {

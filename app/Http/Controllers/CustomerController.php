@@ -50,7 +50,7 @@ class CustomerController extends Controller
             $transections->credit = $request->credit;
             $transections->save();
         } else {
-            if (!empty($request->debit || $request->credit)) {
+            if (!empty($request->debit) || !empty($request->credit)) {
                 $transections->ledger_id = $ledgers->id;
                 $transections->entry_date = date("d-m-Y");
                 $transections->debit = $request->debit;
@@ -79,11 +79,28 @@ class CustomerController extends Controller
     public function viewCustomer($id)
     {
         $ledgers = Ledger::find($id);
-        $transections = Transection::where('ledger_id', $id)->get();
+        $transections = Transection::where('ledger_id', $id);
+        $total_balance = 0;
+        if (request()->ajax()) {
+            $transections = Transection::where('ledger_id', $id)
+                ->when(request()->type == 'invoice', function ($query) {
+                    return $query->where('type', 'INVOICE');
+                })
+                ->when(request()->type == 'payment', function ($query) {
+                    return $query->where('type', 'PAYMENT');
+                })
+                ->when(!empty(request()->from) && !empty(request()->to), function ($query) {
+                    return $query->whereBetween('entry_date', [request()->from, request()->to]);
+                })
+                ->get();
+            return view('view_transection', compact('transections', 'total_balance'));
+        }
+
+        $transections = $transections->get();
+
         $debit = 0;
         $credit = 0;
         $balance = 0;
-        $total_balance = 0;
         foreach ($transections as $transection) {
             $debit += $transection->debit;
             $credit += $transection->credit;

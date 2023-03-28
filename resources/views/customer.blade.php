@@ -37,24 +37,24 @@
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name:</label>
-                                    <input type="text" class="form-control" placeholder="Enter name" name="name">
+                                    <input type="text" class="form-control" placeholder="Enter name" name="name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email:</label>
-                                    <input type="email" class="form-control" placeholder="Enter email" name="email">
+                                    <input type="email" class="form-control" placeholder="Enter email" name="email" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Address:</label>
-                                    <input type="text" class="form-control" placeholder="Enter address" name="address">
+                                    <input type="text" class="form-control" placeholder="Enter address" name="address" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="phone" class="form-label">Phone:</label>
-                                    <input type="number" class="form-control" placeholder="Enter phone" name="phone">
+                                    <input type="number" class="form-control" placeholder="Enter phone" name="phone" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="company_name" class="form-label">Company Name:</label>
                                     <input type="text" class="form-control" placeholder="Enter company name"
-                                        name="company_name">
+                                        name="company_name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="info" class="form-label">Information:</label>
@@ -101,27 +101,27 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name:</label>
                                     <input type="text" class="form-control" id="name" placeholder="Enter name"
-                                        name="name">
+                                        name="name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email:</label>
                                     <input type="email" class="form-control" id="email" placeholder="Enter email"
-                                        name="email">
+                                        name="email" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Address:</label>
                                     <input type="text" class="form-control" id="address"
-                                        placeholder="Enter address" name="address">
+                                        placeholder="Enter address" name="address" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="phone" class="form-label">Phone:</label>
                                     <input type="number" class="form-control" id="phone" placeholder="Enter phone"
-                                        name="phone">
+                                        name="phone" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="company_name" class="form-label">Company Name:</label>
                                     <input type="text" class="form-control" id="company_name"
-                                        placeholder="Enter company name" name="company_name">
+                                        placeholder="Enter company name" name="company_name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="info" class="form-label">Information:</label>
@@ -198,9 +198,9 @@
                                 <td>{{ $customer->phone }}</td>
                                 <td>{{ $customer->info }}</td>
                                 <td>
-                                    <button class="btn btn-info" id="view_customer"
+                                    <button class="btn btn-success" id="view_customer"
                                         value="{{ $customer->id }}">View</button>
-                                    <button class="btn btn-warning" id="edit_customer"
+                                    <button class="btn btn-info" id="edit_customer"
                                         value="{{ $customer->id }}">edit</button>
                                     <button class="btn btn-danger" id="delete_customer"
                                         value="{{ $customer->id }}">delete</button>

@@ -93,7 +93,7 @@
                 <p class="mb-5 mr-1 float-right">Paid: {{ $transections->credit == null ? 0 : $transections->credit }}
                 </p>
                 <div class="clr"></div>
-                <p>Note: <span>Somthing....</span></p>
+                {{-- <p>Note: <span>Somthing....</span></p> --}}
             </div>
 
         </div>

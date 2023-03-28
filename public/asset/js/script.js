@@ -5,15 +5,55 @@ $(document).ready(function () {
     });
     // SEARCH INPUT
     $('#search_dropdown select').selectpicker();
+    // DATEPICKER
+    $('.datepicker').datepicker({
+        dateFormat: "dd-mm-yy",
+        changeMonth: true,
+        changeYear: true
+    })
     // ADD INVOICE ROW
+    // $(document).on("click", "#add_invoice", function (e) {
+    //     e.preventDefault();
+    //     var add_attr = '';
+    //     add_attr += '<tr>';
+    //     add_attr += '<td><input type="text" class="form-control" name="item[]" placeholder="Item"></td>';
+    //     add_attr += '<td><input type="text" class="form-control" name="size[]" placeholder="Size" value="{{ old('size.' . ($loop->index - 1)) }}"></td>';
+    //     add_attr += '<td><input type="text" class="form-control width" name="width[]" placeholder="Width"></td>';
+    //     add_attr += '<td><input type="text" class="form-control height" name="height[]" placeholder="Height"></td>';
+    //     add_attr += '<td><input type="text" class="form-control square_ft" name="square_ft[]" placeholder="Square ft" readonly></td>';
+    //     add_attr += '<td><input type="text" class="form-control qty" name="qty[]" placeholder="Quantity"></td>';
+    //     add_attr += '<td><input type="text" class="form-control total_square_ft" name="total_square_ft[]" placeholder="Total Square ft" readonly></td>';
+    //     add_attr += '<td><input type="text" class="form-control rate" name="rate[]" placeholder="Rate"></td>';
+    //     add_attr += '<td><input type="text" class="form-control price" name="price[]" placeholder="Price" readonly></td>';
+    //     add_attr += '<td><button class="btn btn-danger mt-1" id="remove_invoice_row"><i class="fa-solid fa-trash"></i></button></td>';
+    //     add_attr += '</tr>';
+    //     $("#table_body").append(add_attr)
+    // });
+    // $(document).on("click", "#add_invoice", function (e) {
+    //     e.preventDefault();
+    //     var add_attr = '';
+    //     add_attr += '<tr>';
+    //     add_attr += '<td><input type="text" class="form-control" name="item[]" placeholder="Item"></td>';
+    //     add_attr += '<td><input type="text" class="form-control" name="size[]" placeholder="Size" value="{{ old("size.0") }}"></td>';
+    //     add_attr += '<td><input type="text" class="form-control width" name="width[]" placeholder="Width" value="{{ old("width.0") }}"></td>';
+    //     add_attr += '<td><input type="text" class="form-control height" name="height[]" placeholder="Height" value="{{ old("height.0") }}"></td>';
+    //     add_attr += '<td><input type="text" class="form-control square_ft" name="square_ft[]" placeholder="Square ft" readonly></td>';
+    //     add_attr += '<td><input type="text" class="form-control qty" name="qty[]" placeholder="Quantity" value="{{ old("qty.0") }}"></td>';
+    //     add_attr += '<td><input type="text" class="form-control total_square_ft" name="total_square_ft[]" placeholder="Total Square ft" readonly></td>';
+    //     add_attr += '<td><input type="text" class="form-control rate" name="rate[]" placeholder="Rate" value="{{ old("rate.0") }}"></td>';
+    //     add_attr += '<td><input type="text" class="form-control price" name="price[]" placeholder="Price" readonly></td>';
+    //     add_attr += '<td><button class="btn btn-danger mt-1" id="remove_invoice_row"><i class="fa-solid fa-trash"></i></button></td>';
+    //     add_attr += '</tr>';
+    //     $("#table_body").append(add_attr)
+    // });
     $(document).on("click", "#add_invoice", function (e) {
         e.preventDefault();
         var add_attr = '';
         add_attr += '<tr>';
         add_attr += '<td><input type="text" class="form-control" name="item[]" placeholder="Item"></td>';
-        add_attr += '<td><input type="text" class="form-control" name="size[]" placeholder="Size"></td>';
+        add_attr += '<td><input type="text" class="form-control" name="size[]" placeholder="Size" value="{{ old("size.0") }}"></td>';
         add_attr += '<td><input type="text" class="form-control width" name="width[]" placeholder="Width"></td>';
-        add_attr += '<td><input type="text" class="form-control height" name="height[]" placeholder="Height"></td>';
+        add_attr += '<td><input type="text" class="form-control height" name="height[]" placeholder="Height" required></td>';
         add_attr += '<td><input type="text" class="form-control square_ft" name="square_ft[]" placeholder="Square ft" readonly></td>';
         add_attr += '<td><input type="text" class="form-control qty" name="qty[]" placeholder="Quantity"></td>';
         add_attr += '<td><input type="text" class="form-control total_square_ft" name="total_square_ft[]" placeholder="Total Square ft" readonly></td>';
@@ -21,8 +61,16 @@ $(document).ready(function () {
         add_attr += '<td><input type="text" class="form-control price" name="price[]" placeholder="Price" readonly></td>';
         add_attr += '<td><button class="btn btn-danger mt-1" id="remove_invoice_row"><i class="fa-solid fa-trash"></i></button></td>';
         add_attr += '</tr>';
-        $("#table_body").append(add_attr)
+        $("#table_body").append(add_attr);
+
+        // Set previous values for all input fields
+        $("#table_body tr:last-child input[type='text']").each(function() {
+            var prevValue = $(this).closest("tr").prev().find("input[name='"+$(this).attr("name")+"']").val();
+            $(this).val(prevValue);
+        });
     });
+
+
     // VIEW INVOICE CLICK EVENT
     $(document).on('click', '#view_invoice', function () {
         var id = $(this).val();
@@ -98,8 +146,14 @@ $(document).ready(function () {
 
         $row.remove();
 
-        var subtotal = parseFloat($('#subtotal').val());
-        subtotal -= parseFloat(price);
+        // var subtotal = parseFloat($('#subtotal').val());
+        // subtotal -= parseFloat(price);
+        // $('#subtotal').val(subtotal.toFixed(2));
+        var subtotal = 0;
+        $('input[name="price[]"]').each(function () {
+            subtotal += parseFloat($(this).val()) || 0;
+        });
+
         $('#subtotal').val(subtotal.toFixed(2));
     });
     // DELETE INVOICE CLICK EVENT
@@ -278,7 +332,6 @@ $(document).ready(function () {
                     dateFormat: "dd-mm-yy",
                     changeMonth: true,
                     changeYear: true,
-                    // defaultDate: new Date('d-m-Y') // Set default date to current date
                 });
             },
             error: function (data) {
@@ -324,12 +377,135 @@ $(document).ready(function () {
     $(document).on('click', '#pdf_link', function () {
         window.location = 'download-pdf/' + $(this).val();
     });
-    // DATE
-    $('.datepicker').datepicker({
-        dateFormat: "dd-mm-yy",
-        changeMonth: true,
-        changeYear: true
+    // SEARCH FOR FILTER CUSTOMER
+    $(document).on('click', '#customer_search_view', function (e) {
+        e.preventDefault();
+        var from = $('#from').val();
+        var to = $('#to').val();
+        var id = $(this).attr('view_id');
+        var type = $('#customer_transection_type').val();
+        // console.log(from);
+        // console.log(to);
+        // console.log(type);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '' + id,
+            type: 'get',
+            data: {
+                from: from,
+                to: to,
+                type: type
+            },
+            success: function (res) {
+                $('#get_customer_transection').html(res);
+            }, error: function () {
+                alert('Error');
+            }
+        });
+    });
+
+    $(document).on('change', '#customer_transection_type', function () {
+        var id = $(this).attr('view_id');
+        var from = $('#from').val();
+        var to = $('#to').val();
+        // console.log(from);
+        // console.log(to);
+        // console.log(type);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '' + id,
+            type: 'get',
+            data: {
+                type: $(this).val(),
+                from: from,
+                to: to,
+            },
+            success: function (res) {
+                $('#get_customer_transection').html(res);
+            }, error: function () {
+                alert('Error');
+            }
+        });
     })
+
+    // SEARCH FOR FILTER SUPPLIER
+    $('#supplier_search_view').click(function (e) {
+        e.preventDefault();
+        var from = $('#from').val();
+        var to = $('#to').val();
+        var id = $(this).attr('view_id');
+        var type = $('#supplier_transection_type').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '' + id,
+            type: 'get',
+            data: {
+                from: from,
+                to: to,
+                type: type
+            },
+            success: function (res) {
+                $('#get_supplier_transection').html(res);
+            }, error: function () {
+                alert('Error');
+            }
+        });
+    });
+
+    $('#supplier_transection_type').on('change', function () {
+        var id = $(this).attr('view_id');
+        var from = $('#from').val();
+        var to = $('#to').val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '' + id,
+            type: 'get',
+            data: {
+                type: $(this).val(),
+                from: from,
+                to: to,
+            },
+            success: function (res) {
+                $('#get_supplier_transection').html(res);
+            }, error: function () {
+                alert('Error');
+            }
+        });
+    })
+
+    // SEARCH FOR FILTER BANK
+    $('#bank_search_view').click(function (e) {
+        e.preventDefault();
+        var from = $('#from').val();
+        var to = $('#to').val();
+        var id = $(this).attr('view_id');
+        // console.log(from);
+        // console.log(to);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '' + id,
+            type: 'get',
+            data: {
+                from: from,
+                to: to
+            },
+            success: function (res) {
+                $('#get_bank_transection').html(res);
+            }, error: function () {
+                alert('Error');
+            }
+        });
+    });
 });
 
 

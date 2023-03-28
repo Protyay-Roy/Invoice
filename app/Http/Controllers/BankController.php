@@ -73,11 +73,27 @@ class BankController extends Controller
     public function viewBank($id)
     {
         $bank = Bank::find($id);
-        $bank_transections = Bank_transection::where('bank_id', $id)->get();
+        $bank_transections = Bank_transection::where('bank_id', $id)
+        // ->get()
+        ;
+        $total_balance = 0;
+        if (request()->ajax()) {
+            $bank_transections = Bank_transection::where('bank_id', request()->id)
+            // if (!empty(request()->from) && !empty(request()->to)) {
+            //     $bank_transections->whereBetween('entry_date', [request()->from, request()->to]);
+            // }
+            // $bank_transections = $bank_transections->get();
+
+            ->when(!empty(request()->from) && !empty(request()->to), function ($query) {
+                return $query->whereBetween('entry_date', [request()->from, request()->to]);
+            })
+            ->get();
+            return view('view_bank_transection', compact('bank_transections', 'total_balance'));
+        }
+        $bank_transections = $bank_transections->get();
         $debit = 0;
         $credit = 0;
         $balance = 0;
-        $total_balance = 0;
         foreach ($bank_transections as $transection) {
             $debit += $transection->debit;
             $credit += $transection->credit;

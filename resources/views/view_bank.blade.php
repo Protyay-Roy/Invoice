@@ -9,7 +9,7 @@
                 <div class="col-md-10 mx-auto">
                     <div class="row" id="customer_view">
                         <div class="col-12">
-                            <h5 id="header_heading" class="text-center">Customer Information</h4>
+                            <h5 id="header_heading" class="text-center">Bank Information</h4>
                         </div>
                         <div class="col-md-6">
                             <table id="customer_info">
@@ -44,27 +44,29 @@
                             </table>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group" id="right_form">
-                                <label for="exampleInputEmail1">Select Type</label>
-                                <select name="" id="select_type" class="form-control">
-                                    <option selected>Select</option>
-                                </select>
-                            </div>
-
                             <div class="date_group d-flex">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">from</span>
+                                        <span class="input-group-text" id="basic-addon1">From</span>
                                     </div>
-                                    <input type="text" value="{{ date('d-m-y') }}"  class="form-control datepicker"
-                                        placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" value="{{ date('d-m-y') }}"  class="form-control datepicker" id="from">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">to</span>
+                                        <span class="input-group-text" id="basic-addon1">To</span>
                                     </div>
-                                    <input type="text" value="{{ date('d-m-y') }}"  class="form-control datepicker"
-                                        placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" value="{{ date('d-m-y') }}"  class="form-control datepicker" id="to" >
+                                </div>
+                            </div>
+
+
+                            <div class="row mt-2">
+                                <div class="col-md-5 mx-auto">
+                                    <div class=" search_button_group">
+                                        <button class="btn btn-dark mr-1">Download</button>
+                                        <button class="btn btn-success ml-1" id="bank_search_view"
+                                            view_id="{{ $bank->id }}">View</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +80,7 @@
         <div class="container body_content" style="margin-top: -25px; min-height:130px;padding-bottom: 10px">
             <div class="col-md-12">
                 <table class="table table-bordered mb-5">
-                    <tHead>
+                    <thead>
                         <tr>
                             <th scope="col">Entry date</th>
                             <th scope="col">Debit</th>
@@ -87,27 +89,10 @@
                             <th scope="col">Note</th>
                             <th scope="col">Action</th>
                         </tr>
-                    </tHead>
-                    <tBody>
-                        @foreach ($bank_transections as $transection)
-                            @php
-                                if (!empty($transection->debit) || $transection->debit != 0) {
-                                    $total_balance += $transection->debit;
-                                }
-                                if (!empty($transection->credit) || $transection->credit != 0) {
-                                    $total_balance -= $transection->credit;
-                                }
-                            @endphp
-                            <tr>
-                                <td>{{ $transection->entry_date }}</td>
-                                <td>{{ $transection->debit }}</td>
-                                <td>{{ $transection->credit }}</td>
-                                <td>{{ $total_balance }}</td>
-                                <td>{{ $transection->note == 'N/A' ? 'Empty' : $bank_transection->note }}</td>
-                                <td></td>
-                            </tr>
-                        @endforeach
-                    </tBody>
+                    </thead>
+                    <tbody id="get_bank_transection">
+                        @include('view_bank_transection')
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -53,26 +53,38 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" id="right_form">
-                                <label for="exampleInputEmail1">Select Type</label>
-                                <select name="" id="select_type" class="form-control">
-                                    <option selected>Select</option>
+                                <label for="customer_transection_type">Select</label>
+                                <select name="customer_transection_type" id="customer_transection_type" class="form-control" view_id="{{ $ledgers->id }}">
+                                    <option selected disabled>Select transection type</option>
+                                    <option value="invoice">Invoice</option>
+                                    <option value="payment">Payment</option>
                                 </select>
                             </div>
 
                             <div class="date_group d-flex">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">from</span>
+                                        <span class="input-group-text" id="basic-addon1">From</span>
                                     </div>
-                                    <input type="text" class="form-control datepicker" value="{{ date('d-m-y') }}" placeholder="Username" aria-label="Username"
-                                        aria-describedby="basic-addon1">
+                                    <input type="text" id="from" class="form-control datepicker"
+                                        value="{{ null }}">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">to</span>
+                                        <span class="input-group-text" id="basic-addon1">To</span>
                                     </div>
-                                    <input type="text" class="form-control datepicker" value="{{ date('d-m-y') }}" placeholder="Username" aria-label="Username"
-                                        aria-describedby="basic-addon1">
+                                    <input type="text" id="to" class="form-control datepicker"
+                                        value="{{ null }}">
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-md-5 mx-auto">
+                                    <div class=" search_button_group">
+                                        <button class="btn btn-dark mr-1">Download</button>
+                                        <button class="btn btn-success ml-1" id="customer_search_view"
+                                            view_id="{{ $ledgers->id }}">View</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +98,7 @@
         <div class="container body_content" style="margin-top: -25px; min-height:130px;padding-bottom: 10px">
             <div class="col-md-12">
                 <table class="table table-bordered mb-5">
-                    <tHead>
+                    <thead>
                         <tr>
                             <th scope="col">Entry date</th>
                             <th scope="col">Type</th>
@@ -97,34 +109,10 @@
                             <th scope="col">Bank Name</th>
                             <th scope="col">Action</th>
                         </tr>
-                    </tHead>
-                    <tBody>
-                        @foreach ($transections as $transection)
-                            @php
-                                if (!empty($transection->debit) || $transection->debit != 0) {
-                                    $total_balance += $transection->debit;
-                                }
-                                if (!empty($transection->credit) || $transection->credit != 0) {
-                                    $total_balance -= $transection->credit;
-                                }
-                            @endphp
-                            <tr>
-                                <td>{{ $transection->entry_date }}</td>
-                                <td>{{ $transection->type }}</td>
-                                <td>{{ $transection->debit }}</td>
-                                <td>{{ $transection->credit }}</td>
-                                <td>{{ $total_balance }}</td>
-                                <td>{{ $transection->note == 'N/A' ? 'Empty' : $transection->note }}</td>
-                                <td>{{ $transection->bank_name == null ? 'Empty' : $transection->bank_name }}</td>
-                                <td>
-                                    @if ($transection->type == 'INVOICE')
-                                        <a href="{{ url('edit-invoice/' . $transection->id) }}"
-                                            class="btn btn-primary">Edit</a>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tBody>
+                    </thead>
+                    <tbody id="get_customer_transection">
+                        @include('view_transection')
+                    </tbody>
                 </table>
 
             </div>

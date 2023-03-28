@@ -23,7 +23,7 @@
                     <div class="col-3 offset-2 d-flex">
                         <label for="datepicker" class="pt-2 mr-2">Date:</label>
 
-                        <input type="text" id="datepicker" name="entry_date"  class="form-control datepicker"
+                        <input type="text" id="datepicker" name="entry_date" class="form-control datepicker"
                             value="{{ date('d-m-Y') }}">
                     </div>
                     <div class="col-4" id="search_dropdown">
@@ -61,35 +61,38 @@
                                             <input type="text" class="form-control" name="item[]" placeholder="Item">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="size[]" placeholder="Size">
+                                            {{-- <input type="text" class="form-control" name="size[]" placeholder="Size"> --}}
+                                            <input type="text" class="form-control" name="size[]" placeholder="Size"
+                                                value="{{ old("size.0") }}" required>
+
                                         </td>
                                         <td>
                                             <input type="text" class="form-control width" name="width[]"
-                                                placeholder="Width">
+                                                placeholder="Width" required>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control height" name="height[]"
-                                                placeholder="Height">
+                                                placeholder="Height" required>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control square_ft" name="square_ft[]"
-                                                placeholder="Square ft" readonly>
+                                                placeholder="Square ft" readonly required>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control qty" name="qty[]"
-                                                placeholder="Quantity">
+                                                placeholder="Quantity" required>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control total_square_ft"
-                                                name="total_square_ft[]" placeholder="Total Square ft" readonly>
+                                                name="total_square_ft[]" placeholder="Total Square ft" readonly required>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control rate" name="rate[]"
-                                                placeholder="Rate">
+                                                placeholder="Rate" required>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control price" name="price[]"
-                                                placeholder="Price" readonly>
+                                                placeholder="Price" readonly required>
                                         </td>
                                         <td>
                                             <button class="btn btn-primary mt-1" id="add_invoice">
