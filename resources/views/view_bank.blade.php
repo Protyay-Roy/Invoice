@@ -34,7 +34,7 @@
                                         <th>Balance</th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-light">bank_transections
+                                <tbody class="bg-light">
                                     <tr>
                                         <td> {{ $debit }} </td>
                                         <td>{{ $credit }}</td>
@@ -63,9 +63,10 @@
                             <div class="row mt-2">
                                 <div class="col-md-5 mx-auto">
                                     <div class=" search_button_group">
-                                        <button class="btn btn-dark mr-1">Download</button>
-                                        <button class="btn btn-success ml-1" id="bank_search_view"
-                                            view_id="{{ $bank->id }}">View</button>
+                                        <a href="{{ url('download-bank-pdf/' . $bank->id) }}"
+                                            class="btn btn-dark mr-1">Download</a>
+                                        <button class="btn btn-warning ml-1" id="bank_search_view"
+                                            view_id="{{ $bank->id }}">Search</button>
                                     </div>
                                 </div>
                             </div>
@@ -83,11 +84,11 @@
                     <thead>
                         <tr>
                             <th scope="col">Entry date</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Debit</th>
                             <th scope="col">Credit</th>
                             <th scope="col">Balance</th>
                             <th scope="col">Note</th>
-                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody id="get_bank_transection">

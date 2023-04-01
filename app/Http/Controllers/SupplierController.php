@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ledger;
 use App\Models\Transection;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SupplierController extends Controller
 {
@@ -16,7 +17,6 @@ class SupplierController extends Controller
             'address' => 'required',
             'phone' => 'required|numeric',
             'company_name' => 'required',
-            'info' => 'required',
         ]);
 
         if ($request->update_id != null) {
@@ -79,13 +79,13 @@ class SupplierController extends Controller
     public function viewSupplier($id)
     {
         $ledgers = Ledger::find($id);
-        $transections = Transection::where('ledger_id', $id)->get();
+        $transections = Transection::where('ledger_id', $id);
         $total_balance = 0;
+        $status = 'view';
         if (request()->ajax()) {
-            $transections = Transection::where('ledger_id', $id)
-                ->when(request()->type == 'invoice', function ($query) {
-                    return $query->where('type', 'INVOICE');
-                })
+            $transections = $transections->when(request()->type == 'invoice', function ($query) {
+                return $query->where('type', 'INVOICE');
+            })
                 ->when(request()->type == 'payment', function ($query) {
                     return $query->where('type', 'PAYMENT');
                 })
@@ -94,8 +94,9 @@ class SupplierController extends Controller
                 })
                 ->get();
 
-            return view('view_transection', compact('transections', 'total_balance'));
+            return view('view_transection', compact('transections', 'total_balance', 'status'));
         }
+        $transections = $transections->get();
         $debit = 0;
         $credit = 0;
         $balance = 0;
@@ -104,49 +105,39 @@ class SupplierController extends Controller
             $credit += $transection->credit;
             $balance = $debit - $credit;
         }
-        return view('view_supplier', compact('ledgers', 'transections', 'debit', 'credit', 'balance', 'total_balance'));
+        return view('view_supplier', compact('ledgers', 'transections', 'debit', 'credit', 'balance', 'total_balance', 'status'));
     }
-
-    // public function viewSupplier($id)
-    // {
-    //     $ledgers = Ledger::find($id);
-    //     $transections = Transection::where('ledger_id', $id)->get();
-    //     $total_balance = 0;
-    //     if (request()->ajax()) {
-    //         $transections = Transection::where('ledger_id', request()->id);
-
-    //         switch (request()->type) {
-    //             case 'invoice':
-    //                 $transections->where('type', 'INVOICE');
-    //                 break;
-    //             case 'payment':
-    //                 $transections->where('type', 'PAYMENT');
-    //                 break;
-    //             default:
-    //                 if (!empty(request()->from) && !empty(request()->to)) {
-    //                     $transections->whereBetween('entry_date', [request()->from, request()->to]);
-    //                 }
-    //         }
-
-    //         $transections = $transections->get();
-
-    //         return view('view_transection', compact('transections', 'total_balance'));
-    //     }
-    //     $debit = 0;
-    //     $credit = 0;
-    //     $balance = 0;
-    //     foreach ($transections as $transection) {
-    //         $debit += $transection->debit;
-    //         $credit += $transection->credit;
-    //         $balance = $debit - $credit;
-    //     }
-    //     return view('view_supplier', compact('ledgers', 'transections', 'debit', 'credit', 'balance', 'total_balance'));
-    // }
 
     public function destroy($id)
     {
         $transections = Transection::where('ledger_id', $id)->delete();
         $ledgers = Ledger::find($id)->delete();
         return back()->with('success_message', "Supplier deleted succssfully!");
+    }
+
+    public function downloadPDF($id)
+    {
+        $ledgers = Ledger::find($id);
+        $transections = Transection::where('ledger_id', $id)->get();
+
+        $total_balance = 0;
+        $debit = 0;
+        $credit = 0;
+        $balance = 0;
+        foreach ($transections as $transection) {
+            $debit += $transection->debit;
+            $credit += $transection->credit;
+            $balance = $debit - $credit;
+        }
+
+        $pdf = Pdf::loadView('supplier_pdf', [
+            'transections' => $transections,
+            'ledgers' => $ledgers,
+            'total_balance' => $total_balance,
+            'debit' => $debit,
+            'credit' => $credit,
+            'balance' => $balance,
+        ]);
+        return $pdf->download('supplier_pdf.pdf');
     }
 }

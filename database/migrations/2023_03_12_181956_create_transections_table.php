@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('ledger_id')->constrained();
             $table->text('entry_date');
-            $table->float('debit')->nullable();
-            $table->float('credit')->nullable();
+            $table->double('debit')->nullable();
+            $table->double('credit')->nullable();
             $table->string('type');
             $table->text('note');
             $table->string('bank_name')->nullable();

@@ -9,10 +9,10 @@
     @endphp
     <tr>
         <td>{{ $transection->entry_date }}</td>
+        <td>{{ $transection->type }}</td>
         <td>{{ $transection->debit }}</td>
         <td>{{ $transection->credit }}</td>
         <td>{{ $total_balance }}</td>
         <td>{{ $transection->note == 'N/A' ? 'Empty' : $bank_transection->note }}</td>
-        <td></td>
     </tr>
 @endforeach

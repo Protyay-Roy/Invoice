@@ -1,4 +1,137 @@
 $(document).ready(function () {
+    // CREATE VALIDATION
+    $('form').on('submit', function (event) {
+        // ENTRY FORM VALIDATION
+        $('.entry_type').each(function () {
+            var selectedValue = $(this).val();
+            if (selectedValue === '' || selectedValue === null) {
+                event.preventDefault();
+                alert('Please select a payment type.');
+                $(this).focus();
+                return false;
+            }
+        });
+        $('.profile').each(function () {
+            var selectedValue = $(this).val();
+            if (selectedValue === '' || selectedValue === null) {
+                event.preventDefault();
+                alert('Please select a profile.');
+                $(this).focus();
+                return false;
+            }
+        });
+        // INVOICE FORM VALIDATION
+        var dateValue = $('#datepicker').val();
+        if (dateValue === '' || dateValue === null) {
+            event.preventDefault();
+            alert('Please select a date.');
+            $('#datepicker').focus();
+            return false;
+        }
+        var dropdownValue = $('select[name="ledger_id"]').val();
+        if (dropdownValue === '' || dropdownValue === null) {
+            event.preventDefault();
+            alert('Please select a customer.');
+            $('select[name="ledger_id"]').focus();
+            return false;
+        }
+        $('input[name="item[]"]').each(function() {
+            var inputValue = $(this).val();
+            if (inputValue === '' || inputValue === null) {
+                event.preventDefault();
+                alert('Please enter a value for the item field.');
+                $(this).focus();
+                return false;
+            }
+        });
+        $('input[name="size[]"]').each(function() {
+            var inputValue = $(this).val();
+            if (inputValue === '' || inputValue === null) {
+                event.preventDefault();
+                alert('Please enter a value for the size field.');
+                $(this).focus();
+                return false;
+            }
+        });
+        $('input[name="width[]"]').each(function() {
+            var inputValue = $(this).val();
+            if (inputValue === '' || inputValue === null) {
+                event.preventDefault();
+                alert('Please enter a value for the width field.');
+                $(this).focus();
+                return false;
+            }
+        });
+        $('input[name="height[]"]').each(function() {
+            var inputValue = $(this).val();
+            if (inputValue === '' || inputValue === null) {
+                event.preventDefault();
+                alert('Please enter a value for the height field.');
+                $(this).focus();
+                return false;
+            }
+        });
+        $('input[name="square_ft[]"]').each(function() {
+            var inputValue = $(this).val();
+            if (inputValue === '' || inputValue === null) {
+                event.preventDefault();
+                alert('Something wrong squire ft field.');
+                $(this).focus();
+                return false;
+            }
+        });
+        $('input[name="qty[]"]').each(function() {
+            var inputValue = $(this).val();
+            if (inputValue === '' || inputValue === null) {
+                event.preventDefault();
+                alert('Please enter a value for the quantity field.');
+                $(this).focus();
+                return false;
+            }
+        });
+        $('input[name="total_square_ft[]"]').each(function() {
+            var inputValue = $(this).val();
+            if (inputValue === '' || inputValue === null) {
+                event.preventDefault();
+                alert('Something wrong total squire ft field.');
+                $(this).focus();
+                return false;
+            }
+        });
+        $('input[name="rate[]"]').each(function() {
+            var inputValue = $(this).val();
+            if (inputValue === '' || inputValue === null) {
+                event.preventDefault();
+                alert('Please enter a value for the rate field.');
+                $(this).focus();
+                return false;
+            }
+        });
+        $('input[name="price[]"]').each(function() {
+            var inputValue = $(this).val();
+            if (inputValue === '' || inputValue === null) {
+                event.preventDefault();
+                alert('Something wrong total price field.');
+                $(this).focus();
+                return false;
+            }
+        });
+    });
+    // VALIDATION FOR ENTRY CREDIT AND DEBIT EQUAL NULL
+    $(document).on('submit', '#entry_form', function(event) {
+        $('input[name="debit[]"]').each(function(index, element) {
+            var debitField = $('input[name="debit[]"]').eq(index);
+            var creditField = $('input[name="credit[]"]').eq(index);
+            var debitValue = debitField.val();
+            var creditValue = creditField.val();
+            if (debitValue === '' && creditValue === '') {
+                event.preventDefault();
+                alert('Please enter a value for either the debit or credit field in row ' + (index+1) + '.');
+                debitField.focus();
+                return false;
+            }
+        });
+    });
     // DATATABLE
     $('#example').DataTable({
         scrollX: true,
@@ -12,65 +145,23 @@ $(document).ready(function () {
         changeYear: true
     })
     // ADD INVOICE ROW
-    // $(document).on("click", "#add_invoice", function (e) {
-    //     e.preventDefault();
-    //     var add_attr = '';
-    //     add_attr += '<tr>';
-    //     add_attr += '<td><input type="text" class="form-control" name="item[]" placeholder="Item"></td>';
-    //     add_attr += '<td><input type="text" class="form-control" name="size[]" placeholder="Size" value="{{ old('size.' . ($loop->index - 1)) }}"></td>';
-    //     add_attr += '<td><input type="text" class="form-control width" name="width[]" placeholder="Width"></td>';
-    //     add_attr += '<td><input type="text" class="form-control height" name="height[]" placeholder="Height"></td>';
-    //     add_attr += '<td><input type="text" class="form-control square_ft" name="square_ft[]" placeholder="Square ft" readonly></td>';
-    //     add_attr += '<td><input type="text" class="form-control qty" name="qty[]" placeholder="Quantity"></td>';
-    //     add_attr += '<td><input type="text" class="form-control total_square_ft" name="total_square_ft[]" placeholder="Total Square ft" readonly></td>';
-    //     add_attr += '<td><input type="text" class="form-control rate" name="rate[]" placeholder="Rate"></td>';
-    //     add_attr += '<td><input type="text" class="form-control price" name="price[]" placeholder="Price" readonly></td>';
-    //     add_attr += '<td><button class="btn btn-danger mt-1" id="remove_invoice_row"><i class="fa-solid fa-trash"></i></button></td>';
-    //     add_attr += '</tr>';
-    //     $("#table_body").append(add_attr)
-    // });
-    // $(document).on("click", "#add_invoice", function (e) {
-    //     e.preventDefault();
-    //     var add_attr = '';
-    //     add_attr += '<tr>';
-    //     add_attr += '<td><input type="text" class="form-control" name="item[]" placeholder="Item"></td>';
-    //     add_attr += '<td><input type="text" class="form-control" name="size[]" placeholder="Size" value="{{ old("size.0") }}"></td>';
-    //     add_attr += '<td><input type="text" class="form-control width" name="width[]" placeholder="Width" value="{{ old("width.0") }}"></td>';
-    //     add_attr += '<td><input type="text" class="form-control height" name="height[]" placeholder="Height" value="{{ old("height.0") }}"></td>';
-    //     add_attr += '<td><input type="text" class="form-control square_ft" name="square_ft[]" placeholder="Square ft" readonly></td>';
-    //     add_attr += '<td><input type="text" class="form-control qty" name="qty[]" placeholder="Quantity" value="{{ old("qty.0") }}"></td>';
-    //     add_attr += '<td><input type="text" class="form-control total_square_ft" name="total_square_ft[]" placeholder="Total Square ft" readonly></td>';
-    //     add_attr += '<td><input type="text" class="form-control rate" name="rate[]" placeholder="Rate" value="{{ old("rate.0") }}"></td>';
-    //     add_attr += '<td><input type="text" class="form-control price" name="price[]" placeholder="Price" readonly></td>';
-    //     add_attr += '<td><button class="btn btn-danger mt-1" id="remove_invoice_row"><i class="fa-solid fa-trash"></i></button></td>';
-    //     add_attr += '</tr>';
-    //     $("#table_body").append(add_attr)
-    // });
     $(document).on("click", "#add_invoice", function (e) {
         e.preventDefault();
         var add_attr = '';
         add_attr += '<tr>';
-        add_attr += '<td><input type="text" class="form-control" name="item[]" placeholder="Item"></td>';
-        add_attr += '<td><input type="text" class="form-control" name="size[]" placeholder="Size" value="{{ old("size.0") }}"></td>';
-        add_attr += '<td><input type="text" class="form-control width" name="width[]" placeholder="Width"></td>';
-        add_attr += '<td><input type="text" class="form-control height" name="height[]" placeholder="Height" required></td>';
-        add_attr += '<td><input type="text" class="form-control square_ft" name="square_ft[]" placeholder="Square ft" readonly></td>';
-        add_attr += '<td><input type="text" class="form-control qty" name="qty[]" placeholder="Quantity"></td>';
-        add_attr += '<td><input type="text" class="form-control total_square_ft" name="total_square_ft[]" placeholder="Total Square ft" readonly></td>';
-        add_attr += '<td><input type="text" class="form-control rate" name="rate[]" placeholder="Rate"></td>';
-        add_attr += '<td><input type="text" class="form-control price" name="price[]" placeholder="Price" readonly></td>';
+        add_attr += '<td><input required type="text" class="form-control" name="item[]" placeholder="Item"></td>';
+        add_attr += '<td><input required type="text" class="form-control" name="size[]" placeholder="Size"></td>';
+        add_attr += '<td><input required type="text" class="form-control width" name="width[]" placeholder="Width"></td>';
+        add_attr += '<td><input required type="text" class="form-control height" name="height[]" placeholder="Height"></td>';
+        add_attr += '<td><input required type="text" class="form-control square_ft" name="square_ft[]" placeholder="Square ft" readonly></td>';
+        add_attr += '<td><input required type="text" class="form-control qty" name="qty[]" placeholder="Quantity"></td>';
+        add_attr += '<td><input required type="text" class="form-control total_square_ft" name="total_square_ft[]" placeholder="Total Square ft" readonly></td>';
+        add_attr += '<td><input required type="text" class="form-control rate" name="rate[]" placeholder="Rate"></td>';
+        add_attr += '<td><input required type="text" class="form-control price" name="price[]" placeholder="Price" readonly></td>';
         add_attr += '<td><button class="btn btn-danger mt-1" id="remove_invoice_row"><i class="fa-solid fa-trash"></i></button></td>';
         add_attr += '</tr>';
-        $("#table_body").append(add_attr);
-
-        // Set previous values for all input fields
-        $("#table_body tr:last-child input[type='text']").each(function() {
-            var prevValue = $(this).closest("tr").prev().find("input[name='"+$(this).attr("name")+"']").val();
-            $(this).val(prevValue);
-        });
+        $("#table_body").append(add_attr)
     });
-
-
     // VIEW INVOICE CLICK EVENT
     $(document).on('click', '#view_invoice', function () {
         var id = $(this).val();
@@ -83,8 +174,6 @@ $(document).ready(function () {
                     $('.view_tBody').html('');
                     $('#viewModal').modal('show');
                     $.each(data.transections.get_invoice_items, function (index, invoice) {
-
-                        console.log(invoice.item);
                     });
                     $('#pdf_link').val(data.transections.id);
                     var d = new Date();
@@ -142,7 +231,7 @@ $(document).ready(function () {
     // REMOVE INVOICE ROW
     $(document).on('click', '#remove_invoice_row', function () {
         var $row = $(this).closest('tr');
-        var price = $row.find('.price').val();
+        // var price = $row.find('.price').val();
 
         $row.remove();
 
@@ -307,9 +396,9 @@ $(document).ready(function () {
         }
         var add_attr = '';
         add_attr += '<tr>';
-        add_attr += '<td><input type="text" class="form-control datepicker" name="date[]" value="' + getCurrentDate() + '"></td>';
-        add_attr += '<td><select name="type[]" class="form-control entry_type"><option selected disabled>Select payment type</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
-        add_attr += '<td><select name="profile[]" class="form-control profile"><option selected disabled>Select profile</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
+        add_attr += '<td><input type="text" class="form-control datepicker" name="date[]" value="' + getCurrentDate() + '" required></td>';
+        add_attr += '<td><select name="type[]" class="form-control entry_type" required><option selected disabled value="">Select payment type</option><option value="customer">Customer Payment</option><option value="supplier">Supplier Payment</option><option value="bank">Bank Payment</option></select></td>';
+        add_attr += '<td><select name="profile[]" class="form-control profile" required><option selected disabled value="">Select profile</option></select></td>';
         add_attr += '<td><input type="text" class="form-control" name="debit[]" placeholder="Debit"></td>';
         add_attr += '<td><input type="text" class="form-control" name="credit[]" placeholder="Credit"></td>';
         add_attr += '<td><input type="text" class="form-control" name="note[]" placeholder="Note"></td>';
@@ -346,7 +435,7 @@ $(document).ready(function () {
         var $row = $(this).closest('tr');
         var $profileSelect = $row.find('.profile');
 
-        $profileSelect.html('<option selected disabled>Select profile</option>');
+        $profileSelect.html('<option selected disabled required value="">Select profile</option>');
 
         $.ajax({
             url: 'profile/' + type,
@@ -431,7 +520,6 @@ $(document).ready(function () {
             }
         });
     })
-
     // SEARCH FOR FILTER SUPPLIER
     $('#supplier_search_view').click(function (e) {
         e.preventDefault();
@@ -457,7 +545,6 @@ $(document).ready(function () {
             }
         });
     });
-
     $('#supplier_transection_type').on('change', function () {
         var id = $(this).attr('view_id');
         var from = $('#from').val();
@@ -480,7 +567,6 @@ $(document).ready(function () {
             }
         });
     })
-
     // SEARCH FOR FILTER BANK
     $('#bank_search_view').click(function (e) {
         e.preventDefault();

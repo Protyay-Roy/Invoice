@@ -21,7 +21,7 @@
                     </button>
                 </div>
             @endif
-            <form action="{{ route('add-edit-daily_entry') }}" method="post">
+            <form action="{{ route('add-edit-daily_entry') }}" method="post" id="entry_form">
                 @csrf
                 <div id="body-table">
                     @if ($errors->any())
@@ -57,15 +57,15 @@
                                 </td>
                                 <td>
                                     <select name="type[]" class="form-control entry_type" required>
-                                        <option selected disabled>Select payment type</option>
+                                        <option selected disabled value="">Select payment type</option>
                                         <option value="customer">Customer Payment</option>
                                         <option value="supplier">Supplier Payment</option>
                                         <option value="bank">Bank Payment</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="profile[]" class="form-control profile">
-                                        <option selected disabled>Select profile</option>
+                                    <select name="profile[]" class="form-control profile" required>
+                                        <option selected disabled value="">Select profile</option>
                                     </select>
                                 </td>
                                 <td>
@@ -94,10 +94,9 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="btn btn-success float-right mb-5">Save</button>
+                <button class="btn btn-success float-right mb-5" id="save">Save</button>
                 <div class="clr"></div>
             </form>
         </div>
     </div>
-
 @endsection

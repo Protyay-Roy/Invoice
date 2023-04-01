@@ -1,9 +1,11 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
-i{
+
+i {
     font-size: 13px;
 }
+
 section {
     background: #dff4ff;
     padding-bottom: 50px;
@@ -109,7 +111,8 @@ div.dataTables_wrapper div.dt-row {
     text-align: center;
     margin-right: 10px;
 }
-#body-top .container .body-top-content ul li a{
+
+#body-top .container .body-top-content ul li a {
     background: rgb(220, 220, 220);
     display: block;
     padding: 5px 10px;
@@ -118,16 +121,19 @@ div.dataTables_wrapper div.dt-row {
     text-decoration: none;
     transition: 0.3s;
 }
-#body-top .container .body-top-content ul li a:hover{
+
+#body-top .container .body-top-content ul li a:hover {
     background: rgb(175, 171, 171);
     color: #ffffff;
 }
+
 #body-top .container .body-top-content ul li button {
     line-height: 1rem;
     font-size: 14px;
 }
+
 .modal-dialog {
-    max-width: 800px;
+    max-width: 950px;
     margin: 1.75rem auto;
 }
 
@@ -170,30 +176,35 @@ div.dataTables_wrapper div.dt-row {
 .dataTables_scrollBody {
     padding-bottom: 1rem !important;
 }
+
 @media (max-width: 460px) {
-    .body-top-content ul{
+    .body-top-content ul {
         display: block !important;
     }
 }
-#invoice_view p{
+
+#invoice_view p {
     font-weight: 600;
     font-size: 14px;
 }
-#invoice_view p span{
+
+#invoice_view p span {
     font-weight: 400;
     font-size: 14px;
 }
 
-ul li{
+ul li {
     list-style-type: none;
     font-weight: 500;
     font-size: 14px;
 }
-#invoice_view ul li span{
+
+#invoice_view ul li span {
     font-weight: 400;
     font-size: 14px;
 }
-#invoice_view table tHead th{
+
+#invoice_view table tHead th {
     font-weight: 600;
     font-size: 15px;
 }
@@ -204,90 +215,113 @@ ul li{
     border-radius: 0.7rem;
     padding: 0.8rem 0 1rem;
 }
-#customer_info{
+
+#customer_info {
     width: 100%;
 }
-#customer_info tr td{
+
+#customer_info tr td {
     padding-left: 5rem !important;
     font-size: 14px;
 }
-#customer_info tr{
+
+#customer_info tr {
     border-top: 1px solid #c9c9c9;
 }
-#customer_info tr th{
+
+#customer_info tr th {
     font-weight: 600;
     font-size: 15px;
     padding: 0.3125rem !important;
 }
-#customer_transection_info{
+
+#customer_transection_info {
     margin-top: 1.3rem;
     width: 100%;
 }
-#customer_transection_info tr th{
+
+#customer_transection_info tr th {
     padding: 0.3125rem 0rem;
     font-weight: 600;
     font-size: 14px;
     text-align: center;
 }
-#customer_transection_info tr td{
+
+#customer_transection_info tr td {
     text-align: center;
     padding: 0.5rem 0rem;
     font-size: 14px;
 }
-#right_form{
+
+#right_form {
     border: 1px solid #c9c9c9;
     padding: 0.5rem 0.3125rem;
 }
-#right_form label{
+
+#right_form label {
     font-size: 14px;
 }
-#right_form select{
+
+#right_form select {
     padding: 0.2rem;
 }
+
 #select_type {
     height: calc(1.2rem + 0.5rem + 2px);
 }
-#header_heading{
+
+#header_heading {
     margin-bottom: 1.5rem;
 }
+
 .input-group-prepend span {
     margin-right: 0px;
 }
+
 .ui-datepicker th {
     padding: .7em 0px;
     text-align: center;
 }
-.ui-datepicker td span, .ui-datepicker td a {
+
+.ui-datepicker td span,
+.ui-datepicker td a {
     display: block;
     padding: .2em 0em;
     text-align: center;
     text-decoration: none;
 }
-table thead tr th{
+
+table thead tr th {
     font-weight: 600;
     font-size: 14px;
 }
-.table td{
+
+.table td {
     padding: 3px 3px 3px 10px !important;
 }
-#remove_invoice_row{
+
+#remove_invoice_row {
     padding: 2px 7px !important;
-    font-size: 14px ;
+    font-size: 14px;
 }
-table td .btn,.search_button_group button{
+
+table td .btn,
+.search_button_group button,
+.search_button_group a {
     padding: 2px 7px !important;
-    font-size: 14px  !important;
+    font-size: 14px !important;
 }
-.close span{
+
+.close span {
     color: rgb(202, 7, 7);
 }
-.invoice_view_info th{
+
+.invoice_view_info th {
     font-weight: 500;
     font-size: 15px;
 }
-.invoice_view_info td span,.view_date{
+
+.invoice_view_info td span,
+.view_date {
     margin-left: 15px;
 }
-/* .search_button_group{
-
-} */

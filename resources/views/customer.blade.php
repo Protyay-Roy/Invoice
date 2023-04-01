@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="phone" class="form-label">Phone:</label>
-                                    <input type="number" class="form-control" placeholder="Enter phone" name="phone" required>
+                                    <input type="text" class="form-control" placeholder="Enter phone" name="phone" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="company_name" class="form-label">Company Name:</label>
@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="phone" class="form-label">Phone:</label>
-                                    <input type="number" class="form-control" id="phone" placeholder="Enter phone"
+                                    <input type="text" class="form-control" id="phone" placeholder="Enter phone"
                                         name="phone" required>
                                 </div>
                                 <div class="mb-3">

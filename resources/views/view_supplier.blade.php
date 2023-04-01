@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-    View Customer
+    View supplier
 @endsection
 @section('content')
     <div id="body-top">
@@ -9,7 +9,7 @@
                 <div class="col-md-10 mx-auto">
                     <div class="row" id="customer_view">
                         <div class="col-12">
-                            <h5 id="header_heading" class="text-center">Customer Information</h4>
+                            <h5 id="header_heading" class="text-center">Supplier Information</h4>
                         </div>
                         <div class="col-md-6">
                             <table id="customer_info">
@@ -83,9 +83,10 @@
                             <div class="row mt-2">
                                 <div class="col-md-5 mx-auto">
                                     <div class=" search_button_group">
-                                        <button class="btn btn-dark mr-1">Download</button>
-                                        <button class="btn btn-success ml-1" id="supplier_search_view"
-                                            view_id="{{ $ledgers->id }}">View</button>
+                                        <a href="{{ url('download-supplier-pdf/' . $ledgers->id) }}"
+                                            class="btn btn-dark mr-1">Download</a>
+                                        <button class="btn btn-warning ml-1" id="supplier_search_view"
+                                            view_id="{{ $ledgers->id }}">Search</button>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +110,6 @@
                             <th scope="col">Balance</th>
                             <th scope="col">Note</th>
                             <th scope="col">Bank Name</th>
-                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     {{-- @foreach ($transections as $transection)

@@ -93,17 +93,17 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Bank Name:</label>
                                     <input type="text" class="form-control" placeholder="Enter bank name"
-                                        name="name" id="name">
+                                        name="name" id="name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="account_number" class="form-label">Account number:</label>
                                     <input type="text" class="form-control" placeholder="Enter account number"
-                                        name="account_number" id="account_number">
+                                        name="account_number" id="account_number" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="branch" class="form-label">Branch:</label>
                                     <input type="text" class="form-control" placeholder="Enter branch" name="branch"
-                                        id="branch">
+                                        id="branch" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="info" class="form-label">Information:</label>

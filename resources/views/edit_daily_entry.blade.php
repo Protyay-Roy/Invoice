@@ -51,7 +51,7 @@
                                 </td>
                                 <td>
                                     <select name="type[]" class="form-control entry_type" required>
-                                        <option selected disabled>Select payment type</option>
+                                        <option selected disabled value="">Select payment type</option>
                                         <option value="customer">Customer Payment</option>
                                         <option value="supplier">Supplier Payment</option>
                                         <option value="bank">Bank Payment</option>
@@ -61,8 +61,8 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <select name="profile[]" class="form-control profile">
-                                        <option selected disabled> Select Profile</option>
+                                    <select name="profile[]" class="form-control profile" required>
+                                        <option selected disabled value=""> Select Profile</option>
                                     </select>
                                 </td>
                                 <td>

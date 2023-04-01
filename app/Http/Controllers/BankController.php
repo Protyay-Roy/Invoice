@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bank;
 use App\Models\Bank_transection;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BankController extends Controller
 {
@@ -73,21 +74,12 @@ class BankController extends Controller
     public function viewBank($id)
     {
         $bank = Bank::find($id);
-        $bank_transections = Bank_transection::where('bank_id', $id)
-        // ->get()
-        ;
+        $bank_transections = Bank_transection::where('bank_id', $id);
         $total_balance = 0;
         if (request()->ajax()) {
-            $bank_transections = Bank_transection::where('bank_id', request()->id)
-            // if (!empty(request()->from) && !empty(request()->to)) {
-            //     $bank_transections->whereBetween('entry_date', [request()->from, request()->to]);
-            // }
-            // $bank_transections = $bank_transections->get();
-
-            ->when(!empty(request()->from) && !empty(request()->to), function ($query) {
+            $bank_transections = $bank_transections->when(!empty(request()->from) && !empty(request()->to), function ($query) {
                 return $query->whereBetween('entry_date', [request()->from, request()->to]);
-            })
-            ->get();
+            })->get();
             return view('view_bank_transection', compact('bank_transections', 'total_balance'));
         }
         $bank_transections = $bank_transections->get();
@@ -107,5 +99,32 @@ class BankController extends Controller
         Bank_transection::where('bank_id', $id)->delete();
         $banks = Bank::find($id)->delete();
         return back()->with('success_message', "Bank deleted succssfully!");
+    }
+
+
+    public function downloadPDF($id)
+    {
+        $bank = Bank::find($id);
+        $bank_transections = Bank_transection::where('bank_id', $id)->get();
+
+        $total_balance = 0;
+        $debit = 0;
+        $credit = 0;
+        $balance = 0;
+        foreach ($bank_transections as $transection) {
+            $debit += $transection->debit;
+            $credit += $transection->credit;
+            $balance = $debit - $credit;
+        }
+
+        $pdf = Pdf::loadView('bank_pdf', [
+            'bank_transections' => $bank_transections,
+            'bank' => $bank,
+            'total_balance' => $total_balance,
+            'debit' => $debit,
+            'credit' => $credit,
+            'balance' => $balance,
+        ]);
+        return $pdf->download('bank_pdf.pdf');
     }
 }

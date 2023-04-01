@@ -27,8 +27,8 @@
                             value="{{ date('d-m-Y') }}">
                     </div>
                     <div class="col-4" id="search_dropdown">
-                        <select data-live-search="true" class="w-100" name="ledger_id">
-                            <option data-tokens="" disabled selected>Select customer</option>
+                        <select data-live-search="true" class="w-100" name="ledger_id" required>
+                            <option data-tokens="" disabled selected value="">Select customer</option>
                             @foreach (App\Models\Ledger::where('type', 1)->get() as $customer)
                                 <option data-tokens="{{ $customer->id }}" value="{{ $customer->id }}">
                                     {{ $customer->name }}</option>
@@ -58,13 +58,10 @@
                                 <tbody id="table_body">
                                     <tr id="TableRow">
                                         <td>
-                                            <input type="text" class="form-control" name="item[]" placeholder="Item">
+                                            <input type="text" class="form-control" name="item[]" placeholder="Item" required>
                                         </td>
                                         <td>
-                                            {{-- <input type="text" class="form-control" name="size[]" placeholder="Size"> --}}
-                                            <input type="text" class="form-control" name="size[]" placeholder="Size"
-                                                value="{{ old("size.0") }}" required>
-
+                                            <input type="text" class="form-control" name="size[]" placeholder="Size" required>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control width" name="width[]"
@@ -111,7 +108,7 @@
                         <div class="sub_total d-flex">
                             <span>SubTotal:</span>
                             <input class="form-control" type="text" id="subtotal" name="subtotal"
-                                placeholder="SubTotal">
+                                placeholder="SubTotal" readonly>
                         </div>
                         <div class="sub_total d-flex mt-4">
                             <span style="margin-right: 38px;">Paid:</span>

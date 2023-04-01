@@ -151,6 +151,8 @@ class InvoiceController extends Controller
         Transection::find($id)->delete();
         return back()->with('success_message', "Invoice deleted succssfully!");
     }
+
+
     public function downloadPDF($id)
     {
         $transections = Transection::with('getCustomer', 'getInvoiceItems')->where('id', $id)->first();
@@ -158,7 +160,6 @@ class InvoiceController extends Controller
             'transections' => $transections
         ]);
         return $pdf->download('download_pdf.pdf');
-        // return view('download_pdf',compact('transections'));
     }
 
 }

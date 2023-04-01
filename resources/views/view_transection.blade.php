@@ -15,10 +15,12 @@
         <td>{{ $total_balance }}</td>
         <td>{{ $transection->note == 'N/A' ? 'Empty' : $transection->note }}</td>
         <td>{{ $transection->bank_name == null ? 'Empty' : $transection->bank_name }}</td>
-        <td>
-            @if ($transection->type == 'INVOICE')
+        @if ($transection->type == 'INVOICE' && $status == 'view')
+            <td>
+                <button class="btn btn-success" id="view_invoice" value="{{ $transection->id }}">View</button>
                 <a href="{{ url('edit-invoice/' . $transection->id) }}" class="btn btn-info">Edit</a>
-            @endif
-        </td>
+                <button value="{{ $transection->id }}" id="delete_invoice" class="btn btn-danger">Delete</button>
+            </td>
+        @endif
     </tr>
 @endforeach

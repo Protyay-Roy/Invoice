@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ledger;
 use App\Models\Transection;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CustomerController extends Controller
 {
@@ -16,7 +17,6 @@ class CustomerController extends Controller
             'address' => 'required',
             'phone' => 'required|numeric',
             'company_name' => 'required',
-            'info' => 'required',
         ]);
 
         if ($request->update_id != null) {
@@ -81,9 +81,11 @@ class CustomerController extends Controller
         $ledgers = Ledger::find($id);
         $transections = Transection::where('ledger_id', $id);
         $total_balance = 0;
+        $status = 'view';
         if (request()->ajax()) {
-            $transections = Transection::where('ledger_id', $id)
-                ->when(request()->type == 'invoice', function ($query) {
+            $transections =
+            // Transection::where('ledger_id', $id)
+            $transections->when(request()->type == 'invoice', function ($query) {
                     return $query->where('type', 'INVOICE');
                 })
                 ->when(request()->type == 'payment', function ($query) {
@@ -93,7 +95,7 @@ class CustomerController extends Controller
                     return $query->whereBetween('entry_date', [request()->from, request()->to]);
                 })
                 ->get();
-            return view('view_transection', compact('transections', 'total_balance'));
+            return view('view_transection', compact('transections', 'total_balance', 'status'));
         }
 
         $transections = $transections->get();
@@ -106,7 +108,7 @@ class CustomerController extends Controller
             $credit += $transection->credit;
             $balance = $debit - $credit;
         }
-        return view('view_customer', compact('ledgers', 'transections', 'debit', 'credit', 'balance', 'total_balance'));
+        return view('view_customer', compact('ledgers', 'transections', 'debit', 'credit', 'balance', 'total_balance', 'status'));
     }
 
     public function destroy($id)
@@ -114,5 +116,31 @@ class CustomerController extends Controller
         $transections = Transection::where('ledger_id', $id)->delete();
         $ledgers = Ledger::find($id)->delete();
         return back()->with('success_message', "Customer deleted succssfully!");
+    }
+
+    public function downloadPDF($id)
+    {
+        $ledgers = Ledger::find($id);
+        $transections = Transection::where('ledger_id', $id)->get();
+
+        $total_balance = 0;
+        $debit = 0;
+        $credit = 0;
+        $balance = 0;
+        foreach ($transections as $transection) {
+            $debit += $transection->debit;
+            $credit += $transection->credit;
+            $balance = $debit - $credit;
+        }
+
+        $pdf = Pdf::loadView('customer_pdf', [
+            'transections' => $transections,
+            'ledgers' => $ledgers,
+            'total_balance' => $total_balance,
+            'debit' => $debit,
+            'credit' => $credit,
+            'balance' => $balance,
+        ]);
+        return $pdf->download('customer_pdf.pdf');
     }
 }
