@@ -69,4 +69,6 @@ Route::get('download-customer-pdf/{id}', [CustomerController::class, 'downloadPD
 Route::get('download-supplier-pdf/{id}', [SupplierController::class, 'downloadPDF']);
 Route::get('download-bank-pdf/{id}', [BankController::class, 'downloadPDF']);
 
+// Route::view('pdf', 'download_pdf');
+
 

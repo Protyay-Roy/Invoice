@@ -83,9 +83,11 @@ class CustomerController extends Controller
         $total_balance = 0;
         $status = 'view';
         if (request()->ajax()) {
-            $transections =
-            // Transection::where('ledger_id', $id)
-            $transections->when(request()->type == 'invoice', function ($query) {
+            if (request()->type == 'all') {
+                $transections = $transections;
+            }
+            $transections = $transections
+                ->when(request()->type == 'invoice', function ($query) {
                     return $query->where('type', 'INVOICE');
                 })
                 ->when(request()->type == 'payment', function ($query) {

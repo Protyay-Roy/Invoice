@@ -111,11 +111,17 @@
                                         <td>{{ $invoice->credit }}</td>
                                         <td>
                                             <button class="btn btn-success" id="view_invoice"
-                                                value="{{ $invoice->id }}">View</button>
+                                                value="{{ $invoice->id }}" title="View Invoice">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </button>
                                             <a href="{{ url('edit-invoice/' . $invoice->id) }}"
-                                                class="btn btn-info">Edit</a>
+                                                class="btn btn-info ml-1" title="Edit Invoice">
+                                                <i class="fa-solid fa-pencil"></i>
+                                            </a>
                                             <button value="{{ $invoice->id }}" id="delete_invoice"
-                                                class="btn btn-danger">Delete</button>
+                                                class="btn btn-danger ml-1" title="Delete Invoice">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach

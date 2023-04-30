@@ -17,9 +17,9 @@
         <td>{{ $transection->bank_name == null ? 'Empty' : $transection->bank_name }}</td>
         @if ($transection->type == 'INVOICE' && $status == 'view')
             <td>
-                <button class="btn btn-success" id="view_invoice" value="{{ $transection->id }}">View</button>
-                <a href="{{ url('edit-invoice/' . $transection->id) }}" class="btn btn-info">Edit</a>
-                <button value="{{ $transection->id }}" id="delete_invoice" class="btn btn-danger">Delete</button>
+                <button class="btn btn-success" id="view_invoice" value="{{ $transection->id }}" title="View"><i class="fa-regular fa-eye"></i></button>
+                <a href="{{ url('edit-invoice/' . $transection->id) }}" class="btn btn-info ml-1" title="Edit"><i class="fa-solid fa-pencil"></i></a>
+                <button value="{{ $transection->id }}" id="delete_invoice" class="btn btn-danger ml-1" title="Delete"><i class="fa-solid fa-trash"></i></button>
             </td>
         @endif
     </tr>

@@ -63,9 +63,19 @@ section {
 }
 
 table tbody tr td input.form-control {
-    padding: 0.75rem 0.75rem !important;
+    padding: 0.25rem 0.25rem !important;
+    height: calc(1.5em + 0rem + 2px) !important;
 }
 
+table tbody tr td select.form-control {
+    padding: 0rem 0.25rem !important;
+    height: calc(1.5em + 0.23rem + 2px) !important;
+    font-size: 14px !important;
+}
+table thead:first-child tr th{
+    font-size: 14px !important;
+    padding: 5px;
+}
 input {
     outline: none !important;
     border: 1px solid #b5b5b5 !important;
@@ -297,7 +307,8 @@ table thead tr th {
 }
 
 .table td {
-    padding: 3px 3px 3px 10px !important;
+    padding: 0px 3px 1px 5px !important;
+    font-size: 14px;
 }
 
 #remove_invoice_row {
@@ -308,10 +319,12 @@ table thead tr th {
 table td .btn,
 .search_button_group button,
 .search_button_group a {
-    padding: 2px 7px !important;
-    font-size: 14px !important;
+    padding: 2px 8px !important;
+    font-size: 10px !important;
 }
-
+i{
+    font-size: 10px;
+}
 .close span {
     color: rgb(202, 7, 7);
 }
@@ -324,4 +337,11 @@ table td .btn,
 .invoice_view_info td span,
 .view_date {
     margin-left: 15px;
+}
+
+.fix-invoice-table tr th,.fix-invoice-table tr td{
+    padding-bottom: 1rem;
+}
+.fix-invoice-table tr th{
+    padding-right: 1rem !important;
 }

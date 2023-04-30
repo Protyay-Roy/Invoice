@@ -191,19 +191,23 @@
                     <tbody>
                         @foreach (App\Models\Ledger::where('type', 2)->get() as $supplier)
                             <tr>
-                                <td>{{ $supplier->company_name }}</td>
-                                <td>{{ $supplier->name }}</td>
+                                <td>
+                                    <a href="{{ url('view-supplier/'.$supplier->id) }}">{{ $supplier->company_name }}</a>
+                                </td>
+                                <td>
+                                    <a href="{{ url('view-supplier/'.$supplier->id) }}">{{ $supplier->name }}</a>
+                                </td>
                                 <td>{{ $supplier->email }}</td>
                                 <td>{{ $supplier->address }}</td>
                                 <td>{{ $supplier->phone }}</td>
                                 <td>{{ $supplier->info }}</td>
                                 <td>
                                     <button class="btn btn-success" id="view_supplier"
-                                        value="{{ $supplier->id }}">View</button>
-                                    <button class="btn btn-info" id="edit_supplier"
-                                        value="{{ $supplier->id }}">edit</button>
-                                    <button class="btn btn-danger" id="delete_supplier"
-                                        value="{{ $supplier->id }}">delete</button>
+                                        value="{{ $supplier->id }}" title="View Supplier"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="btn btn-info ml-1" id="edit_supplier"
+                                        value="{{ $supplier->id }}" title="Edit Supplier"><i class="fa-solid fa-pencil"></i></button>
+                                    <button class="btn btn-danger ml-1" id="delete_supplier"
+                                        value="{{ $supplier->id }}" title="Delete Supplier"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
                         @endforeach

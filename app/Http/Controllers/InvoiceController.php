@@ -159,6 +159,7 @@ class InvoiceController extends Controller
         $pdf = Pdf::loadView('download_pdf', [
             'transections' => $transections
         ]);
+        // return view('download_pdf', compact('transections'));
         return $pdf->download('download_pdf.pdf');
     }
 

@@ -191,19 +191,23 @@
                     <tbody>
                         @foreach (App\Models\Ledger::where('type', 1)->get() as $customer)
                             <tr>
-                                <td>{{ $customer->company_name }}</td>
-                                <td>{{ $customer->name }}</td>
+                                <td>
+                                    <a href="{{ url('view-customer/'.$customer->id) }}">{{ $customer->company_name }}</a>
+                                </td>
+                                <td>
+                                    <a href="{{ url('view-customer/'.$customer->id) }}">{{ $customer->name }}</a>
+                                </td>
                                 <td>{{ $customer->email }}</td>
                                 <td>{{ $customer->address }}</td>
                                 <td>{{ $customer->phone }}</td>
                                 <td>{{ $customer->info }}</td>
                                 <td>
                                     <button class="btn btn-success" id="view_customer"
-                                        value="{{ $customer->id }}">View</button>
-                                    <button class="btn btn-info" id="edit_customer"
-                                        value="{{ $customer->id }}">edit</button>
-                                    <button class="btn btn-danger" id="delete_customer"
-                                        value="{{ $customer->id }}">delete</button>
+                                        value="{{ $customer->id }}" title="View Customer"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="btn btn-info ml-1" id="edit_customer"
+                                        value="{{ $customer->id }}" title="Edit Customer"><i class="fa-solid fa-pencil"></i></button>
+                                    <button class="btn btn-danger ml-1" id="delete_customer"
+                                        value="{{ $customer->id }}" title="Delete Customer"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
                         @endforeach

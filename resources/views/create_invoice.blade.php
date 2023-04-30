@@ -102,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5">
+                {{-- <div class="row mt-5">
                     <div class="col-8"></div>
                     <div class="col-3 pb-5">
                         <div class="sub_total d-flex">
@@ -115,16 +115,16 @@
                             <input class="form-control" type="text" id="credit" name="credit" placeholder="Paid">
                         </div>
                     </div>
-                </div>
-                <div class="row">
+                </div> --}}
+                {{-- <div class="row">
                     <div class="col-4 offset-6">
                         <div class="mb-2">
                             <label for="note" class="form-label">Cheque:</label>
                             <input type="text" class="form-control" placeholder="Enter Cheque" name="cheque">
                         </div>
                     </div>
-                </div>
-                <div class="row">
+                </div> --}}
+                {{-- <div class="row">
                     <div class="col-4 offset-6">
                         <div class="mb-3">
                             <label for="bank_name" class="form-label">Bank:</label>
@@ -136,7 +136,42 @@
                             </select>
                         </div>
                     </div>
-                </div>
+                </div> --}}
+                {{-- <button class="float-right mb-5 mr-1 btn btn-success">Save</button>
+                <div class="clr"></div> --}}
+                <table class="float-right fix-invoice-table">
+                    <tr>
+                        <th>SubTotal: </th>
+                        <td>
+                            <input class="form-control" type="text" id="subtotal" name="subtotal"
+                                placeholder="SubTotal" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Paid: </th>
+                        <td>
+                            <input class="form-control" type="text" id="credit" name="credit" placeholder="Paid">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Cheque: </th>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Enter Cheque" name="cheque">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Bank: </th>
+                        <td>
+                            <select name="bank_name" id="bank_name" class="form-control">
+                                <option selected disabled>Select Bank</option>
+                                @foreach (App\Models\Bank::get() as $bank)
+                                    <option value="{{ $bank->name }}"> {{ $bank->name }} </option>
+                                @endforeach
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <div class="clr"></div>
                 <button class="float-right mb-5 mr-1 btn btn-success">Save</button>
                 <div class="clr"></div>
             </form>

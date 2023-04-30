@@ -83,9 +83,13 @@ class SupplierController extends Controller
         $total_balance = 0;
         $status = 'view';
         if (request()->ajax()) {
-            $transections = $transections->when(request()->type == 'invoice', function ($query) {
-                return $query->where('type', 'INVOICE');
-            })
+            if(request()->type == 'all'){
+                $transections = $transections;
+            }
+            $transections = $transections
+                ->when(request()->type == 'invoice', function ($query) {
+                    return $query->where('type', 'INVOICE');
+                })
                 ->when(request()->type == 'payment', function ($query) {
                     return $query->where('type', 'PAYMENT');
                 })

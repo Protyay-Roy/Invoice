@@ -38,7 +38,6 @@ class DailyEntryController extends Controller
     public function addEditEntry(Request $request)
     {
         if ($request->isMethod('post')) {
-            $request->dd();
             $request->validate([
                 'date.*' => 'required|date_format:d-m-Y',
                 'type.*' => 'required',

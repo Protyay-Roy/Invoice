@@ -21,6 +21,22 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-7 col-sm-12 mx-auto">
+                    <div class="body-top-content">
+                        <ul>
+                            <li> <a href="#">All Bank</a> </li>
+                            <li> <a href="#">Active Bank</a>  </li>
+                            <li> <a href="#">Inactive Bank</a> </li>
+                            <li>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Add Bank
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <!--bank add Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -158,10 +174,10 @@
                     </button>
                 </div>
             @endif
-            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+            {{-- <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
                 Add Bank
             </button>
-            <div class="clr"></div>
+            <div class="clr"></div> --}}
             <div>
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>
@@ -176,17 +192,19 @@
                     <tbody>
                         @foreach (App\Models\Bank::get() as $bank)
                             <tr>
-                                <td>{{ $bank->name }}</td>
+                                <td>
+                                    <a href="{{ url('view-bank/'.$bank->id) }}">{{ $bank->name }}</a>
+                                </td>
                                 <td>{{ $bank->account_number }}</td>
                                 <td>{{ $bank->branch }}</td>
                                 <td>{{ $bank->info }}</td>
                                 <td>
                                     <button class="btn btn-success" id="view_bank"
-                                        value="{{ $bank->id }}">View</button>
-                                    <button class="btn btn-info" id="edit_bank"
-                                        value="{{ $bank->id }}">edit</button>
-                                    <button class="btn btn-danger" id="delete_bank"
-                                        value="{{ $bank->id }}">delete</button>
+                                        value="{{ $bank->id }}" title="View Bank"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="btn btn-info ml-1" id="edit_bank"
+                                        value="{{ $bank->id }}" title="Edit Bank"><i class="fa-solid fa-pencil"></i></button>
+                                    <button class="btn btn-danger ml-1" id="delete_bank"
+                                        value="{{ $bank->id }}" title="Delete Bank"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
                         @endforeach

@@ -58,6 +58,7 @@
                                 <select name="customer_transection_type" id="supplier_transection_type" class="form-control"
                                     view_id="{{ $ledgers->id }}">
                                     <option selected disabled>Select transection type</option>
+                                    <option value="all">All</option>
                                     <option value="invoice">Invoice</option>
                                     <option value="payment">Payment</option>
                                 </select>

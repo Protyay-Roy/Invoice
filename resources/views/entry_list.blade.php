@@ -29,7 +29,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (App\Models\Transection::where('type', 'PAYMENT')->get() as $entry)
+                                @foreach (App\Models\Transection::where('type', 'PAYMENT')->orderBy('entry_date', 'ASC')->get() as $entry)
                                     <tr>
                                         <td>{{ $entry->entry_date }}</td>
                                         <td>{{ $entry->getCustomer->name }}</td>
@@ -37,9 +37,9 @@
                                         <td>{{ $entry->debit }}</td>
                                         <td>{{ $entry->credit }}</td>
                                         <td>
-                                            <a href="{{ route('edit-entry', $entry->id) }}" class="btn btn-primary">Edit</a>
+                                            <a href="{{ route('edit-entry', $entry->id) }}" class="btn btn-primary" title="Edit Entry"><i class="fa-solid fa-pencil"></i></a>
                                             <button value="{{ $entry->id }}" id="delete_entry"
-                                                class="btn btn-danger">Delete</button>
+                                                class="btn btn-danger ml-1" title="Delete Entry"><i class="fa-solid fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
