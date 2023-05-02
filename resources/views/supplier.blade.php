@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <!--customer add Modal -->
+            <!--supplier add Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -56,10 +56,10 @@
                                     <input type="text" class="form-control" placeholder="Enter company name"
                                         name="company_name" required>
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="info" class="form-label">Information:</label>
                                     <input type="text" class="form-control" placeholder="Enter info" name="info">
-                                </div>
+                                </div> --}}
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col-6">
@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <!--customer update/edit Modal -->
+            <!--supplier update/edit Modal -->
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -123,11 +123,11 @@
                                     <input type="text" class="form-control" id="company_name"
                                         placeholder="Enter company name" name="company_name" required>
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="info" class="form-label">Information:</label>
                                     <input type="text" class="form-control" id="info" placeholder="Enter info"
                                         name="info">
-                                </div>
+                                </div> --}}
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col-6">
@@ -184,7 +184,7 @@
                             <th scope="col">Email</th>
                             <th scope="col">Address</th>
                             <th scope="col">Phone</th>
-                            <th scope="col">Note</th>
+                            {{-- <th scope="col">Note</th> --}}
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -200,7 +200,7 @@
                                 <td>{{ $supplier->email }}</td>
                                 <td>{{ $supplier->address }}</td>
                                 <td>{{ $supplier->phone }}</td>
-                                <td>{{ $supplier->info }}</td>
+                                {{-- <td>{{ $supplier->info }}</td> --}}
                                 <td>
                                     <button class="btn btn-success" id="view_supplier"
                                         value="{{ $supplier->id }}" title="View Supplier"><i class="fa-regular fa-eye"></i></button>

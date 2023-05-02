@@ -35,7 +35,7 @@ $(document).ready(function () {
             $('select[name="ledger_id"]').focus();
             return false;
         }
-        $('input[name="item[]"]').each(function() {
+        $('input[name="item[]"]').each(function () {
             var inputValue = $(this).val();
             if (inputValue === '' || inputValue === null) {
                 event.preventDefault();
@@ -44,7 +44,7 @@ $(document).ready(function () {
                 return false;
             }
         });
-        $('input[name="size[]"]').each(function() {
+        $('input[name="size[]"]').each(function () {
             var inputValue = $(this).val();
             if (inputValue === '' || inputValue === null) {
                 event.preventDefault();
@@ -53,7 +53,7 @@ $(document).ready(function () {
                 return false;
             }
         });
-        $('input[name="width[]"]').each(function() {
+        $('input[name="width[]"]').each(function () {
             var inputValue = $(this).val();
             if (inputValue === '' || inputValue === null) {
                 event.preventDefault();
@@ -62,7 +62,7 @@ $(document).ready(function () {
                 return false;
             }
         });
-        $('input[name="height[]"]').each(function() {
+        $('input[name="height[]"]').each(function () {
             var inputValue = $(this).val();
             if (inputValue === '' || inputValue === null) {
                 event.preventDefault();
@@ -71,7 +71,7 @@ $(document).ready(function () {
                 return false;
             }
         });
-        $('input[name="square_ft[]"]').each(function() {
+        $('input[name="square_ft[]"]').each(function () {
             var inputValue = $(this).val();
             if (inputValue === '' || inputValue === null) {
                 event.preventDefault();
@@ -80,7 +80,7 @@ $(document).ready(function () {
                 return false;
             }
         });
-        $('input[name="qty[]"]').each(function() {
+        $('input[name="qty[]"]').each(function () {
             var inputValue = $(this).val();
             if (inputValue === '' || inputValue === null) {
                 event.preventDefault();
@@ -89,7 +89,7 @@ $(document).ready(function () {
                 return false;
             }
         });
-        $('input[name="total_square_ft[]"]').each(function() {
+        $('input[name="total_square_ft[]"]').each(function () {
             var inputValue = $(this).val();
             if (inputValue === '' || inputValue === null) {
                 event.preventDefault();
@@ -98,7 +98,7 @@ $(document).ready(function () {
                 return false;
             }
         });
-        $('input[name="rate[]"]').each(function() {
+        $('input[name="rate[]"]').each(function () {
             var inputValue = $(this).val();
             if (inputValue === '' || inputValue === null) {
                 event.preventDefault();
@@ -107,7 +107,7 @@ $(document).ready(function () {
                 return false;
             }
         });
-        $('input[name="price[]"]').each(function() {
+        $('input[name="price[]"]').each(function () {
             var inputValue = $(this).val();
             if (inputValue === '' || inputValue === null) {
                 event.preventDefault();
@@ -118,15 +118,15 @@ $(document).ready(function () {
         });
     });
     // VALIDATION FOR ENTRY CREDIT AND DEBIT EQUAL NULL
-    $(document).on('submit', '#entry_form', function(event) {
-        $('input[name="debit[]"]').each(function(index, element) {
+    $(document).on('submit', '#entry_form', function (event) {
+        $('input[name="debit[]"]').each(function (index, element) {
             var debitField = $('input[name="debit[]"]').eq(index);
             var creditField = $('input[name="credit[]"]').eq(index);
             var debitValue = debitField.val();
             var creditValue = creditField.val();
             if (debitValue === '' && creditValue === '') {
                 event.preventDefault();
-                alert('Please enter a value for either the debit or credit field in row ' + (index+1) + '.');
+                alert('Please enter a value for either the debit or credit field in row ' + (index + 1) + '.');
                 debitField.focus();
                 return false;
             }
@@ -140,7 +140,8 @@ $(document).ready(function () {
     $('#search_dropdown select').selectpicker();
     // DATEPICKER
     $('.datepicker').datepicker({
-        dateFormat: "dd-mm-yy",
+        // dateFormat: "dd-mm-yy",
+        dateFormat: "yy-mm-dd",
         changeMonth: true,
         changeYear: true
     })
@@ -192,14 +193,15 @@ $(document).ready(function () {
                     if (data.transections.get_invoice_items != null) {
                         $.each(data.transections.get_invoice_items, function (index, invoice) {
                             $('.view_tBody').append(
-                                '<tr><td>' + invoice.entry_date + '</td><td>' + invoice.item + '</td><td>' + invoice.size + '</td><td>' + invoice.width + '</td><td>' + invoice.height + '</td><td>' + invoice.square_ft + '</td><td>' + invoice.qty + '</td><td>' + invoice.total_square_ft + '</td><td>' + invoice.rate + '</td><td>' + invoice.price + '</td></tr>'
+                                '<tr><td>' + invoice.entry_date + '</td><td>' + invoice.item + '</td><td>' + invoice.size + '</td><td>' + invoice.width + '</td><td>' + invoice.height + '</td><td>' + invoice.square_ft + '</td><td>' + invoice.qty + '</td><td>' + invoice.total_square_ft + '</td><td>' + invoice.rate + '</td><td>' + invoice.price.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</td></tr>'
                             )
                         })
                     } else {
                         $('.view_tBody').html('')
                     }
-
-                    $('.view_total').text(data.transections.debit);
+                    var number = data.transections.debit;
+                    var total_price = number.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    $('.view_total').text(total_price);
                 }
             }
         });
@@ -392,7 +394,7 @@ $(document).ready(function () {
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = today.getFullYear();
-            return dd + '-' + mm + '-' + yyyy;
+            return yyyy + '-' + mm + '-' + dd;
         }
         var add_attr = '';
         add_attr += '<tr>';
@@ -402,7 +404,18 @@ $(document).ready(function () {
         add_attr += '<td><input type="text" class="form-control" name="debit[]" placeholder="Debit"></td>';
         add_attr += '<td><input type="text" class="form-control" name="credit[]" placeholder="Credit"></td>';
         add_attr += '<td><input type="text" class="form-control" name="note[]" placeholder="Note"></td>';
-        add_attr += '<td><select name="bank_name[]" id="bank_name" class="form-control"><option selected disabled>Select your bank</option>';
+        add_attr += '<td class="search_dropdown"> <select name="bank_name" data-live-search="true" class="form-control"> <option data-tokens="" disabled selected value="">Select Bank</option>';
+        // add_attr += '<td class="bank_td"><input type="text" class="form-control" name="bank_name" id="bank_name" placeholder="Enter Bank"><div id="search_bank_name"></div></td>';
+        // add_attr += '</select></td>';
+        // add_attr += '<td><button class="btn btn-danger mt-1" id="remove_entry_row"><i class="fa-solid fa-trash"></i></button></td>';
+
+        // $("#table_body").append(add_attr);
+
+        // $('.datepicker').datepicker({
+        //     dateFormat: "yy-mm-dd",
+        //     changeMonth: true,
+        //     changeYear: true,
+        // });
 
         $.ajax({
             url: '/get_bank',
@@ -416,12 +429,13 @@ $(document).ready(function () {
 
                 $("#table_body").append(add_attr);
 
-                // Initialize datepicker and set default date to current date
                 $('.datepicker').datepicker({
-                    dateFormat: "dd-mm-yy",
+                    dateFormat: "yy-mm-dd",
                     changeMonth: true,
                     changeYear: true,
                 });
+
+                $('.search_dropdown select').selectpicker();
             },
             error: function (data) {
                 console.log(data);
@@ -434,8 +448,16 @@ $(document).ready(function () {
         var type = $(this).val();
         var $row = $(this).closest('tr');
         var $profileSelect = $row.find('.profile');
-
         $profileSelect.html('<option selected disabled required value="">Select profile</option>');
+
+        // var $profileSelect = $row.find('#ajax_profile');
+        // $profileSelect.html('<td id="search_dropdown"><select data-live-search="true" name="profile[]" class="form-control profile" required><option data-tokens="" selected disabled required value="">Select profile</option>');
+
+        // $prfl = '';
+        // $prfl = '<td id="search_dropdown">';
+        // $prfl = '<select data-live-search="true" name="profile[]" class="form-control profile" required>';
+        // $prfl = '<option data-tokens="" selected disabled required value="">Select profile</option>';
+
 
         $.ajax({
             url: 'profile/' + type,
@@ -443,7 +465,11 @@ $(document).ready(function () {
             success: function (data) {
                 $.each(data, function (index, profile) {
                     $profileSelect.append('<option value="' + profile.id + '">' + profile.name + '</option>');
+
+                    // $profileSelect.html('<td>hii<td>')
+                    // $profileSelect.append('<option value="' + profile.id + '">' + profile.name + '</option></select></td>');
                 });
+                // $('#search_dropdown select').selectpicker();
             },
             error: function () {
                 alert('Error');
@@ -473,9 +499,6 @@ $(document).ready(function () {
         var to = $('#to').val();
         var id = $(this).attr('view_id');
         var type = $('#customer_transection_type').val();
-        // console.log(from);
-        // console.log(to);
-        // console.log(type);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -489,10 +512,28 @@ $(document).ready(function () {
             },
             success: function (res) {
                 $('#get_customer_transection').html(res);
+                // testing
+
             }, error: function () {
                 alert('Error');
             }
         });
+        // $.ajax({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     },
+        //     url: 'download-customer-pdf' + id,
+        //     type: 'get',
+        //     data: {
+        //         from: from,
+        //         to: to,
+        //         type: type
+        //     },
+        //     success: function (res) {
+        //         // $('#get_customer_transection').html(res);
+        //         console.log(res);
+        //     }
+        // })
     });
 
     $(document).on('change', '#customer_transection_type', function () {
@@ -592,6 +633,40 @@ $(document).ready(function () {
             }
         });
     });
+
+    // $(document).on('click', '#download', function(e){
+    //     e.preventDefault();
+    //     var from = $('#from').val();
+    //     var to = $('#to').val();
+    //     var id = $(this).attr('download_id');
+    //     var type = $('#customer_transection_type').val();
+
+    //     window.location = 'download-customer-pdf/'+id;
+    // })
+
+    $(document).on('keyup', '#bank_name', function () {
+        $('#search_bank_name').hide();
+        $.ajax({
+            url: 'search-bank/' + $(this).val(),
+            type: 'get',
+            success: function (res) {
+                if (res.status == 200) {
+                    $('#search_bank_name').fadeIn();
+                    $.each(res.banks, function (index, bank) {
+                        $('#search_bank_name').html('<button class="ajax_bank_name" value="' + bank.name + '">' + bank.name + '</button>');
+                    })
+                }
+            }
+        })
+    });
+    $('#search_bank_name').hide();
+    $(document).on('click', '.ajax_bank_name', function () {
+        $('#bank_name').val($(this).val());
+        $('#search_bank_name').hide();
+    });
+    $(window).on('click', function () {
+        $('#search_bank_name').hide();
+    })
 });
 
 

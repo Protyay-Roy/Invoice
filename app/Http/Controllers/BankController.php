@@ -15,7 +15,7 @@ class BankController extends Controller
             'name' => 'required',
             'account_number' => 'required',
             'branch' => 'required',
-            'info' => 'required',
+            // 'info' => 'required',
         ]);
         if ($request->update_id != null) {
             $banks = Bank::find($request->update_id);
@@ -37,20 +37,29 @@ class BankController extends Controller
         $banks->name = $request->name;
         $banks->account_number = $request->account_number;
         $banks->branch = $request->branch;
-        $banks->info = $request->info;
+        // $banks->info = $request->info;
         $banks->save();
 
+        $debit = 0;
+        $credit = 0;
+        if (is_numeric($request->debit)) {
+            $debit = $request->debit;
+        }
+        if (is_numeric($request->credit)) {
+            $credit = $request->credit;
+        }
+
         if ($transections_id != null) {
-            $bank_transections->entry_date = date("d-m-Y");
-            $bank_transections->debit = $request->debit;
-            $bank_transections->credit = $request->credit;
+            $bank_transections->entry_date = date("Y-m-d");
+            $bank_transections->debit = $debit;
+            $bank_transections->credit = $credit;
             $bank_transections->save();
         } else {
             if (!empty($request->debit || $request->credit)) {
                 $bank_transections->bank_id = $banks->id;
-                $bank_transections->entry_date = date("d-m-Y");
-                $bank_transections->debit = $request->debit;
-                $bank_transections->credit = $request->credit;
+                $bank_transections->entry_date = date("Y-m-d");
+                $bank_transections->debit = $debit;
+                $bank_transections->credit = $credit;
                 $bank_transections->type = 'OPENING BALANCE';
                 $bank_transections->note = 'N/A';
                 $bank_transections->save();
@@ -91,6 +100,9 @@ class BankController extends Controller
             $credit += $transection->credit;
             $balance = $debit - $credit;
         }
+        $balance = number_format($balance, 2, '.', ',');
+        $debit = number_format($debit, 2, '.', ',');
+        $credit = number_format($credit, 2, '.', ',');
         return view('view_bank', compact('bank', 'bank_transections', 'debit', 'credit', 'balance', 'total_balance'));
     }
 
@@ -101,30 +113,40 @@ class BankController extends Controller
         return back()->with('success_message', "Bank deleted succssfully!");
     }
 
-
-    public function downloadPDF($id)
+    public function search($value)
     {
+        // $banks = Bank::where('name', 'LIKE', '%' . $value . '%')->get();
+        // return $banks;
+        return response()->json([
+            'status' => 200,
+            'banks' => Bank::where('name', 'LIKE', '%' . $value . '%')->get()
+        ]);
+    }
+
+
+    public function downloadPDF(Request $request, $id)
+    {
+        // dd($request->all());
         $bank = Bank::find($id);
-        $bank_transections = Bank_transection::where('bank_id', $id)->get();
+        $bank_transections = Bank_transection::where('bank_id', $id);
+
+        if (!empty(request()->from) || !empty(request()->to)) {
+            $bank_transections = $bank_transections->when(!empty(request()->from) && !empty(request()->to), function ($query) {
+                return $query->whereBetween('entry_date', [request()->from, request()->to]);
+            });
+        }
+
+        $bank_transections = $bank_transections->get();
 
         $total_balance = 0;
-        $debit = 0;
-        $credit = 0;
-        $balance = 0;
-        foreach ($bank_transections as $transection) {
-            $debit += $transection->debit;
-            $credit += $transection->credit;
-            $balance = $debit - $credit;
-        }
 
         $pdf = Pdf::loadView('bank_pdf', [
             'bank_transections' => $bank_transections,
             'bank' => $bank,
             'total_balance' => $total_balance,
-            'debit' => $debit,
-            'credit' => $credit,
-            'balance' => $balance,
+            'id' => $id
         ]);
+        // return view('bank_pdf', compact('bank_transections', 'bank', 'total_balance','id'));
         return $pdf->download('bank_pdf.pdf');
     }
 }

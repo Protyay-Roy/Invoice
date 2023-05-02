@@ -303,7 +303,7 @@ ul li {
 
 table thead tr th {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 14px !important;
 }
 
 .table td {
@@ -319,7 +319,7 @@ table thead tr th {
 table td .btn,
 .search_button_group button,
 .search_button_group a {
-    padding: 2px 8px !important;
+    padding: 0px 8px !important;
     font-size: 10px !important;
 }
 i{
@@ -339,9 +339,51 @@ i{
     margin-left: 15px;
 }
 
+.fix-invoice-table{
+    margin-top: 30px;
+}
+.fix-invoice-table #save_invoice{
+    width: 150px !important;
+}
 .fix-invoice-table tr th,.fix-invoice-table tr td{
     padding-bottom: 1rem;
 }
 .fix-invoice-table tr th{
     padding-right: 1rem !important;
+}
+.fix-invoice-table .btn{
+    font-size: 14px !important;
+}
+.form-control::placeholder{
+    font-size: 14px;
+}
+table thead{
+    text-transform: uppercase !important;
+}
+/* .inv-top input{
+    height: calc(1.5em + 0rem + 2px) !important;
+}
+.inv-top select.form-control{
+    height: calc(1.5em + 0rem + 2px) !important;
+} */
+
+.bank_td{
+    position: relative;
+}
+#search_bank_name{
+    width: 100%;
+    overflow:scroll;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #212529;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 2px;
+    max-height: 100px;
+}
+#search_bank_name button{
+    margin-bottom: 0;
+    width: 100%;
+    display: block;
+    border: none !important;
 }

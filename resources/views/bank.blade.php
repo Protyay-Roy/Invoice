@@ -64,10 +64,10 @@
                                     <label for="branch" class="form-label">Branch:</label>
                                     <input type="text" class="form-control" placeholder="Enter branch" name="branch" required>
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="info" class="form-label">Information:</label>
                                     <input type="text" class="form-control" placeholder="Enter info" name="info">
-                                </div>
+                                </div> --}}
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col-6">
@@ -121,11 +121,11 @@
                                     <input type="text" class="form-control" placeholder="Enter branch" name="branch"
                                         id="branch" required>
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="info" class="form-label">Information:</label>
                                     <input type="text" class="form-control" placeholder="Enter info" name="info"
                                         id="info">
-                                </div>
+                                </div> --}}
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col-6">
@@ -185,7 +185,7 @@
                             <th scope="col">Bank Name</th>
                             <th scope="col">Account Number</th>
                             <th scope="col">Branch</th>
-                            <th scope="col">Information</th>
+                            {{-- <th scope="col">Information</th> --}}
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -197,7 +197,7 @@
                                 </td>
                                 <td>{{ $bank->account_number }}</td>
                                 <td>{{ $bank->branch }}</td>
-                                <td>{{ $bank->info }}</td>
+                                {{-- <td>{{ $bank->info }}</td> --}}
                                 <td>
                                     <button class="btn btn-success" id="view_bank"
                                         value="{{ $bank->id }}" title="View Bank"><i class="fa-regular fa-eye"></i></button>

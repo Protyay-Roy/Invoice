@@ -19,12 +19,12 @@
             @endif
             <form action="{{ route('create-invoice') }}" method="post">
                 @csrf
-                <div class="row">
+                <div class="row inv-top">
                     <div class="col-3 offset-2 d-flex">
                         <label for="datepicker" class="pt-2 mr-2">Date:</label>
 
                         <input type="text" id="datepicker" name="entry_date" class="form-control datepicker"
-                            value="{{ date('d-m-Y') }}">
+                            value="{{ date('Y-m-d') }}">
                     </div>
                     <div class="col-4" id="search_dropdown">
                         <select data-live-search="true" class="w-100" name="ledger_id" required>
@@ -49,7 +49,7 @@
                                         <th scope="col">Height</th>
                                         <th scope="col">Square ft</th>
                                         <th scope="col">Quantity</th>
-                                        <th scope="col">Total Square ft</th>
+                                        <th scope="col">Total Square</th>
                                         <th scope="col">Rate</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Action</th>
@@ -102,43 +102,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="row mt-5">
-                    <div class="col-8"></div>
-                    <div class="col-3 pb-5">
-                        <div class="sub_total d-flex">
-                            <span>SubTotal:</span>
-                            <input class="form-control" type="text" id="subtotal" name="subtotal"
-                                placeholder="SubTotal" readonly>
-                        </div>
-                        <div class="sub_total d-flex mt-4">
-                            <span style="margin-right: 38px;">Paid:</span>
-                            <input class="form-control" type="text" id="credit" name="credit" placeholder="Paid">
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="row">
-                    <div class="col-4 offset-6">
-                        <div class="mb-2">
-                            <label for="note" class="form-label">Cheque:</label>
-                            <input type="text" class="form-control" placeholder="Enter Cheque" name="cheque">
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="row">
-                    <div class="col-4 offset-6">
-                        <div class="mb-3">
-                            <label for="bank_name" class="form-label">Bank:</label>
-                            <select name="bank_name" id="bank_name" class="form-control">
-                                <option selected disabled>Select Bank</option>
-                                @foreach (App\Models\Bank::get() as $bank)
-                                    <option value="{{ $bank->name }}"> {{ $bank->name }} </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- <button class="float-right mb-5 mr-1 btn btn-success">Save</button>
-                <div class="clr"></div> --}}
                 <table class="float-right fix-invoice-table">
                     <tr>
                         <th>SubTotal: </th>
@@ -160,19 +123,30 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Bank: </th>
+                        <th>Calan: </th>
                         <td>
-                            <select name="bank_name" id="bank_name" class="form-control">
-                                <option selected disabled>Select Bank</option>
+                            <input type="text" class="form-control" placeholder="Enter Calan" name="calan">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Bank: </th>
+                        {{-- <td id="search_dropdown">
+                            <select name="bank_name" id="bank_name" data-live-search="true">
+                                <option data-tokens="" disabled selected value="">Select Bank</option>
                                 @foreach (App\Models\Bank::get() as $bank)
                                     <option value="{{ $bank->name }}"> {{ $bank->name }} </option>
                                 @endforeach
                             </select>
+                        </td> --}}
+                        <td class="bank_td">
+                            <input type="text" class="form-control" name="bank_name" id="bank_name" placeholder="Enter Bank">
+                            <div id="search_bank_name">
+                            </div>
                         </td>
                     </tr>
                 </table>
                 <div class="clr"></div>
-                <button class="float-right mb-5 mr-1 btn btn-success">Save</button>
+                <button class="float-right mb-5 mr-1 btn btn-success" style="width: 305px" id="save_invoice">Save</button>
                 <div class="clr"></div>
             </form>
         </div>

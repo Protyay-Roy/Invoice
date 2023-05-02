@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-3 offset-2 d-flex">
                         <label for="datepicker" class="pt-2 mr-2">Date:</label>
-                        <input type="text" id="datepicker" name="entry_date" class="form-control"
+                        <input type="text" class="datepicker" name="entry_date" class="form-control"
                             value="{{ $transections->entry_date }}">
                     </div>
                     <div class="col-4" id="search_dropdown">
@@ -47,7 +47,7 @@
                                 <th scope="col">Height</th>
                                 <th scope="col">Square ft</th>
                                 <th scope="col">Quantity</th>
-                                <th scope="col">Total Square ft</th>
+                                <th scope="col">Total Square</th>
                                 <th scope="col">Rate</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">
@@ -105,7 +105,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="row mt-5">
+                {{-- <div class="row mt-5">
                     <div class="col-8"></div>
                     <div class="col-3 pb-5">
                         <div class="sub_total d-flex">
@@ -143,6 +143,63 @@
                     </div>
                 </div>
                 <button class="float-right mb-5 mr-1 btn btn-success">Save</button>
+                <div class="clr"></div> --}}
+
+                <table class="float-right fix-invoice-table">
+                    <tr>
+                        <th>SubTotal: </th>
+                        <td>
+                            <input class="form-control" type="text" id="subtotal" name="subtotal" placeholder="SubTotal"
+                                readonly value="{{ $transections->debit }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Paid: </th>
+                        <td>
+                            <input class="form-control" type="text" id="credit" name="credit" placeholder="Paid"
+                                value="{{ $transections->credit }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Cheque: </th>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Enter Cheque" name="cheque"
+                                value="{{ $transections->note }}">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Calan: </th>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Enter Calan" name="calan"
+                                value="{{ $transections->calan }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Bank: </th>
+                        {{-- <td id="search_dropdown">
+                            <select name="bank_name" id="bank_name" data-live-search="true">
+                                <option data-tokens="" disabled selected value="">Select Bank</option>
+                                @foreach (App\Models\Bank::get() as $bank)
+                                    <option value="{{ $bank->name }}"
+                                    {{ !empty($transections->bank_name) && $transections->bank_name == $bank->name ? 'selected' : '' }}>
+                                    {{ $bank->name }} </option>
+                                @endforeach
+
+
+                            </select>
+                        </td> --}}
+                        <td class="bank_td">
+                            <input type="text" class="form-control" name="bank_name" id="bank_name"
+                                placeholder="Enter Bank" value="{{ $transections->bank_name }}">
+                            <div id="search_bank_name">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="clr"></div>
+                <button class="float-right mb-5 mr-1 btn btn-success" style="width: 305px"
+                    id="save_invoice">Save</button>
                 <div class="clr"></div>
             </form>
         </div>

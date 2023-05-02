@@ -44,32 +44,39 @@
                             </table>
                         </div>
                         <div class="col-md-6">
-                            <div class="date_group d-flex">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">From</span>
+                            <form action="{{ url('download-bank-pdf/' . $bank->id) }}" method="get">
+                                @csrf
+
+                                <div class="date_group d-flex">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">From</span>
+                                        </div>
+                                        <input type="text" value="{{ null }}" class="form-control datepicker"
+                                            id="from" name="from">
                                     </div>
-                                    <input type="text" value="{{ date('d-m-y') }}"  class="form-control datepicker" id="from">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">To</span>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">To</span>
+                                        </div>
+                                        <input type="text" value="{{ null }}" class="form-control datepicker"
+                                            id="to" name="to">
                                     </div>
-                                    <input type="text" value="{{ date('d-m-y') }}"  class="form-control datepicker" id="to" >
                                 </div>
-                            </div>
 
 
-                            <div class="row mt-2">
-                                <div class="col-md-5 mx-auto">
-                                    <div class=" search_button_group">
-                                        <a href="{{ url('download-bank-pdf/' . $bank->id) }}"
-                                            class="btn btn-dark mr-1">Download</a>
-                                        <button class="btn btn-warning ml-1" id="bank_search_view"
-                                            view_id="{{ $bank->id }}">Search</button>
+                                <div class="row mt-2">
+                                    <div class="col-md-5 mx-auto">
+                                        <div class=" search_button_group">
+                                            {{-- <a href="{{ url('download-bank-pdf/' . $bank->id) }}"
+                                            class="btn btn-dark mr-1">Download</a> --}}
+                                            <button class="btn btn-dark mr-1">Download</button>
+                                            <button class="btn btn-warning ml-1" id="bank_search_view"
+                                                view_id="{{ $bank->id }}">Search</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

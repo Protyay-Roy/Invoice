@@ -7,9 +7,25 @@ use App\Models\Bank_transection;
 use App\Models\Ledger;
 use App\Models\Transection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DailyEntryController extends Controller
 {
+    public function index()
+    {
+        // $transactions = Transection::where('type', 'PAYMENT')->orderBy('transections.entry_date', 'DESC')->get();
+        // foreach($transactions as $t){
+        //     echo $ss = $t->getCustomer->name;
+        // }
+        // dd();
+
+        $transactions = DB::table('transections')
+            ->where('type', 'PAYMENT')
+            ->orderByRaw('DATE(transections.entry_date) DESC')
+            ->get();
+
+        return view('entry_list', compact('transactions'));
+    }
     public function getProfile($type)
     {
         if ($type == 'customer') {
@@ -39,7 +55,7 @@ class DailyEntryController extends Controller
     {
         if ($request->isMethod('post')) {
             $request->validate([
-                'date.*' => 'required|date_format:d-m-Y',
+                'date.*' => 'required|date_format:Y-m-d',
                 'type.*' => 'required',
                 'profile.*' => 'required',
                 'debit.*' => 'nullable|numeric|min:0',
@@ -64,7 +80,7 @@ class DailyEntryController extends Controller
             ]);
 
             $validatedData = $request->validate([
-                'date.*' => 'required|date_format:d-m-Y',
+                'date.*' => 'required|date_format:Y-m-d',
                 'type.*' => 'required|in:customer,supplier,bank',
                 'profile.*' => 'required',
                 'debit.*' => 'nullable|numeric',
@@ -80,14 +96,23 @@ class DailyEntryController extends Controller
                     if ($request->type[$key] == 'customer' || $request->type[$key] == 'supplier') {
 
                         if (!empty($request->debit[$key]) || !empty($request->credit[$key])) {
+                            $debit = 0;
+                            $credit = 0;
+                            if (is_numeric($request->debit[$key])) {
+                                $debit = $request->debit[$key];
+                            }
+                            if (is_numeric($request->credit[$key])) {
+                                $credit = $request->credit[$key];
+                            }
                             $transections = new Transection;
                             $transections->ledger_id = $request->profile[$key];
                             $transections->entry_date = $date;
-                            $transections->debit = $request->debit[$key];
-                            $transections->credit = $request->credit[$key];
+                            $transections->debit = $debit;
+                            $transections->credit = $credit;
                             $transections->type = 'PAYMENT';
                             $transections->note = $note;
-                            $transections->bank_name = !empty($request->bank_name[$key]) ? $request->bank_name[$key] : null;
+                            $transections->calan = 'N/A';
+                            $transections->bank_name = !empty($request->bank_name[$key]) ? $request->bank_name[$key] : 'N/A';
                             $transections->save();
                         }
                     } else if ($request->type[$key] == 'bank') {
@@ -124,11 +149,11 @@ class DailyEntryController extends Controller
     {
         $transection = Transection::with('getCustomer')->find($id);
 
-        // dd($transections);
+        // dd($request->all());
         if ($request->isMethod('post')) {
 
             $request->validate([
-                'date.*' => 'required|date_format:d-m-Y',
+                'date.*' => 'required|date_format:Y-m-d',
                 'type.*' => 'required|in:customer,supplier,bank',
                 'profile.*' => 'required',
                 'debit.*' => 'nullable|numeric|min:0',
@@ -156,13 +181,21 @@ class DailyEntryController extends Controller
                 if ($request->type == 'customer' || $request->type == 'supplier') {
 
                     if (!empty($request->debit) || !empty($request->credit)) {
+                        $debit = 0;
+                        $credit = 0;
+                        if (is_numeric($request->debit)) {
+                            $debit = $request->debit;
+                        }
+                        if (is_numeric($request->credit)) {
+                            $credit = $request->credit;
+                        }
                         $transection->ledger_id = $request->profile;
                         $transection->entry_date = $request->date;
-                        $transection->debit = $request->debit;
-                        $transection->credit = $request->credit;
+                        $transection->debit = $debit;
+                        $transection->credit = $credit;
                         $transection->type = 'PAYMENT';
                         $transection->note = $note;
-                        $transection->bank_name = !empty($request->bank_name) ? $request->bank_name : null;
+                        $transection->bank_name = !empty($request->bank_name) ? $request->bank_name : 'N/A';
                         $transection->save();
                     }
                 } else if ($request->type == 'bank') {

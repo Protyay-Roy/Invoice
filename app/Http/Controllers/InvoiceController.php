@@ -38,15 +38,25 @@ class InvoiceController extends Controller
                 'rate.*.numeric' => 'The rate must be a numeric value for all items.',
             ]);
 
+            $debit = 0;
+            $credit = 0;
+            if (is_numeric($request->subtotal)) {
+                $debit = $request->subtotal;
+            }
+            if (is_numeric($request->credit)) {
+                $credit = $request->credit;
+            }
+
             $transections = new Transection;
 
             $transections->ledger_id = $request->ledger_id;
             $transections->entry_date = $request->entry_date;
-            $transections->debit = $request->subtotal;
-            $transections->credit = $request->credit;
+            $transections->debit = $debit;
+            $transections->credit = $credit;
             $transections->type = 'INVOICE';
             $transections->note = !empty($request->cheque) ? $request->cheque : 'N/A';
-            $transections->bank_name = $request->bank_name;
+            $transections->calan = !empty($request->calan) ? $request->calan : 'N/A';
+            $transections->bank_name = !empty($request->bank_name) ? $request->bank_name : 'N/A';
             $transections->save();
 
             foreach ($request->price as $key => $price) {
@@ -102,12 +112,22 @@ class InvoiceController extends Controller
 
             $pre_invoice_item = Invoice_item::where('transection_id', $id)->delete();
 
+            $debit = 0;
+            $credit = 0;
+            if (is_numeric($request->subtotal)) {
+                $debit = $request->subtotal;
+            }
+            if (is_numeric($request->credit)) {
+                $credit = $request->credit;
+            }
+
             $transections->ledger_id = $request->ledger_id;
             $transections->entry_date = $request->entry_date;
-            $transections->debit = $request->subtotal;
-            $transections->credit = $request->credit;
+            $transections->debit = $debit;
+            $transections->credit = $credit;
             $transections->type = 'INVOICE';
             $transections->note = !empty($request->cheque) ? $request->cheque : 'N/A';
+            $transections->calan = !empty($request->calan) ? $request->calan : 'N/A';
             $transections->bank_name = $request->bank_name;
             $transections->save();
 
@@ -162,5 +182,4 @@ class InvoiceController extends Controller
         // return view('download_pdf', compact('transections'));
         return $pdf->download('download_pdf.pdf');
     }
-
 }

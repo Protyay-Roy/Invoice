@@ -10,9 +10,9 @@
     <tr>
         <td>{{ $transection->entry_date }}</td>
         <td>{{ $transection->type }}</td>
-        <td>{{ $transection->debit }}</td>
-        <td>{{ $transection->credit }}</td>
-        <td>{{ $total_balance }}</td>
-        <td>{{ $transection->note == 'N/A' ? 'Empty' : $bank_transection->note }}</td>
+        <td><?= number_format($transection->debit, 2, '.', ',') ?></td>
+        <td><?= number_format($transection->credit, 2, '.', ',') ?></td>
+        <td>{{ number_format($total_balance, 2, '.', ',') }}</td>
+        <td>{{ $transection->note }}</td>
     </tr>
 @endforeach

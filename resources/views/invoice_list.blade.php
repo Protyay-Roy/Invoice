@@ -51,7 +51,7 @@
                             </table>
                         </div>
                         <table class="table table-striped table-bordered" style="width:100%">
-                            <thead>
+                            <thead style="text-transform: uppercase">
                                 <tr>
                                     <th scope="col">Entry date</th>
                                     <th scope="col">Item</th>
@@ -91,7 +91,7 @@
                     <h4 class="text-center">Transition details</h4>
                     <div>
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
+                            <thead style="text-transform: uppercase">
                                 <tr>
                                     <th>Date</th>
                                     <th>Name</th>
@@ -107,8 +107,8 @@
                                         <td>{{ $invoice->entry_date }}</td>
                                         <td>{{ $invoice->getCustomer->name }}</td>
                                         <td>{{ $invoice->bank_name }}</td>
-                                        <td>{{ $invoice->debit }}</td>
-                                        <td>{{ $invoice->credit }}</td>
+                                        <td><?= number_format($invoice->debit, 2, '.', ',') ?></td>
+                                        <td><?= number_format($invoice->credit, 2, '.', ',') ?></td>
                                         <td>
                                             <button class="btn btn-success" id="view_invoice"
                                                 value="{{ $invoice->id }}" title="View Invoice">

@@ -37,6 +37,7 @@ Route::view('supplier', 'supplier')->name('supplier-list');
 Route::post('create-supplier', [SupplierController::class, 'createSupplier'])->name('create-supplier');
 Route::get('update-supplier/{id}', [SupplierController::class, 'updateSupplier']);
 Route::get('view-supplier/{id}', [SupplierController::class, 'viewSupplier']);
+// Route::get('view-supplier/update-supplier/{id}', [SupplierController::class, 'viewSupplier']);
 Route::get('delete-supplier/{id}', [SupplierController::class, 'destroy']);
 
 // INVOICE ROUTE
@@ -52,10 +53,15 @@ Route::post('create-bank', [BankController::class, 'createBank'])->name('create-
 Route::get('update-bank/{id}', [BankController::class, 'updateBank']);
 Route::get('view-bank/{id}', [BankController::class, 'viewBank']);
 Route::get('delete-bank/{id}', [BankController::class, 'destroy']);
+Route::get('search-bank/{value}', [BankController::class, 'search']);
+Route::get('edit-invoice/search-bank/{value}', [BankController::class, 'search']);
+// Route::get('add-edit-daily_entry/search-bank/{value}', [BankController::class, 'search']);
 
 // DAILY ENTRY ROUTE
 // Route::view('daily_entry-list', 'create_daily_entry')->name('daily_entry');
-Route::view('daily_entry-list', 'entry_list')->name('daily_entry-list');
+// Route::view('daily_entry-list', 'entry_list')->name('daily_entry-list');
+
+Route::get('daily_entry-list', [DailyEntryController::class, 'index'])->name('daily_entry-list');
 Route::get('profile/{type}', [DailyEntryController::class, 'getProfile']);
 Route::get('{route}/profile/{type}', [DailyEntryController::class, 'getEditProfile']);
 Route::get('get_bank', [DailyEntryController::class, 'getBank']);

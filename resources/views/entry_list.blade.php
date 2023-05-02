@@ -29,13 +29,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (App\Models\Transection::where('type', 'PAYMENT')->orderBy('entry_date', 'ASC')->get() as $entry)
+                                @foreach (App\Models\Transection::where('type', 'PAYMENT')->orderBy('transections.entry_date', 'DESC')->get() as $entry)
                                     <tr>
                                         <td>{{ $entry->entry_date }}</td>
-                                        <td>{{ $entry->getCustomer->name }}</td>
+                                        <td>
+                                            <?php
+                                                $customer = App\Models\Ledger::where('id', $entry->ledger_id)->first();
+                                                echo $customer->name
+                                            ?>
+                                            {{-- {{ $customer->name }} --}}
+                                        </td>
                                         <td>{{ $entry->bank_name }}</td>
-                                        <td>{{ $entry->debit }}</td>
-                                        <td>{{ $entry->credit }}</td>
+                                        <td><?= number_format($entry->debit, 2, '.', ',') ?></td>
+                                        <td><?= number_format($entry->credit, 2, '.', ',') ?></td>
+                                        {{-- <td>{{ $entry->debit }}</td>
+                                        <td>{{ $entry->credit }}</td> --}}
                                         <td>
                                             <a href="{{ route('edit-entry', $entry->id) }}" class="btn btn-primary" title="Edit Entry"><i class="fa-solid fa-pencil"></i></a>
                                             <button value="{{ $entry->id }}" id="delete_entry"
