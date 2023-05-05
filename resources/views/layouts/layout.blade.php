@@ -50,10 +50,10 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav m-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown active">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Invoice
@@ -84,6 +84,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('bank-list') }}">Bank <span
                                     class="sr-only">(current)</span></a>
+                        </li>
+                        {{-- <li class="nav-item ml-5 bg-danger">
+                            <a class="nav-link text-white" href="{{ route('logout') }}"><i class="fa-solid fa-gear"></i></a>
+                        </li> --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-solid fa-gear"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('add-edit-daily_entry') }}">Change Profile</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                            </div>
                         </li>
                     </ul>
                 </div>

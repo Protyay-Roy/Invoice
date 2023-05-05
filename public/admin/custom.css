@@ -1,0 +1,199 @@
+.btn{
+    border-radius: 0.5rem !important;
+}
+.clearfix{
+    clear: both;
+}
+table tr td{
+    padding-top: 0.3125em !important;
+    padding-bottom: 0.3125em !important;
+}
+.auth .auth-form-light {
+    border-radius: 10px;
+}
+/* previous and next button css */
+
+/* #bootstrap_datatable_previous a:focus{
+    border-color: transparent !important;
+    box-shadow: none !important;
+} */
+.content-wrapper {
+    background: #f2f4ff;
+}
+
+.loader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 11111;
+}
+
+.loader img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* .card{
+    position: relative;
+}
+.card .loader img{
+    left: 50%;
+    top: 22%;
+    transform: translate(-50%, -50%);
+} */
+tr td a.action_btn:hover {
+    text-decoration: none;
+}
+
+tr td a.action_btn {
+    padding: 0 5px;
+}
+
+tr td .action_btn:last-child {
+    margin-left: 10px;
+}
+
+tr td a.action_btn i {
+    font-size: 14px;
+    transition: transform .2s;
+}
+
+tr td a.action_btn:hover i {
+    color: #f3ff08;
+    transform: scale(1.3);
+}
+
+tr .image_status {
+    position: relative !important;
+}
+
+tr td a.change_status i {
+    font-size: 16px;
+    color: #1fda25;
+    transition: transform .2s;
+}
+
+tr td a.change_status:hover i {
+    color: #f3ff08;
+    transform: scale(1.3);
+}
+
+tr .image_status a.change_status {
+    position: absolute;
+    left: 10%;
+    top: 60%;
+}
+
+.profile-image {
+    background-color: rgb(243, 243, 243);
+    padding: 2rem;
+    box-shadow: 10px 9px 9px 1px #d9d9d9;
+    border-radius: .3125rem;
+    position: relative;
+}
+
+.profile-image img {
+    border-radius: 50% !important;
+    border: 1px dotted #d0d0d0;
+}
+.overlay {
+    position: absolute;
+    top: 9%;
+    left: 8.8%;
+    width: 82.4%;
+    height: 82%;
+    background-color: rgba(0, 0, 0, 0.600);
+    transition: all linear .4s;
+    transform: scale(0);
+    border-radius: 50%;
+}
+
+.overlay .image-button {
+    position: absolute;
+    left: 50%;
+    top: 57%;
+    transform: translate(-50%, -50%);
+}
+.overlay .image-button .btn{
+    width: 120px;
+    border-radius: .3125rem;
+    padding: .5rem;
+    font-weight: 500;
+    /* color: #ffffff; */
+}
+.profile-image:hover .overlay {
+    transform: scale(1);
+}
+.form_card{
+    border: 1px solid #999999;
+    padding: 1rem 0.6rem;
+    margin-top: 0.3125rem;
+    border-radius: .3125rem;
+    box-shadow: 5px 10px 10px 1px #d9d9d9;
+}
+.form_card h4{
+    margin-bottom: 1rem;
+    padding-bottom: .8rem;
+    border-bottom: 1px dotted #acacac;
+    text-align: center;
+}
+.body-content{
+    padding-top: 0 !important;
+}
+.cat_image img{
+    height: 30px !important;
+    width: 100px !important;
+    border-radius: .3125rem !important;
+}
+.custom {
+    margin-left: 0.5rem !important;
+}
+.custom ul{
+    padding-left: 0 !important;
+}
+.custom ul li{
+    list-style: none;
+    line-height: 1.2;
+    color: #444;
+    font-weight: 600;
+}
+
+.dataTables_scroll{
+    padding-bottom: 0.5rem !important;
+}
+.dataTables_scrollBody{
+    padding-bottom: 1rem !important;
+}
+
+.attribute_box{
+    border: 1px solid #CED4DA;
+    padding: 0.7rem;
+    border-radius: 0.3125rem
+}
+.attribute_box h4{
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #f1f1f1;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+/* .attribute_box .form-group {
+    margin-bottom: .5rem;
+} */
+
+.attribute_box h6{
+    font-size: 14px;
+    font-weight: 500;
+}
+.attribute_box #add_gallery_btn{
+    padding: 0.7rem;
+    margin-top: 0.5rem;
+}
+.transparent a{
+    text-decoration: none;
+    color: #ffffff;
+}

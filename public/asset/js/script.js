@@ -666,7 +666,14 @@ $(document).ready(function () {
     });
     $(window).on('click', function () {
         $('#search_bank_name').hide();
-    })
+    });
+
+
+    // $(document).on('click', '#navbarSupportedContent ul li.nav-item', function(){
+    //     // alert();
+    //     $('li').removeClass('active');
+    //     $(this).addClass('active');
+    // });
 });
 
 
