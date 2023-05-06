@@ -41,6 +41,9 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
+    // AUTH ROUTE
+    Route::view('Profile', 'profile')->name('profile');
+    Route::post('update-profile', [AuthController::class, 'updateProfile'])->name('update-profile');
 
     // CUSTOMER ROUTE
     Route::view('customer', 'customer')->name('customer-list');

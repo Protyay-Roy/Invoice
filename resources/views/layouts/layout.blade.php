@@ -88,13 +88,14 @@
                         {{-- <li class="nav-item ml-5 bg-danger">
                             <a class="nav-link text-white" href="{{ route('logout') }}"><i class="fa-solid fa-gear"></i></a>
                         </li> --}}
-                        <li class="nav-item dropdown" style="margin-left: 200px">
+                        <li class="nav-item dropdown {{ $active == 'profile' ? 'active' : '' }}"
+                            style="margin-left: 200px">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa-solid fa-gear"></i>
+                                {{ auth()->user()->name }} <i class="fa-solid fa-gear ml-1"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('add-edit-daily_entry') }}">Change Profile</a>
+                                <a class="dropdown-item" href="{{ route('profile') }}">Change Profile</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                             </div>
                         </li>

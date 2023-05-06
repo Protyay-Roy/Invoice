@@ -9,7 +9,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
-
     <link rel="stylesheet" href="{{ asset('admin') }}/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="{{ asset('admin') }}/css/vertical-layout-light/style.css">
 
@@ -41,11 +40,11 @@
                 <div class="row w-100 mx-0">
                     <div class="col-lg-5 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                            <div class="brand-logo text-center">
-                                {{-- <img src="{{ url('images/logo/0Bxq57pOfSNlX87Ur9jGquHIdW6PVsQuJlXcG2xe.png') }}"
-                                    alt="0Bxq57pOfSNlX87Ur9jGquHIdW6PVsQuJlXcG2xe.png"> --}}
+                            {{-- <div class="brand-logo text-center">
+                                <img src="{{ url('images/logo/0Bxq57pOfSNlX87Ur9jGquHIdW6PVsQuJlXcG2xe.png') }}"
+                                    alt="0Bxq57pOfSNlX87Ur9jGquHIdW6PVsQuJlXcG2xe.png">
                                 LOGO
-                            </div>
+                            </div> --}}
                             @if (Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
                                     <strong>Error:</strong> {{ Session('error_message') }}
@@ -101,43 +100,12 @@
     </div>
     <script src="{{ asset('admin') }}/js/jquery-3.6.3.min.js"></script>
 
-    {{-- <script>
-        $(document).ready(function() {
-            $('#admin_login').submit(function() {
-                $('.loader').fadeIn();
-                var formData = $(this).serialize();
-                $.ajax({
-                    url: "/",
-                    type: "post",
-                    data: formData,
-                    success: function(data) {
-                        $('.loader').fadeOut();
-                        if (data.status == true) {
-                            $('body').html(data.view);
-                            window.history.pushState(null, document.title =
-                                "Skydash Admin | Dashboard", "admin/dashboard");
-                            // window.history.replaceState(null, "null", window.location.href = "dashboard")
-                        }else if(data.status == false){
-                            $('.ajax').addClass('d-block show')
-                            $('#ajax_message').html(data.error_message)
-                        } else {
-                            alert('Page Error')
-                        }
-                    },
-                    error: function() {
-                        alert('Error')
-                    }
-                })
-            });
-
-            $(document).on('click', '.close', function() {
-                $('.alert').fadeOut();
-                $('.ajax').removeClass('d-block show');
-            });
-
-            $('.loader').fadeOut();
+    <script>
+        $(document).on('click', '.close', function(){
+            // alert();
+            $('.alert').fadeOut()
         })
-    </script> --}}
+    </script>
 
 </body>
 

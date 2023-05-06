@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Transection;
 use App\Models\Ledger;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Route;
 
 class InvoiceController extends Controller
 {
@@ -75,7 +76,7 @@ class InvoiceController extends Controller
                 $invoice_items->entry_date = $request->entry_date;
                 $invoice_items->save();
             }
-            return redirect('/')->with('success_message', "Invoice items added succssfully!");
+            return redirect('/invoice')->with('success_message', "Invoice items added succssfully!");
         }
 
         return view('create_invoice');
@@ -149,7 +150,7 @@ class InvoiceController extends Controller
                 $invoice_items->entry_date = $request->entry_date;
                 $invoice_items->save();
             }
-            return redirect('/')->with('success_message', "Invoice items updated succssfully!");
+            return redirect('/invoice')->with('success_message', "Invoice items updated succssfully!");
         }
 
         return view('edit_invoice', compact('transections'));
