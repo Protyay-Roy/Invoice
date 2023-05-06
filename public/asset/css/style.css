@@ -7,13 +7,16 @@ i {
 }
 
 section {
-    background: #dff4ff;
+    background: #dfe6ff7c;
+    /* background: #fcdfff69; */
+    /* background: linear-gradient(to left,#b2a362, #dbec20); */
     padding-bottom: 50px;
 }
 
-#top-header {
+/* #top-header {
     background: #ffffff;
-}
+    /* box-shadow: 1px 1px 30px 5px #aeaeae;
+} */
 
 #main-body {
     width: 100%;
@@ -22,6 +25,7 @@ section {
 
 #main-body .container {
     background: #ffffff;
+    box-shadow: 5px 5px 10px 2px #cfcfcf;
 }
 
 .body_content {
@@ -30,32 +34,41 @@ section {
     padding-top: 2rem;
 }
 
+.navbar {
+    padding: 0.3rem 0;
+}
+
 #top-header .navbar-expand-lg .navbar-nav .nav-item {
     margin-right: 0.3125rem;
     margin-left: 0.3125rem;
-    background-color: rgb(248, 226, 113);
-    border-radius: 0.3125rem;
+    background-color: #84cdb772;
+    border-radius: 0.25rem;
+    transition: all linear 0.3s;
+    border: 1px solid #09d6d6;
 }
 
 #top-header .navbar-expand-lg .navbar-nav .nav-item:hover {
-    background-color: rgb(189, 180, 134);
+    background-color: #84cdb7c3;
 }
 
 #top-header .navbar-light .navbar-nav .nav-link {
-    color: #777777;
+    color: #666666;
     font-weight: 500;
+    transition: all linear 0.2s;
+    padding-top: 0.4rem;
+    padding-bottom: 0.35rem;
 }
 
 #top-header .navbar-light .navbar-nav .nav-link:hover {
-    color: #ffffff !important;
+    color: #333333;
 }
 
 #top-header .navbar-light .navbar-nav .nav-item.active {
-    background-color: rgb(216, 247, 131);
+    background-color: rgb(102, 186, 151);
 }
 
 #top-header .navbar-light .navbar-nav .nav-item.active .nav-link {
-    color: #555555 !important;
+    color: #ffffff;
 }
 
 #body-table {
@@ -145,11 +158,6 @@ div.dataTables_wrapper div.dt-row {
 .modal-dialog {
     max-width: 950px;
     margin: 1.75rem auto;
-}
-
-.navbar {
-    padding-top: .7rem;
-    padding-bottom: .7rem;
 }
 
 #search_dropdown .dropdown {
@@ -386,4 +394,11 @@ table thead{
     width: 100%;
     display: block;
     border: none !important;
+}
+
+#add_button{
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    background-color: #3b7181e8;
+    /* color: #555555; */
 }

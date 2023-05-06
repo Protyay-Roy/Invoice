@@ -1,3 +1,6 @@
+@php
+    $active = 'supplier';
+@endphp
 @extends('layouts.layout')
 @section('title')
     View supplier

@@ -1,3 +1,6 @@
+@php
+    $active = 'bank';
+@endphp
 @extends('layouts.layout')
 @section('title')
     Bank List
@@ -5,7 +8,7 @@
 @section('content')
     <div id="body-top">
         <div class="container">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-6 offset-3">
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -20,8 +23,8 @@
                         </div>
                     @endif
                 </div>
-            </div>
-            <div class="row">
+            </div> --}}
+            {{-- <div class="row">
                 <div class="col-md-7 col-sm-12 mx-auto">
                     <div class="body-top-content">
                         <ul>
@@ -36,7 +39,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--bank add Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -178,6 +181,10 @@
                 Add Bank
             </button>
             <div class="clr"></div> --}}
+            <button id="add_button" type="button" class="btn btn-primary float-right ml-2" data-toggle="modal" data-target="#exampleModal">
+                Add Bank
+            </button>
+            {{-- <div class="clr"></div> --}}
             <div>
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>

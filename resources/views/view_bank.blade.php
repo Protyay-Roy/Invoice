@@ -1,3 +1,6 @@
+@php
+    $active = 'bank';
+@endphp
 @extends('layouts.layout')
 @section('title')
     View Bank

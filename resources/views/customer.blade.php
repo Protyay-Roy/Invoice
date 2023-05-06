@@ -1,3 +1,6 @@
+@php
+    $active = 'customer';
+@endphp
 @extends('layouts.layout')
 @section('title')
     Customer List
@@ -5,7 +8,7 @@
 @section('content')
     <div id="body-top">
         <div class="container">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-7 col-sm-12 mx-auto">
                     <div class="body-top-content">
                         <ul>
@@ -20,7 +23,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--customer add Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -175,6 +178,10 @@
                     </button>
                 </div>
             @endif
+            <button type="button" class="btn btn-primary ml-2 float-right" data-toggle="modal" data-target="#exampleModal" id="add_button">
+                Add customer
+            </button>
+            {{-- <div class="clr"></div> --}}
             <div>
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>

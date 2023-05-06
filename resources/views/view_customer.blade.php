@@ -1,3 +1,6 @@
+@php
+    $active = 'customer';
+@endphp
 @extends('layouts.layout')
 @section('title')
     View Customer

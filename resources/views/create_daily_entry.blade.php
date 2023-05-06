@@ -1,3 +1,6 @@
+@php
+    $active = 'daily_entry';
+@endphp
 @extends('layouts.layout')
 @section('title')
     Create Daily Entry

@@ -1,3 +1,6 @@
+@php
+    $active = 'supplier';
+@endphp
 @extends('layouts.layout')
 @section('title')
     Supplier List
@@ -5,7 +8,7 @@
 @section('content')
     <div id="body-top">
         <div class="container">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-7 col-sm-12 mx-auto">
                     <div class="body-top-content">
                         <ul>
@@ -20,7 +23,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--supplier add Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -175,6 +178,9 @@
                     </button>
                 </div>
             @endif
+            <button id="add_button" type="button" class="btn btn-primary float-right ml-2" data-toggle="modal" data-target="#exampleModal">
+                Add Supplier
+            </button>
             <div>
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>

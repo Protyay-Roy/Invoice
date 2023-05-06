@@ -1,3 +1,6 @@
+@php
+    $active = 'invoice';
+@endphp
 @extends('layouts.layout')
 @section('title')
     Invoice List

@@ -53,17 +53,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item dropdown active">
+                        <li class="nav-item dropdown {{ $active == 'invoice' ? 'active' : '' }}">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Invoice
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('create-invoice') }}">Create Invoice</a>
-                                <a class="dropdown-item" href="{{ route('invoice-list') }}">Invoice List</a>
+                                <a class="dropdown-item" href="{{ route('invoice-list') }}">Invoice List </a>
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown {{ $active == 'daily_entry' ? 'active' : '' }}">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Daily Entry
@@ -73,22 +73,22 @@
                                 <a class="dropdown-item" href="{{ route('daily_entry-list') }}">Entry List</a>
                             </div>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ $active == 'customer' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('customer-list') }}">Customer <span
                                     class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ $active == 'supplier' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('supplier-list') }}">Supplier <span
                                     class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ $active == 'bank' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('bank-list') }}">Bank <span
                                     class="sr-only">(current)</span></a>
                         </li>
                         {{-- <li class="nav-item ml-5 bg-danger">
                             <a class="nav-link text-white" href="{{ route('logout') }}"><i class="fa-solid fa-gear"></i></a>
                         </li> --}}
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" style="margin-left: 200px">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-gear"></i>
@@ -98,6 +98,7 @@
                                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                             </div>
                         </li>
+                        <div class="clr"></div>
                     </ul>
                 </div>
             </nav>
