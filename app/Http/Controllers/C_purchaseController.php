@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Invoice_item;
 use Illuminate\Http\Request;
 use App\Models\Transection;
-use Barryvdh\DomPDF\Facade\Pdf;
 
-class InvoiceController extends Controller
+class C_purchaseController extends Controller
 {
-    public function createInvoice(Request $request)
+
+    public function createPurchase(Request $request)
     {
         // dd($request->all());
         if ($request->isMethod('post')) {
@@ -40,10 +40,10 @@ class InvoiceController extends Controller
             $debit = 0;
             $credit = 0;
             if (is_numeric($request->subtotal)) {
-                $debit = $request->subtotal;
+                $credit = $request->subtotal;
             }
             if (is_numeric($request->credit)) {
-                $credit = $request->credit;
+                $debit = $request->credit;
             }
 
             $transections = new Transection;
@@ -52,7 +52,7 @@ class InvoiceController extends Controller
             $transections->entry_date = $request->entry_date;
             $transections->debit = $debit;
             $transections->credit = $credit;
-            $transections->type = 'INVOICE';
+            $transections->type = 'C_PURCHASE';
             $transections->note = !empty($request->cheque) ? $request->cheque : 'N/A';
             $transections->calan = !empty($request->calan) ? $request->calan : 'N/A';
             $transections->bank_name = !empty($request->bank_name) ? $request->bank_name : 'N/A';
@@ -74,14 +74,16 @@ class InvoiceController extends Controller
                 $invoice_items->entry_date = $request->entry_date;
                 $invoice_items->save();
             }
-            return redirect('/invoice')->with('success_message', "Invoice items added succssfully!");
+            return redirect('/purchase')->with('success_message', "Purchase items added succssfully!");
         }
 
-        return view('create_invoice');
+        return view('create_c_purchase');
     }
 
-    public function editInvoice(Request $request, $id)
+    public function editPurchase(Request $request, $id)
     {
+
+        // dd($id);
         $transections = Transection::with('getCustomer', 'getInvoiceItems')->find($id);
 
         if ($request->isMethod('post')) {
@@ -114,17 +116,17 @@ class InvoiceController extends Controller
             $debit = 0;
             $credit = 0;
             if (is_numeric($request->subtotal)) {
-                $debit = $request->subtotal;
+                $credit = $request->subtotal;
             }
             if (is_numeric($request->credit)) {
-                $credit = $request->credit;
+                $debit = $request->credit;
             }
 
             $transections->ledger_id = $request->ledger_id;
             $transections->entry_date = $request->entry_date;
             $transections->debit = $debit;
             $transections->credit = $credit;
-            $transections->type = 'INVOICE';
+            $transections->type = 'C_PURCHASE';
             $transections->note = !empty($request->cheque) ? $request->cheque : 'N/A';
             $transections->calan = !empty($request->calan) ? $request->calan : 'N/A';
             $transections->bank_name = $request->bank_name;
@@ -148,13 +150,13 @@ class InvoiceController extends Controller
                 $invoice_items->entry_date = $request->entry_date;
                 $invoice_items->save();
             }
-            return redirect('/invoice')->with('success_message', "Invoice items updated succssfully!");
+            return redirect('/purchase')->with('success_message', "Purchase items updated succssfully!");
         }
 
-        return view('edit_invoice', compact('transections'));
+        return view('edit_c_purchase', compact('transections'));
     }
 
-    public function viewInvoice($id)
+    public function viewPurchase($id)
     {
         $transections = Transection::with('getCustomer', 'getInvoiceItems')->find($id);
         return response()->json([
@@ -168,17 +170,6 @@ class InvoiceController extends Controller
     {
         Invoice_item::where('transection_id', $id)->delete();
         Transection::find($id)->delete();
-        return back()->with('success_message', "Invoice deleted succssfully!");
-    }
-
-
-    public function downloadPDF($id)
-    {
-        $transections = Transection::with('getCustomer', 'getInvoiceItems')->where('id', $id)->first();
-        $pdf = Pdf::loadView('download_pdf', [
-            'transections' => $transections
-        ]);
-        // return view('download_pdf', compact('transections'));
-        return $pdf->download('download_pdf.pdf');
+        return back()->with('success_message', "Purchase deleted succssfully!");
     }
 }

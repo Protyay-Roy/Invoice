@@ -1,9 +1,9 @@
 @php
-    $active = 'invoice';
+    $active = 'purchase';
 @endphp
 @extends('layouts.layout')
 @section('title')
-    Create Invoice
+    Create Purchase
 @endsection
 @section('content')
     <div id="main-body">
@@ -20,7 +20,7 @@
                     </button>
                 </div>
             @endif
-            <form action="{{ route('create-invoice') }}" method="post">
+            <form action="{{ route('create-purchase') }}" method="post">
                 @csrf
                 <div class="row inv-top">
                     <div class="col-3 offset-2 d-flex">

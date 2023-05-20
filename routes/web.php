@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\C_purchaseController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DailyEntryController;
 use App\Http\Controllers\InvoiceController;
@@ -69,6 +70,13 @@ Route::middleware('auth')->group(function () {
     Route::match(['get', 'post'], 'edit-invoice/{id}', [InvoiceController::class, 'editInvoice']);
     Route::get('delete-invoice/{id}', [InvoiceController::class, 'destroy']);
     Route::get('view-invoice/{id}', [InvoiceController::class, 'viewInvoice']);
+
+    // PURCHASE ROUTE
+    Route::view('/purchase', 'c_purchase_list')->name('purchase-list');
+    Route::match(['get', 'post'], 'create-purchase', [C_purchaseController::class, 'createPurchase'])->name('create-purchase');
+    Route::match(['get', 'post'], 'edit-purchase/{id}', [C_purchaseController::class, 'editPurchase']);
+    Route::get('delete-purchase/{id}', [C_purchaseController::class, 'destroy']);
+    Route::get('view-purchase/{id}', [C_purchaseController::class, 'viewPurchase']);
 
     // BANK ROUTE
     Route::view('bank', 'bank')->name('bank-list');

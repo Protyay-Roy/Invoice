@@ -189,7 +189,7 @@ $(document).ready(function () {
                     $('.view_address').text(data.transections.get_customer.address);
                     $('.view_phone').text(data.transections.get_customer.phone);
                     $('.view_com_name').text(data.transections.get_customer.company_name);
-                    $('.view_info').text(data.transections.get_customer.info);
+                    $('.view_cheque').text(data.transections.note);
                     if (data.transections.get_invoice_items != null) {
                         $.each(data.transections.get_invoice_items, function (index, invoice) {
                             $('.view_tBody').append(
@@ -199,9 +199,17 @@ $(document).ready(function () {
                     } else {
                         $('.view_tBody').html('')
                     }
-                    var number = data.transections.debit;
-                    var total_price = number.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    var debit = data.transections.debit;
+                    var credit = data.transections.credit;
+                    var main_balance = (debit - credit);
+
+                    var total_price = debit.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    var paid = credit.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    var balance = main_balance.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
                     $('.view_total').text(total_price);
+                    $('.view_paid').text(paid);
+                    $('.view_balance').text(balance);
                 }
             }
         });
@@ -253,6 +261,17 @@ $(document).ready(function () {
         var result = confirm('Do you want to delete this?');
         if (result) {
             window.location = 'delete-invoice/' + id;
+        }
+
+    });
+
+
+    // DELETE PURCHASE CLICK EVENT
+    $(document).on('click', '#delete_purchase', function () {
+        var id = $(this).val();
+        var result = confirm('Do you want to delete this?');
+        if (result) {
+            window.location = 'delete-purchase/' + id;
         }
 
     });
@@ -403,44 +422,45 @@ $(document).ready(function () {
         add_attr += '<td><select name="profile[]" class="form-control profile" required><option selected disabled value="">Select profile</option></select></td>';
         add_attr += '<td><input type="text" class="form-control" name="debit[]" placeholder="Debit"></td>';
         add_attr += '<td><input type="text" class="form-control" name="credit[]" placeholder="Credit"></td>';
-        add_attr += '<td><input type="text" class="form-control" name="note[]" placeholder="Note"></td>';
-        add_attr += '<td class="search_dropdown"> <select name="bank_name" data-live-search="true" class="form-control"> <option data-tokens="" disabled selected value="">Select Bank</option>';
-        // add_attr += '<td class="bank_td"><input type="text" class="form-control" name="bank_name" id="bank_name" placeholder="Enter Bank"><div id="search_bank_name"></div></td>';
-        // add_attr += '</select></td>';
-        // add_attr += '<td><button class="btn btn-danger mt-1" id="remove_entry_row"><i class="fa-solid fa-trash"></i></button></td>';
+        add_attr += '<td><input type="text" class="form-control" name="note[]" placeholder="Cheque"></td>';
+        // add_attr += '<td class="search_dropdown"> <select name="bank_name" data-live-search="true" class="form-control"> <option data-tokens="" disabled selected value="">Select Bank</option>';
 
-        // $("#table_body").append(add_attr);
 
-        // $('.datepicker').datepicker({
-        //     dateFormat: "yy-mm-dd",
-        //     changeMonth: true,
-        //     changeYear: true,
-        // });
+        add_attr += '<td><input type="text" class="form-control" name="bank_name[]" placeholder="Bank"></td>';
 
-        $.ajax({
-            url: '/get_bank',
-            type: 'GET',
-            success: function (data) {
-                $.each(data.bank, function (index, bank) {
-                    add_attr += '<option value="' + bank.name + '">' + bank.name + '</option>';
-                });
-                add_attr += '</select></td>';
-                add_attr += '<td><button class="btn btn-danger mt-1" id="remove_entry_row"><i class="fa-solid fa-trash"></i></button></td>';
+        add_attr += '<td><button class="btn btn-danger mt-1" id="remove_entry_row"><i class="fa-solid fa-trash"></i></button></td>';
 
-                $("#table_body").append(add_attr);
-
-                $('.datepicker').datepicker({
-                    dateFormat: "yy-mm-dd",
-                    changeMonth: true,
-                    changeYear: true,
-                });
-
-                $('.search_dropdown select').selectpicker();
-            },
-            error: function (data) {
-                console.log(data);
-            }
+        $("#table_body").append(add_attr);
+        $('.datepicker').datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
         });
+
+        // $.ajax({
+        //     url: '/get_bank',
+        //     type: 'GET',
+        //     success: function (data) {
+        //         $.each(data.bank, function (index, bank) {
+        //             add_attr += '<option value="' + bank.name + '">' + bank.name + '</option>';
+        //         });
+        //         add_attr += '</select></td>';
+        //         add_attr += '<td><button class="btn btn-danger mt-1" id="remove_entry_row"><i class="fa-solid fa-trash"></i></button></td>';
+
+        //         $("#table_body").append(add_attr);
+
+        //         $('.datepicker').datepicker({
+        //             dateFormat: "yy-mm-dd",
+        //             changeMonth: true,
+        //             changeYear: true,
+        //         });
+
+        //         $('.search_dropdown select').selectpicker();
+        //     },
+        //     error: function (data) {
+        //         console.log(data);
+        //     }
+        // });
     });
 
     // CHANGE ENTRY TYPE BY AJAX
@@ -450,14 +470,6 @@ $(document).ready(function () {
         var $profileSelect = $row.find('.profile');
         $profileSelect.html('<option selected disabled required value="">Select profile</option>');
 
-        // var $profileSelect = $row.find('#ajax_profile');
-        // $profileSelect.html('<td id="search_dropdown"><select data-live-search="true" name="profile[]" class="form-control profile" required><option data-tokens="" selected disabled required value="">Select profile</option>');
-
-        // $prfl = '';
-        // $prfl = '<td id="search_dropdown">';
-        // $prfl = '<select data-live-search="true" name="profile[]" class="form-control profile" required>';
-        // $prfl = '<option data-tokens="" selected disabled required value="">Select profile</option>';
-
 
         $.ajax({
             url: 'profile/' + type,
@@ -465,11 +477,7 @@ $(document).ready(function () {
             success: function (data) {
                 $.each(data, function (index, profile) {
                     $profileSelect.append('<option value="' + profile.id + '">' + profile.name + '</option>');
-
-                    // $profileSelect.html('<td>hii<td>')
-                    // $profileSelect.append('<option value="' + profile.id + '">' + profile.name + '</option></select></td>');
                 });
-                // $('#search_dropdown select').selectpicker();
             },
             error: function () {
                 alert('Error');
@@ -668,12 +676,6 @@ $(document).ready(function () {
         $('#search_bank_name').hide();
     });
 
-
-    // $(document).on('click', '#navbarSupportedContent ul li.nav-item', function(){
-    //     // alert();
-    //     $('li').removeClass('active');
-    //     $(this).addClass('active');
-    // });
 });
 
 

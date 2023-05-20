@@ -28,6 +28,10 @@
         table thead tr th {
             padding: 0 5px 2px !important
         }
+        .table_head{
+            background: #1e2896;
+            color: #ffffff
+        }
     </style>
 </head>
 
@@ -105,7 +109,7 @@
         </table>
     </div>
     <table class="table table-bordered mb-3">
-        <thead class="bg-success">
+        <thead class="table_head">
             <tr>
                 <th scope="col">Entry date</th>
                 <th scope="col">Item</th>

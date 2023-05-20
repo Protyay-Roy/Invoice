@@ -12,6 +12,7 @@
     $balance = number_format($balance, 2, '.', ',');
     $debit = number_format($debit, 2, '.', ',');
     $credit = number_format($credit, 2, '.', ',');
+
 @endphp
 
 <!DOCTYPE html>
@@ -51,132 +52,113 @@
         .table {
             margin-bottom: 8px !important
         }
+        .table_head{
+            background: #1e2896;
+            color: #ffffff
+        }
     </style>
 </head>
 
-<body>
-    {{-- <div class="row"> --}}
-    {{-- <div class="col-12">
-            <h5 id="header_heading" class="text-center">Customer Information</h4>
-        </div> --}}
-    {{-- <div class="col-12"> --}}
-    <table>
-        {{-- <tr>
-                    <th>Company Name:</th>
-                    <td>{{ $ledgers->company_name }}</td>
-                </tr> --}}
-        <tr>
-            <th>Name:</th>
-            <td>{{ $ledgers->name }}</td>
-        </tr>
-        {{-- <tr>
-                    <th>Address:</th>
-                    <td>{{ $ledgers->address }}</td>
-                </tr>
-                <tr>
-                    <th>Email:</th>
-                    <td>{{ $ledgers->email }}</td>
-                </tr> --}}
-        <tr>
-            <th>Phone no.:</th>
-            <td>{{ $ledgers->phone }}</td>
-        </tr>
-    </table>
-    {{-- </div> --}}
-    {{-- <div class="col-12"> --}}
-    <table class="table float-right" style="width: 50%; margin-top:-40px">
-        <thead class="table-dark">
-            <tr>
-                <th>Debit</th>
-                <th>Credit</th>
-                <th>Balance</th>
-            </tr>
-        </thead>
-        <tbody class="bg-light">
-            <tr>
-                <td> {{ $debit }} </td>
-                <td>{{ $credit }}</td>
-                <td>{{ $balance }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="clr"></div>
+<body style="width: 100%; padding:0px; margin:0px">
+
+    <p style="font-weight: 800; font-size: 22px; margin-bottom: 0px">M/S R.K. TRADING</p>
+    <p style="font-weight: 700; font-size: 15px; margin-bottom: 0px">IMPORTER, EXPORTER & GENERAL MERCHANT</p>
+    <p style="font-weight: 500; font-size: 16px; margin-bottom: 0px">DHARANDA, DINAJPUR ROAD, BANGL HILI, HAKIMPUR, DINAJPUR, BANGLADESH.</p>
+    <p style="font-weight: 400; font-size: 15px; margin-bottom: 0px">Phone: 01711-413307 - 01711286437</p>
+    <p style="font-weight: 400; font-size: 15px; margin-bottom: 0px">Email: <a href="rktrading65@yahoo.com" style="text-decoration: none; color: #444444">rktrading65@yahoo.com</a></p>
+
+    <br>
+    <p style="font-weight: 400; font-size: 14px; margin-bottom: 5px">M/S H R ROSHID</p>
+    <p style="font-weight: 400; font-size: 14px; margin-bottom: 5px">
+        Party's report: {{ $type }}
+        @if ($from != null)
+
+        <span class="ml-3">Form: ( {{$from}} ) &nbsp;&nbsp; To: ( {{$to}} )</span>
+
+        @endif
+    </p>
+    <p style="font-weight: 400; font-size: 14px; margin-bottom: 5px">Party's Report Created: <?= date('l jS \of F Y h:i:s A'); ?></p>
     <table class="table table-bordered mb-5">
-        <thead class="bg-success">
+        <thead class="table_head">
             <tr>
                 <th scope="col">Entry date</th>
-                <th scope="col">Type</th>
+                <th scope="col">Information</th>
                 <th scope="col">Debit</th>
                 <th scope="col">Credit</th>
-                <th scope="col">Balance</th>
-                <th scope="col">Note</th>
-                <th scope="col">Bank Name</th>
+                <th scope="col">Calan</th>
+                <th scope="col">Bank/Cheque</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($transections as $transection)
                 @php
-                    if (!empty($transection->debit) || $transection->debit != 0) {
-                        $total_balance += $transection->debit;
-                    }
-                    if (!empty($transection->credit) || $transection->credit != 0) {
-                        $total_balance -= $transection->credit;
-                    }
+                    $invoic_items = DB::table('invoice_items')
+                        ->where('transection_id', $transection->id)
+                        ->get();
                 @endphp
+
+
+
+                @foreach ($invoic_items as $items)
+                    @php
+                        $total_balance += $items->price;
+                    @endphp
+                    <tr>
+
+                        <td>{{ $transection->entry_date }}</td>
+                        <td>
+
+                            <b>{{ $items->item }} </b>
+                            <b>{{ $items->size }}</b>
+                            (W)
+                            : <b>{{ $items->width }}</b>
+                            (H): <b>{{ $items->height }}</b>
+                            (SQft): <b>{{ $items->square_ft }}</b>
+                            <br>
+
+                            (PCS): <b>{{ $items->qty }}</b>
+                            (Total SQft): <b>{{ $items->total_square_ft }}</b>
+                            (Rate): <b>{{ $items->rate }}</b>
+
+
+                        </td>
+
+                        <td>{{ number_format($items->price, 2, '.', ',') }}</td>
+                        <td>0</td>
+                        <td>{{ $transection->calan }}</td>
+                        <td>-</td>
+                    </tr>
+                @endforeach
+
+                @php
+
+                    $total_balance -= $transection->credit;
+
+                @endphp
+
+
+
                 <tr>
+
                     <td>{{ $transection->entry_date }}</td>
-                    <td>{{ $transection->type }}</td>
-                    <td><?= number_format($transection->debit, 2, '.', ',') ?></td>
+                    <td>PAYMENT</td>
+                    <td> 0 </td>
                     <td><?= number_format($transection->credit, 2, '.', ',') ?></td>
-                    <td>{{ number_format($total_balance, 2, '.', ',') }}</td>
-                    <td>{{ $transection->note == 'N/A' ? 'Empty' : $transection->note }}</td>
-                    <td>{{ $transection->bank_name == null ? 'Empty' : $transection->bank_name }}
-                    </td>
+                    <td>-</td>
+
+                    <td>{{ $transection->bank_name }}</td>
                 </tr>
             @endforeach
+            <tr>
+                <td colspan="2"><span class="float-right font-weight-bold">Total:</span></td>
+                <td class=" font-weight-bold">{{ $debit }}</td>
+                <td class=" font-weight-bold">{{ $credit }}</td>
+            </tr>
+            <tr>
+                <td colspan="6" class="text-center">Balance: {{ $balance }}</td>
+            </tr>
         </tbody>
-        {{-- <tbody id="get_customer_transection">
-        @include('view_transection')
-    </tbody> --}}
     </table>
 </body>
 
 </html>
-{{-- <table class="table table-bordered mb-5">
-    <thead class="bg-success">
-        <tr>
-            <th scope="col">Entry date</th>
-            <th scope="col">Type</th>
-            <th scope="col">Debit</th>
-            <th scope="col">Credit</th>
-            <th scope="col">Balance</th>
-            <th scope="col">Note</th>
-            <th scope="col">Bank Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($transections as $transection)
-            @php
-                if (!empty($transection->debit) || $transection->debit != 0) {
-                    $total_balance += $transection->debit;
-                }
-                if (!empty($transection->credit) || $transection->credit != 0) {
-                    $total_balance -= $transection->credit;
-                }
-            @endphp
-            <tr>
-                <td>{{ $transection->entry_date }}</td>
-                <td>{{ $transection->type }}</td>
-                <td>{{ $transection->debit }}</td>
-                <td>{{ $transection->credit }}</td>
-                <td>{{ $total_balance }}</td>
-                <td>{{ $transection->note == 'N/A' ? 'Empty' : $transection->note }}</td>
-                <td>{{ $transection->bank_name == null ? 'Empty' : $transection->bank_name }}
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-    <tbody id="get_customer_transection">
-        @include('view_transection')
-    </tbody>
-</table> --}}

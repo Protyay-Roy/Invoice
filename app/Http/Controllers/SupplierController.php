@@ -136,10 +136,22 @@ class SupplierController extends Controller
     {
         $ledgers = Ledger::find($id);
         $transections = Transection::where('ledger_id', $id);
+        $type = 'All';
+        $from = null;
+        $to = null;
 
         if (!empty(request()->type) || !empty(request()->from) || !empty(request()->to)) {
             if (request()->type == 'all') {
                 $transections = $transections;
+            }
+            if (request()->type == 'invoice') {
+                $type = 'Invoice';
+            }if (request()->type == 'payment') {
+                $type = 'Payment';
+            }
+            if(!empty(request()->from) && !empty(request()->to)){
+                $from = $request->from;
+                $to = $request->to;
             }
             $transections = $transections
                 ->when(request()->type == 'invoice', function ($query) {
@@ -160,7 +172,10 @@ class SupplierController extends Controller
             'transections' => $transections,
             'ledgers' => $ledgers,
             'total_balance' => $total_balance,
-            'id' => $id
+            'id' => $id,
+            'type' => $type,
+            'from' => $from,
+            'to' => $to
         ]);
         return $pdf->download('supplier_pdf.pdf');
     }

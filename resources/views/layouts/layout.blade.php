@@ -9,11 +9,6 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"> --}}
-
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-number/2.1.6/jquery.number.min.js"></script> --}}
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,6 +56,16 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('create-invoice') }}">Create Invoice</a>
                                 <a class="dropdown-item" href="{{ route('invoice-list') }}">Invoice List </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown {{ $active == 'purchase' ? 'active' : '' }}">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Purchase
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('create-purchase') }}">Create Purchase</a>
+                                <a class="dropdown-item" href="{{ route('purchase-list') }}">Purchase List </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown {{ $active == 'daily_entry' ? 'active' : '' }}">

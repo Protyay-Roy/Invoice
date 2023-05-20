@@ -138,10 +138,22 @@ class CustomerController extends Controller
     {
         $ledgers = Ledger::find($id);
         $transections = Transection::where('ledger_id', $id);
-
+        $type = 'All';
+        $from = null;
+        $to = null;
         if (!empty(request()->type) || !empty(request()->from) || !empty(request()->to)) {
+
             if (request()->type == 'all') {
                 $transections = $transections;
+            }
+            if (request()->type == 'invoice') {
+                $type = 'Invoice';
+            }if (request()->type == 'payment') {
+                $type = 'Payment';
+            }
+            if(!empty(request()->from) && !empty(request()->to)){
+                $from = $request->from;
+                $to = $request->to;
             }
             $transections = $transections
                 ->when(request()->type == 'invoice', function ($query) {
@@ -161,9 +173,13 @@ class CustomerController extends Controller
             'transections' => $transections,
             'ledgers' => $ledgers,
             'total_balance' => $total_balance,
-            'id' => $id
+            'id' => $id,
+            'type' => $type,
+            'from' => $from,
+            'to' => $to
         ]);
-        // return view('customer_pdf', compact('transections', 'ledgers', 'total_balance','id'));
+
+        // return view('customer_pdf', compact('transections', 'ledgers', 'total_balance','id','type', 'from', 'to'));
         return $pdf->download('customer_pdf.pdf');
     }
 }

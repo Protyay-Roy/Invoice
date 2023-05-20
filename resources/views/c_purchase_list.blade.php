@@ -1,9 +1,9 @@
 @php
-    $active = 'invoice';
+    $active = 'purchase';
 @endphp
 @extends('layouts.layout')
 @section('title')
-    Invoice List
+    Purchase List
 @endsection
 @section('content')
     <!-- invoice view Modal -->
@@ -12,7 +12,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content px-4">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="exampleModalLabel">Invoice</h4>
+                        <h4 class="modal-title" id="exampleModalLabel">Purchase</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -21,7 +21,7 @@
                         <p class="pl-1 pt-3">Date: <span class="view_date"></span></p>
                         <hr>
                         <div>
-                            <h5>Invoice to:</h5>
+                            <h5>Purchase to:</h5>
                             <table class="ml-2 invoice_view_info">
                                 <tr>
                                     <th>Company Name:</th>
@@ -70,13 +70,6 @@
                             </thead>
                             <tbody class="view_tBody"></tbody>
                         </table>
-                        {{-- <p class="mr-1 float-right">Total: <span class="view_total"></span></p>
-                        <div class="clr"></div>
-                        <p class="mr-1 float-right">Paid: <span class="view_paid"></span></p>
-                        <div class="clr"></div>
-                        <p class="mb-5 mr-1 float-right">Balance: <span class="view_balance"></span></p>
-                        <div class="clr"></div> --}}
-                        {{-- <p>Note: <span>Somthing....</span></p> --}}
                         <table class="float-right mb-3">
                             <tr>
                                 <th>Total:</th>
@@ -124,7 +117,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (App\Models\Transection::where('type', 'INVOICE')->get() as $invoice)
+                                @foreach (App\Models\Transection::where('type', 'C_PURCHASE')->get() as $invoice)
                                     <tr>
                                         <td>{{ $invoice->entry_date }}</td>
                                         <td>{{ $invoice->getCustomer->name }}</td>
@@ -133,17 +126,22 @@
                                         <td><?= number_format($invoice->credit, 2, '.', ',') ?></td>
                                         <td>
                                             <button class="btn btn-success" id="view_invoice"
-                                                value="{{ $invoice->id }}" title="View Invoice">
+                                                value="{{ $invoice->id }}" title="View Purchase">
                                                 <i class="fa-regular fa-eye"></i>
                                             </button>
-                                            <a href="{{ url('edit-invoice/' . $invoice->id) }}"
-                                                class="btn btn-info ml-1" title="Edit Invoice">
+                                            <a href="{{ url('edit-purchase/' . $invoice->id) }}"
+                                                class="btn btn-info ml-1" title="Edit Purchase">
                                                 <i class="fa-solid fa-pencil"></i>
                                             </a>
-                                            <button value="{{ $invoice->id }}" id="delete_invoice"
-                                                class="btn btn-danger ml-1" title="Delete Invoice">
+                                            <button value="{{ $invoice->id }}" id="delete_purchase"
+                                                class="btn btn-danger ml-1" title="Delete Purchase">
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
+
+                                            {{-- <button value="{{ $invoice->id }}" id="delete_invoice"
+                                                class="btn btn-danger ml-1" title="Delete Purchase">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button> --}}
                                         </td>
                                     </tr>
                                 @endforeach

@@ -61,7 +61,6 @@ class DailyEntryController extends Controller
                 'debit.*' => 'nullable|numeric|min:0',
                 'credit.*' => 'nullable|numeric|min:0',
                 'note.*' => 'nullable|string|max:255',
-                'bank_name.*' => 'required_if:type.*,bank|string|max:255',
             ], [
                 'date.*.required' => 'The date field is required.',
                 'date.*.date_format' => 'The date field must be in the format dd-mm-yyyy.',
@@ -73,20 +72,7 @@ class DailyEntryController extends Controller
                 'credit.*.numeric' => 'The credit field must be a number.',
                 'credit.*.min' => 'The credit field must be at least 0.',
                 'note.*.string' => 'The note field must be a string.',
-                'note.*.max' => 'The note field may not be greater than :max characters.',
-                'bank_name.*.required_if' => 'The bank name field is required when payment type is bank.',
-                'bank_name.*.string' => 'The bank name field must be a string.',
-                'bank_name.*.max' => 'The bank name field may not be greater than :max characters.',
-            ]);
-
-            $validatedData = $request->validate([
-                'date.*' => 'required|date_format:Y-m-d',
-                'type.*' => 'required|in:customer,supplier,bank',
-                'profile.*' => 'required',
-                'debit.*' => 'nullable|numeric',
-                'credit.*' => 'nullable|numeric',
-                'note.*' => 'nullable|string|max:255',
-                'bank_name.*' => 'nullable|string|max:255',
+                'note.*.max' => 'The note field may not be greater than :max characters.'
             ]);
 
 

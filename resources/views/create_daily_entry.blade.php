@@ -84,13 +84,17 @@
                                     <input type="text" class="form-control" name="note[]" placeholder="Cheque">
                                 </td>
 
-                                <td id="search_dropdown">
+                                {{-- <td id="search_dropdown">
                                     <select name="bank_name[]" id="bank_name" data-live-search="true" class="w-auto">
                                         <option data-tokens="" disabled selected value="">Select Bank</option>
                                         @foreach (App\Models\Bank::get() as $bank)
                                             <option value="{{ $bank->name }}"> {{ $bank->name }} </option>
                                         @endforeach
                                     </select>
+                                </td> --}}
+
+                                <td>
+                                    <input type="text" class="form-control" name="bank_name[]" placeholder="Bank">
                                 </td>
 
                                     {{-- <td class="bank_td">

@@ -3,9 +3,11 @@
 @endphp
 @extends('layouts.layout')
 @section('title')
-    View Customer
+    Customer Transactions
 @endsection
 @section('content')
+
+
     <!-- invoice view Modal -->
     <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -77,12 +79,12 @@
         </div>
     </div>
     <div id="body-top">
-        <div class="container">
+        <div class="container-fluid" style=" background:white; padding:20px">
             <div class="row">
                 <div class="col-md-10 mx-auto">
                     <div class="row" id="customer_view">
                         <div class="col-12">
-                            <h5 id="header_heading" class="text-center">Customer Information</h4>
+                            <h5 id="header_heading">Customer Information</h4>
                         </div>
                         <div class="col-md-6">
                             <table id="customer_info">
@@ -175,8 +177,8 @@
             <!-- Button trigger modal -->
         </div>
     </div>
-    <div id="main-body">
-        <div class="container body_content" style="margin-top: -25px; min-height:130px;padding-bottom: 10px">
+    <div >
+        <div class="container-fluid body_content" style="background:white; margin:0">
             @if (Session::has('success_message'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>Success:</strong> {{ Session('success_message') }}
@@ -190,13 +192,13 @@
                     <thead style="text-transform:uppercase">
                         <tr>
                             <th scope="col">Entry date</th>
-                            <th scope="col">Type</th>
+                            <th scope="col">Information</th>
                             <th scope="col">Debit</th>
                             <th scope="col">Credit</th>
                             <th scope="col">Balance</th>
                             <th scope="col">Calan</th>
-                            <th scope="col">Cheque</th>
-                            <th scope="col">Bank</th>
+
+                            <th scope="col">Bank And Cheque</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
