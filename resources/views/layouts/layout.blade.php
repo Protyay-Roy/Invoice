@@ -90,9 +90,11 @@
                             <a class="nav-link" href="{{ route('bank-list') }}">Bank <span
                                     class="sr-only">(current)</span></a>
                         </li>
-                        {{-- <li class="nav-item ml-5 bg-danger">
-                            <a class="nav-link text-white" href="{{ route('logout') }}"><i class="fa-solid fa-gear"></i></a>
-                        </li> --}}
+
+                        <li class="nav-item {{ $active == 'balancesheet' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('download-balance-sheet-pdf') }}">Balance Sheet <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
                         <li class="nav-item dropdown {{ $active == 'profile' ? 'active' : '' }}"
                             style="margin-left: 200px">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

@@ -182,4 +182,17 @@ class CustomerController extends Controller
         // return view('customer_pdf', compact('transections', 'ledgers', 'total_balance','id','type', 'from', 'to'));
         return $pdf->download('customer_pdf.pdf');
     }
+
+    public function balanceSheetPDF(Request $request)
+    {
+
+        $customers = Ledger::with('getTransectionId')->where('type', 1)->get();
+
+        $pdf = Pdf::loadView('balancesheet', [
+            'customers' => $customers
+        ]);
+
+        return view('balancesheet', compact('customers'));
+        return $pdf->download('customer_pdf.pdf');
+    }
 }

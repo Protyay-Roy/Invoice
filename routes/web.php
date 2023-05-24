@@ -105,4 +105,5 @@ Route::middleware('auth')->group(function () {
     Route::get('download-customer-pdf/{id}', [CustomerController::class, 'downloadPDF']);
     Route::get('download-supplier-pdf/{id}', [SupplierController::class, 'downloadPDF']);
     Route::get('download-bank-pdf/{id}', [BankController::class, 'downloadPDF']);
+    Route::get('download-balance-sheet-pdf', [CustomerController::class, 'balanceSheetPDF']);
 });

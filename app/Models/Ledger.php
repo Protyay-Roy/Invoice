@@ -12,6 +12,6 @@ class Ledger extends Model
     public $timestamps = false;
 
     public function getTransectionId() {
-        return $this->hasOne('App\Models\Transection','ledger_id', 'id');
+        return $this->hasMany('App\Models\Transection','ledger_id', 'id');
     }
 }
